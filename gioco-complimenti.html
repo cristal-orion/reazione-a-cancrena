@@ -1,757 +1,2211 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reazione a Cancrena</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reazione a Cancrena - V3</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
-        /* Importa un font più moderno da Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+      /* Nuova palette colori più vivace */
+      :root {
+        --primary-color: #ff4757; /* Rosso più vibrante */
+        --primary-dark: #e83142;
+        --secondary-color: #5352ed; /* Blu vivace */
+        --secondary-dark: #3f3fbf;
+        --accent-color: #f9f9fa;
+        --dark-text: #2c3a47;
+        --light-bg: #f1f2f6;
+        --laugh-color: #2ed573; /* Verde più vivace */
+        --laugh-dark: #1cb058;
+        --cry-color: #70a1ff; /* Blu più chiaro */
+        --cry-dark: #5886e0;
+        --warning-color: #ffa502; /* Arancione più brillante */
+        --warning-dark: #e08a00;
+        --winner-bg: #ffd700;
+        --challenge-color: #9b59b6; /* Viola più moderno */
+        --challenge-dark: #8e44ad;
+        --couple-icon-color: #ff6b81; /* Rosa più moderno */
+        --like-color: #2ed573;
+        --dislike-color: #ff4757;
+        --highlight-bg: #e0f7fa;
+        --border-radius-main: 16px; /* Bordi più arrotondati */
+        --box-shadow-light: 0 6px 20px rgba(0, 0, 0, 0.08);
+        --box-shadow-medium: 0 10px 28px rgba(0, 0, 0, 0.15);
+        --box-shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.2);
+      }
 
-        /* Variabili CSS per colori e stili */
-        :root {
-            --primary-color: #E63946; /* Rosso Acceso */
-            --primary-dark: #c1121f;  /* Rosso Scuro per hover */
-            --secondary-color: #457B9D; /* Blu Acciaio */
-            --accent-color: #F1FAEE;   /* Bianco Sporco/Crema */
-            --dark-text: #1D3557;    /* Blu Scuro per testo */
-            --light-bg: #F8F9FA;      /* Grigio Molto Chiaro */
-            --laugh-color: #84a98c;   /* Verde Salvia */
-            --laugh-dark: #6a997a;
-            --cry-color: #a8dadc;     /* Azzurro Chiaro */
-            --cry-dark: #8ec3c6;
-            --warning-color: #ff8600; /* Arancione per bottone "fine" */
-            --warning-dark: #cc6b00;
-            --winner-bg: #ffd700;     /* Oro per vincitore */
-            --challenge-color: #6a0dad; /* Viola per sfida */
-            --challenge-dark: #4b0082;
-            --couple-icon-color: #e63946;
-            --border-radius-main: 12px;
-            --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
-            --box-shadow-medium: 0 6px 20px rgba(0, 0, 0, 0.12);
+      /* Importazione font più giocosi */
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+
+      /* Titolo principale più accattivante */
+      h1 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: "Fredoka One", cursive;
+        font-size: 3em;
+        width: 100%;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        letter-spacing: 1px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Container con sfondo sfumato */
+      .container,
+      #setup-section,
+      #game-section,
+      #scoreboard-section {
+        border-radius: var(--border-radius-main);
+        background: white;
+        box-shadow: var(--box-shadow-medium);
+        padding: 30px 40px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Miglioramento aspetto bottoni */
+      #setup-section button,
+      #game-section button {
+        padding: 14px 28px;
+        margin: 10px 5px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1em;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      #setup-section button:hover:not(:disabled),
+      #game-section button:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: var(--box-shadow-hover);
+      }
+
+      /* Pulsante principale più attraente */
+      .input-group button,
+      #start-btn,
+      #couple-btn {
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--primary-dark)
+        );
+        color: white;
+      }
+
+      /* Card sfida più attraente */
+      .challenge-card {
+        border-radius: var(--border-radius-main);
+        padding: 35px 40px;
+        margin: 0 0 25px 0;
+        box-shadow: var(--box-shadow-medium);
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: all 0.5s ease;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      /* Sfondi sfumati per le card sfida */
+      .group-challenge {
+        background: linear-gradient(135deg, #ffefba, #ffffff);
+        border-left: 6px solid var(--warning-color);
+      }
+
+      .couple-challenge {
+        background: linear-gradient(135deg, #e0c3fc, #fff);
+        border-left: 6px solid var(--challenge-color);
+      }
+
+      .challenge-mode {
+        background: linear-gradient(135deg, #a1c4fd, #fff);
+        border-left: 6px solid var(--secondary-color);
+      }
+
+      /* Miglioramento visualizzazione giocatori */
+      li.player-item {
+        padding: 14px 16px;
+        margin: 8px 0;
+        background-color: var(--light-bg);
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      li.player-item:hover {
+        background-color: #e9ecef;
+        transform: translateX(3px);
+      }
+
+      /* Scoreboard più attraente */
+      .scoreboard-sidebar {
+        border-radius: var(--border-radius-main);
+        background: white;
+        box-shadow: var(--box-shadow-medium);
+        padding: 25px;
+        height: fit-content;
+        position: sticky;
+        top: 20px;
+      }
+
+      .scoreboard-sidebar h2 {
+        font-family: "Fredoka One", cursive;
+        color: var(--primary-color);
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 10px;
+      }
+
+      li.score-item {
+        padding: 14px 16px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background-color: var(--light-bg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      li.score-item.highlight {
+        background: linear-gradient(45deg, var(--highlight-bg), #f5ffff);
+        box-shadow: 0 0 12px rgba(79, 189, 217, 0.6);
+        transform: scale(1.02);
+      }
+
+      /* Animazione per le azioni di punteggio */
+      .score-actions button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.6em;
+        transition: all 0.2s ease;
+      }
+
+      .score-actions button:hover {
+        transform: scale(1.3);
+      }
+
+      /* Sezione coppie più attraente */
+      #couple-section {
+        margin-top: 30px;
+        padding: 25px;
+        border-radius: var(--border-radius-main);
+        background: linear-gradient(135deg, #e0f7fa, #ffffff);
+        box-shadow: var(--box-shadow-light);
+      }
+
+      /* Input più moderni */
+      #setup-section input[type="text"],
+      #setup-section select {
+        padding: 14px 18px;
+        margin: 5px 0 15px 0;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        width: calc(100% - 36px);
+        font-size: 1em;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+        background-color: white;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      #setup-section input[type="text"]:focus,
+      #setup-section select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
+      }
+
+      /* Animazioni per elementi interattivi */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
         }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--light-bg) 100%);
-            color: var(--dark-text);
-            line-height: 1.6;
+      #general-laugh-btn {
+        animation: pulse 2s infinite;
+      }
+
+      /* Media query per responsiveness migliorata */
+      @media (max-width: 900px) {
+        .main-layout {
+          flex-direction: column;
+          align-items: center;
         }
 
         h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 40px;
-            font-weight: 700;
-            font-size: 2.5em;
+          font-size: 2.4em;
         }
 
-        h2 {
-            color: var(--secondary-color);
-            margin-top: 30px; margin-bottom: 20px;
-            font-weight: 600; text-align: center;
-            border-bottom: 1px solid #eee; padding-bottom: 10px;
+        .scoreboard-sidebar,
+        .game-content {
+          width: 100%;
+          max-width: 100%;
         }
-         h3 {
-            color: var(--dark-text); margin-top: 25px; margin-bottom: 15px;
-            font-weight: 600; text-align: center; font-size: 1.1em;
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2em;
         }
 
-        .container {
-            background-color: white; border-radius: var(--border-radius-main);
-            padding: 30px 40px; box-shadow: var(--box-shadow-medium);
-            transition: all 0.3s ease-in-out;
-        }
-        .section { margin-bottom: 40px; }
-
-        /* Input, Select, Button */
-        input[type="text"], select {
-            padding: 12px 15px; margin: 5px 0 10px 0;
-            border-radius: 8px; border: 1px solid #ddd;
-            width: calc(100% - 32px); font-size: 1em;
-            box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s;
-            background-color: white;
-        }
-         select {
-             width: 100%; margin-bottom: 15px; appearance: none;
-             background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-             background-repeat: no-repeat; background-position: right 15px center;
-             background-size: 10px auto; padding-right: 40px;
-        }
-        input[type="text"]:focus, select:focus {
-            outline: none; border-color: var(--primary-color);
-            box-shadow: 0 0 5px rgba(230, 57, 70, 0.3);
+        #setup-section,
+        #game-section,
+        #scoreboard-section {
+          padding: 20px;
         }
 
-        .input-group { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .input-group input { flex-grow: 1; margin: 0; }
-        .input-group button { margin: 0; flex-shrink: 0; padding: 12px 20px; }
-
-        button {
-            padding: 12px 25px; margin: 10px 5px; border-radius: 8px;
-            border: none; cursor: pointer; font-weight: 600; font-size: 1em;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-        }
-        button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: var(--box-shadow-light); }
-        button:active:not(:disabled) { transform: translateY(0px); }
-        button:disabled { background-color: #ccc; cursor: not-allowed; transform: none; box-shadow: none; opacity: 0.7; }
-
-        /* Bottoni Primari */
-        .input-group button, #start-btn, #next-btn, .game-controls button, #couple-btn {
-            background-color: var(--primary-color); color: white;
-        }
-        .input-group button:hover:not(:disabled), #start-btn:hover:not(:disabled), #next-btn:hover:not(:disabled), .game-controls button:hover, #couple-btn:hover:not(:disabled) {
-            background-color: var(--primary-dark);
-        }
-
-        /* Lista Giocatori */
-        ul#players-list { list-style-type: none; padding: 0; margin-top: 20px; margin-bottom: 30px; }
-        li.player-item {
-            padding: 12px 15px; margin: 8px 0; background-color: var(--light-bg);
-            border-radius: 8px; display: flex; justify-content: space-between;
-            align-items: center; font-size: 1.1em; transition: background-color 0.3s; gap: 10px;
-        }
-        li.player-item:hover { background-color: #e9ecef; }
-        .player-name { flex-grow: 1; }
-        .couple-icon { color: var(--couple-icon-color); font-size: 1.2em; margin: 0 5px; }
-        .player-actions button {
-             padding: 6px 10px; font-size: 0.85em; text-transform: none;
-             letter-spacing: 0; margin: 0 3px; min-width: 70px; text-align: center;
-        }
-        .player-actions button:hover { transform: none; box-shadow: none; }
-        .delete-btn { background-color: var(--secondary-color); color: white; }
-         .delete-btn:hover { background-color: var(--dark-text); }
-        .uncouple-btn { background-color: var(--warning-color); color: white; display: none; }
-        .uncouple-btn:hover { background-color: var(--warning-dark); }
-
-        /* Sezione Coppie */
-        #couple-section {
-            margin-top: 30px; padding: 20px; border: 1px solid #eee;
-            border-radius: var(--border-radius-main); background-color: var(--accent-color);
-        }
-        .couple-selectors { display: flex; gap: 15px; align-items: center; margin-bottom: 15px; }
-        .couple-selectors label { flex-basis: 100px; text-align: right; font-weight: 600; font-size: 0.9em; color: var(--secondary-color); }
-         .couple-selectors > div { flex-grow: 1; }
-         #couple-btn { display: block; width: 100%; margin-top: 10px; }
-
-        /* Sezione Gioco */
-        .game-section { display: none; text-align: center; }
         .challenge-card {
-            background-color: white; border-radius: var(--border-radius-main);
-            padding: 30px 40px; /* Ridotto padding verticale per fare spazio ai bottoni */
-             margin: 30px 0; box-shadow: var(--box-shadow-medium);
-            min-height: 250px; /* Altezza minima per contenere tutto */
-             display: flex; flex-direction: column; justify-content: space-between; /* Spazio tra contenuto e bottoni */
-             transition: background-color 0.5s ease, border-color 0.5s ease;
-            border: 2px solid transparent; overflow: hidden;
+          padding: 25px 20px;
         }
-        .challenge-content { /* Contenitore per immagine, coppia, testo */
-            margin-bottom: 20px; /* Spazio prima dei bottoni */
+      }
+      /* ===== EFFETTI E ANIMAZIONI ===== */
+
+      /* Animazione per i cambi di schermata */
+      .fade-in {
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      .fade-out {
+        animation: fadeOut 0.3s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Animazione per l'aggiunta di player */
+      .player-added {
+        animation: playerAdded 0.5s ease;
+      }
+
+      @keyframes playerAdded {
+        0% {
+          transform: translateX(-20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* Animazione per rimozione player */
+      .player-removed {
+        animation: playerRemoved 0.3s ease forwards;
+      }
+
+      @keyframes playerRemoved {
+        0% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(20px);
+          opacity: 0;
+        }
+      }
+
+      /* Shake per input errati */
+      .shake {
+        animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      }
+
+      @keyframes shake {
+        10%,
+        90% {
+          transform: translate3d(-1px, 0, 0);
+        }
+        20%,
+        80% {
+          transform: translate3d(2px, 0, 0);
+        }
+        30%,
+        50%,
+        70% {
+          transform: translate3d(-3px, 0, 0);
+        }
+        40%,
+        60% {
+          transform: translate3d(3px, 0, 0);
+        }
+      }
+
+      /* Toast di notifica */
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 0.95em;
+        z-index: 1000;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+
+      /* Animazione cambio card */
+      .card-change {
+        animation: cardChange 0.3s ease;
+      }
+
+      @keyframes cardChange {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(0.95);
+          opacity: 0.5;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Animazione apparizione testo */
+      .text-appear {
+        animation: textAppear 0.6s ease;
+      }
+
+      @keyframes textAppear {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Effetti per l'assegnazione punti */
+      .point-bubble {
+        position: absolute;
+        top: -20px;
+        right: 10px;
+        background-color: var(--like-color);
+        color: white;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        animation: bubbleUp 1s forwards;
+      }
+
+      @keyframes bubbleUp {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        20% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        80% {
+          transform: scale(1) translateY(-15px);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0.5) translateY(-30px);
+          opacity: 0;
+        }
+      }
+
+      /* Effetto vittoria sfida */
+      .winner-effect {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(45deg, #ffd700, #f7c200);
+        color: #1e1e1e;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-weight: bold;
+        box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+        animation: winnerEffect 1.5s forwards;
+      }
+
+      @keyframes winnerEffect {
+        0% {
+          transform: translateX(-50%) scale(0.8);
+          opacity: 0;
+        }
+        20% {
+          transform: translateX(-50%) scale(1.1);
+          opacity: 1;
+        }
+        80% {
+          transform: translateX(-50%) scale(1) translateY(-10px);
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(-50%) scale(0.8) translateY(-20px);
+          opacity: 0;
+        }
+      }
+
+      /* Effetto risata di gruppo */
+      .group-laugh-effect {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(
+          45deg,
+          var(--laugh-color),
+          var(--laugh-dark)
+        );
+        color: white;
+        padding: 15px 25px;
+        border-radius: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(46, 213, 115, 0.5);
+        animation: groupLaughEffect 1.5s forwards;
+        z-index: 100;
+      }
+
+      @keyframes groupLaughEffect {
+        0% {
+          transform: translate(-50%, -50%) scale(0.5);
+          opacity: 0;
+        }
+        20% {
+          transform: translate(-50%, -50%) scale(1.1);
+          opacity: 1;
+        }
+        70% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      /* Badge tipo sfida */
+      .challenge-type-badge {
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: bold;
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+      }
+
+      .single-badge {
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--primary-dark)
+        );
+      }
+
+      .couple-badge {
+        background: linear-gradient(45deg, #9b59b6, #8e44ad);
+      }
+
+      .group-badge {
+        background: linear-gradient(
+          45deg,
+          var(--warning-color),
+          var(--warning-dark)
+        );
+      }
+
+      .challenge-badge {
+        background: linear-gradient(
+          45deg,
+          var(--secondary-color),
+          var(--secondary-dark)
+        );
+      }
+
+      /* Contatore giocatori */
+      .player-counter {
+        text-align: center;
+        margin: 10px 0 15px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        display: inline-block;
+        font-size: 0.9em;
+        font-weight: 600;
+        background-color: #f1f2f6;
+        color: var(--dark-text);
+        transition: all 0.3s ease;
+      }
+
+      .few-players {
+        color: var(--warning-color);
+      }
+
+      .enough-players {
+        color: var(--secondary-color);
+      }
+
+      .many-players {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+
+      /* Indicatore turno */
+      .turn-indicator {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 0.9em;
+        color: var(--secondary-color);
+        font-weight: 600;
+      }
+
+      /* Animazione foto caricata */
+      .image-loaded {
+        animation: imageReveal 0.5s ease forwards;
+      }
+
+      @keyframes imageReveal {
+        0% {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Regole del gioco */
+      .rules-container {
+        margin-top: 25px;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+      }
+
+      .rules-toggle {
+        background: none;
+        border: none;
+        color: var(--secondary-color);
+        cursor: pointer;
+        font-size: 0.9em;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: all 0.2s;
+        width: 100%;
+        text-align: left;
+        display: flex;
+        align-items: center;
+      }
+
+      .rules-toggle i {
+        margin-right: 5px;
+      }
+
+      .rules-toggle:hover {
+        background-color: #f8f9fa;
+      }
+
+      .rules-content {
+        font-size: 0.85em;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        line-height: 1.4;
+      }
+
+      .rules-content p {
+        margin-top: 0;
+      }
+
+      .rules-content ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+      }
+
+      /* Stile per la schermata finale */
+      .final-score-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+      }
+
+      .final-score-item.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .final-score-item.winner {
+        background: linear-gradient(to right, #ffd700, #faf0be);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        transform: scale(1.03);
+      }
+
+      .rank {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--secondary-color);
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        margin-right: 15px;
+        font-size: 1.2em;
+      }
+
+      .final-score-item.winner .rank {
+        background-color: var(--primary-color);
+      }
+
+      .final-name {
+        flex-grow: 1;
+        font-weight: 600;
+        font-size: 1.1em;
+      }
+
+      .final-points {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 1.15em;
+      }
+
+      .final-score-item.winner .final-points {
+        color: var(--primary-dark);
+      }
+
+      /* Statistiche finali */
+      .final-stats {
+        margin-top: 30px;
+        padding: 20px;
+        background: white;
+        border-radius: var(--border-radius-main);
+        box-shadow: var(--box-shadow-light);
+      }
+
+      .final-stats h3 {
+        text-align: center;
+        color: var(--secondary-color);
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.3em;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        transition: all 0.2s;
+      }
+
+      .stat-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .stat-icon {
+        font-size: 1.5em;
+        color: var(--secondary-color);
+        margin-bottom: 5px;
+      }
+
+      .stat-value {
+        font-size: 1.8em;
+        font-weight: 700;
+        color: var(--dark-text);
+      }
+
+      .stat-label {
+        font-size: 0.85em;
+        color: #777;
+      }
+
+      .special-stats {
+        font-size: 0.95em;
+        color: var(--dark-text);
+        line-height: 1.6;
+      }
+
+      .special-stat {
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        background: #f1f2f6;
+        border-radius: 8px;
+      }
+
+      .special-stat i {
+        color: var(--primary-color);
+        margin-right: 5px;
+      }
+
+      /* Bottone start game */
+      .start-game-container {
+        margin-top: 25px;
+        text-align: center;
+      }
+
+      #start-btn {
+        padding: 15px 35px;
+        font-size: 1.2em;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--primary-dark)
+        );
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+      }
+
+      #start-btn:not(:disabled):hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+      }
+
+      #start-btn i {
+        margin-right: 8px;
+      }
+
+      /* Animazioni responsive */
+      @media (max-width: 768px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .winner-effect,
+        .point-bubble {
+          font-size: 0.9em;
         }
 
-        #challenge-image-container { display: none; margin-bottom: 15px; text-align: center; }
-        #challenge-image {
-            max-width: 90%; /* Leggermente più grande? */
-             max-height: 220px; /* Altezza leggermente ridotta */
-             height: auto; width: auto; border-radius: 8px;
-            display: inline-block; object-fit: contain;
+        .group-laugh-effect {
+          padding: 10px 15px;
+          font-size: 1em;
         }
-
-        /* Stili specifici per tipi di sfida */
-        .group-challenge { background: linear-gradient(135deg, #fff1cc, #ffe4b3); border-color: var(--warning-color); }
-        .couple-challenge { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); border-color: #8a2be2; }
-        .challenge-mode { background: linear-gradient(135deg, #e0c3fc, #c3e0fc); border-color: var(--challenge-color); } /* NUOVO STILE SFIDA */
-
-        .players-pair { font-weight: 700; font-size: 1.4em; color: var(--primary-color); margin-bottom: 15px; }
-        .couple-challenge .players-pair { color: #8a2be2; }
-        .challenge-mode .players-pair { color: var(--challenge-color); font-size: 1.3em; } /* NUOVO STILE SFIDA */
-
-        .challenge-text { font-size: 1.4em; line-height: 1.5; color: var(--dark-text); } /* Leggermente ridotto */
-
-        /* Contenitori Bottoni */
-        .reaction-buttons, .challenge-vote-buttons {
-             display: none; /* Nascosti di default, mostrati da JS */
-             justify-content: center; margin-top: 20px; gap: 15px; /* Gap leggermente ridotto */
-             flex-wrap: wrap; /* Manda a capo se non ci stanno */
-         }
-
-        /* Bottoni Reazione/Voto */
-        .reaction-button, .challenge-vote-button {
-             padding: 12px 20px; /* Leggermente più compatti */
-              border-radius: 8px; font-weight: 600; /* Meno bold? */
-              font-size: 1em; /* Leggermente più piccoli */
-              cursor: pointer; transition: transform 0.2s ease-out, background-color 0.3s;
-             color: white; border: none; flex-grow: 1; max-width: 45%; /* Occupano spazio ma non troppo larghi */
-         }
-        .reaction-button:hover:not(:disabled), .challenge-vote-button:hover:not(:disabled) {
-             transform: scale(1.05); /* Hover più sobrio */
-         }
-        .reaction-button:active:not(:disabled), .challenge-vote-button:active:not(:disabled) {
-             transform: scale(1.01);
-         }
-
-        .laugh-btn { background-color: var(--laugh-color); }
-        .laugh-btn:hover:not(:disabled) { background-color: var(--laugh-dark); }
-        .cry-btn { background-color: var(--cry-color); color: var(--dark-text); }
-        .cry-btn:hover:not(:disabled) { background-color: var(--cry-dark); }
-
-        /* Bottoni Voto Sfida */
-        .challenge-vote-button {
-             background-color: var(--challenge-color);
-        }
-        .challenge-vote-button:hover:not(:disabled) {
-             background-color: var(--challenge-dark);
-        }
-
-        /* Bottone Fine Partita */
-        .end-btn { background-color: var(--warning-color); color: white; margin-top: 30px; font-weight: 700; }
-        .end-btn:hover { background-color: var(--warning-dark); }
-
-        /* Classifica */
-        .scoreboard { display: none; margin-top: 40px; text-align: center; }
-        .scoreboard h2 { color: var(--primary-color); margin-bottom: 30px; font-size: 2em; }
-        .score-list { width: 90%; max-width: 600px; margin: 0 auto; text-align: left; }
-        .score-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; margin: 10px 0; background-color: white; border-radius: 8px; font-size: 1.1em; box-shadow: var(--box-shadow-light); transition: transform 0.2s, box-shadow 0.2s; }
-        .score-item:hover { transform: translateX(5px); box-shadow: var(--box-shadow-medium); }
-        .score-item span:first-child { font-weight: 600; }
-        .score-item span:last-child { color: var(--secondary-color); font-weight: 600; }
-        .winner { background: linear-gradient(to right, var(--winner-bg), #fffacd); font-weight: 700 !important; border: 2px solid darken(var(--winner-bg), 10%); transform: scale(1.03); box-shadow: var(--box-shadow-medium); }
-        .winner span:first-child { color: var(--dark-text); }
-        .winner span:last-child { color: var(--primary-dark); font-size: 1.1em;}
-        .game-controls { margin-top: 30px; }
-
-        /* Responsiveness */
-        @media (max-width: 700px) {
-             .couple-selectors { flex-direction: column; gap: 5px; align-items: stretch; }
-             .couple-selectors label { text-align: left; margin-bottom: 2px; flex-basis: auto;}
-             body { margin: 20px auto; padding: 15px; }
-             h1 { font-size: 2em; }
-             .container { padding: 20px; }
-             .input-group { flex-direction: column; align-items: stretch; }
-             .input-group input, .input-group button { width: 100%; }
-             button, .reaction-button, .challenge-vote-button { padding: 12px 15px; font-size: 0.9em; max-width: 100%; } /* Bottoni più piccoli, full width se vanno a capo */
-             .challenge-card { padding: 20px; min-height: 220px; }
-             #challenge-image { max-height: 150px; }
-             .players-pair { font-size: 1.1em; }
-             .challenge-text { font-size: 1.2em; }
-             .score-list { width: 100%; }
-             .score-item { padding: 12px 15px; font-size: 1em; flex-direction: column; align-items: flex-start; gap: 5px; }
-             .reaction-buttons, .challenge-vote-buttons { gap: 10px; }
-        }
+      }
     </style>
-</head>
-<body>
-    <h1>Reazione a Cancrena</h1>
-
-    <div class="container">
-        <!-- SEZIONE SETUP -->
-        <div id="setup-section" class="section">
-             <!-- ... (HTML Setup invariato) ... -->
-             <h2>Crea la tua Squadra (e Coppie)</h2>
-            <div class="input-group">
-                <input type="text" id="player-name" placeholder="Nome giocatore...">
-                <button onclick="addPlayer()">Aggiungi</button>
+  </head>
+  <body>
+    <div class="main-layout">
+      <!-- Colonna Sinistra: Contenuto Gioco (Setup o Sfida) -->
+      <div class="game-content">
+        <h1>
+          <i class="fas fa-fire-alt"></i> Reazione a Cancrena
+          <i class="fas fa-fire-alt"></i>
+        </h1>
+        <!-- Sezione Setup (Inizialmente Visibile) -->
+        <div id="setup-section">
+          <h2>Crea la tua Squadra (e Coppie)</h2>
+          <div class="input-group">
+            <input
+              type="text"
+              id="player-name"
+              placeholder="Nome giocatore..."
+            />
+            <button onclick="addPlayer()">Aggiungi</button>
+          </div>
+          <ul id="players-list"></ul>
+          <div id="couple-section" style="display: none">
+            <h3>Forma Coppie (Opzionale)</h3>
+            <div class="couple-selectors">
+              <div>
+                <label for="couple-player1">Giocatore 1:</label>
+                <select id="couple-player1">
+                  <option value="">Seleziona...</option>
+                </select>
+              </div>
+              <div>
+                <label for="couple-player2">Giocatore 2:</label>
+                <select id="couple-player2">
+                  <option value="">Seleziona...</option>
+                </select>
+              </div>
             </div>
-            <ul id="players-list"></ul>
-            <div id="couple-section" style="display: none;">
-                <h3>Forma Coppie (Opzionale)</h3>
-                <div class="couple-selectors">
-                     <div>
-                         <label for="couple-player1">Giocatore 1:</label>
-                         <select id="couple-player1"><option value="">Seleziona...</option></select>
-                     </div>
-                      <div>
-                          <label for="couple-player2">Giocatore 2:</label>
-                          <select id="couple-player2"><option value="">Seleziona...</option></select>
-                      </div>
-                </div>
-                <button id="couple-btn" onclick="formCouple()" disabled>Abbina Coppia</button>
-            </div>
-            <button onclick="startGame()" id="start-btn" disabled>Inizia Gioco</button>
+            <button id="couple-btn" onclick="formCouple()" disabled>
+              Abbina Coppia
+            </button>
+          </div>
+          <button onclick="startGame()" id="start-btn" disabled>
+            Inizia Gioco
+          </button>
         </div>
 
-        <!-- SEZIONE GIOCO -->
-        <div id="game-section" class="game-section">
-            <div class="challenge-card" id="challenge-card">
-                <!-- Contenuto Sfida -->
-                <div class="challenge-content">
-                    <div id="challenge-image-container">
-                        <img id="challenge-image" src="" alt="Immagine Sfida">
-                    </div>
-                    <div class="players-pair" id="current-pair"></div>
-                    <div class="challenge-text" id="challenge-text"></div>
-                </div>
-                <!-- Contenitori Bottoni (mostrati/nascosti da JS) -->
-                <div id="reaction-buttons-container" class="reaction-buttons">
-                    <button class="reaction-button laugh-btn" onclick="rateChallenge('laugh')">RISATE 😂</button>
-                    <button class="reaction-button cry-btn" onclick="rateChallenge('cry')">IMBARAZZO 😳</button>
-                </div>
-                <div id="challenge-vote-buttons-container" class="challenge-vote-buttons">
-                    <button id="vote-btn-1" class="challenge-vote-button" onclick="voteChallengeWinner(this.dataset.playerName)"></button>
-                    <button id="vote-btn-2" class="challenge-vote-button" onclick="voteChallengeWinner(this.dataset.playerName)"></button>
-                </div>
+        <!-- Sezione Gioco (Inizialmente Nascosta) -->
+        <div id="game-section">
+          <div class="challenge-card" id="challenge-card">
+            <!-- Contenuto dinamico sfida -->
+            <div id="challenge-image-container">
+              <img id="challenge-image" src="" alt="Immagine Sfida" />
             </div>
-            <button onclick="nextChallenge()" id="next-btn">Prossima Sfida</button>
+            <div class="players-pair" id="current-pair"></div>
+            <div class="challenge-text" id="challenge-text"></div>
+            <!-- Bottone Risate Generali (solo per gruppo) -->
+            <button id="general-laugh-btn" onclick="assignGroupPoints()">
+              RISATE GENERALI 🎉 (+1 a tutti)
+            </button>
+          </div>
+          <!-- Controlli generali gioco -->
+          <div class="game-controls">
+            <button onclick="nextChallenge()" id="next-btn">
+              Prossima Sfida
+            </button>
             <button class="end-btn" onclick="endGame()">Termina Partita</button>
+          </div>
         </div>
 
-        <!-- SEZIONE CLASSIFICA -->
-        <div id="scoreboard-section" class="scoreboard">
-             <!-- ... (HTML Scoreboard invariato) ... -->
-             <h2>Classifica Finale</h2>
-            <div id="score-list" class="score-list"></div>
-            <div class="game-controls">
-                <button onclick="resetGame()">Nuova Partita</button>
-            </div>
+        <!-- Sezione Scoreboard Finale (Inizialmente Nascosta) -->
+        <div id="scoreboard-section">
+          <h2>Classifica Finale</h2>
+          <div id="score-list-final" class="score-list-final">
+            <!-- Contenuto generato da JS -->
+          </div>
+          <div class="game-controls">
+            <button onclick="resetGame()">Nuova Partita</button>
+          </div>
         </div>
+      </div>
+
+      <!-- Colonna Destra: Scoreboard Sidebar (Visibile durante gioco) -->
+      <div
+        class="scoreboard-sidebar"
+        id="scoreboard-sidebar"
+        style="display: none"
+      >
+        <!-- Nascosto finché il gioco non inizia -->
+        <h2>Punteggi</h2>
+        <ul id="scoreboard-list">
+          <!-- Contenuto generato da JS -->
+          <!-- Esempio Item (verrà clonato):
+                <li class="score-item" data-player-name="NomeGiocatore">
+                    <span class="score-name">NomeGiocatore</span>
+                    <span class="score-points">0</span>
+                    <div class="score-actions">
+                        <button class="like-btn" title="Assegna Punto" onclick="assignPoints('NomeGiocatore', 'like')">👍</button>
+                        <button class="dislike-btn" title="Nessun Punto" onclick="assignPoints('NomeGiocatore', 'dislike')">👎</button>
+                        <button class="vote-winner-btn" title="Vincitore Sfida" onclick="assignPoints('NomeGiocatore', 'challengeWin')"> </button>
+                    </div>
+                </li>
+                 -->
+        </ul>
+      </div>
     </div>
 
     <script>
-        // -------- STATO DEL GIOCO --------
-        let players = [];
-        let couples = [];
-        let playerScores = {};
-        let currentChallengeData = null;
-        // Probabilità (AGGGIORNATE - DEVONO SOMMARE ~100)
-        const oneVsOneProbability = 45; // Ridotta
-        const groupChallengeProbability = 20;
-        const coupleChallengeProbability = 20; // Ridotta
-        const challengeModeProbability = 15; // NUOVA
-        const challengeWinPoints = 3; // Punti per vittoria sfida
+      // -------- STATO DEL GIOCO --------
+      let players = [];
+      let couples = [];
+      let playerScores = {};
+      let currentChallengeData = null;
 
-        // -------- ARRAY DELLE SFIDE --------
-        // (Compliments, Roasts, UncomfortableQuestions, groupChallenges, coupleChallenges SONO IDENTICI all'ultimo codice,
-        //  con le tue immagini integrate. Li ometto qui per brevità, ma assicurati di averli nel tuo codice!)
-        const compliments = [ { type: 'text', text: "Se [PLAYER] fosse un colore, quale sarebbe e perché emana quella particolare 'vibrazione'?"}, { type: 'text', text: "Quale canzone descrive perfettamente l'energia o lo spirito di [PLAYER]?"}, { type: 'image', text: "Questa Lontra Umana ([PLAYER]?) ha degli occhi penetranti. Fai un complimento sincero a [PLAYER] sul suo sguardo o sulla sua profondità.", image: "images/Lontra_umana_con_occhi_azzurri.jpg"}, { type: 'text', text: "Descrivi un piccolo gesto quasi invisibile di [PLAYER] che però trovi significativo."}, { type: 'text', text: "Fai un complimento a [PLAYER] su una sua caratteristica fisica o di stile che ti piace."}, { type: 'text', text: "Se [PLAYER] fosse un fenomeno atmosferico (sole, pioggia...), quale sarebbe e perché?"}, { type: 'image', text: "Nonostante la puzza, questo cane ha un suo perché. Trova un pregio 'nascosto' di [PLAYER] e descrivilo.", image: "images/un_cane_puzza.jpg"}, { type: 'text', text: "Fai un complimento sincero su una qualità del carattere che ammiri profondamente in [PLAYER]."}, { type: 'text', text: "Condividi qualcosa di concreto che hai imparato grazie a [PLAYER]."}, { type: 'text', text: "Descrivi [PLAYER] in tre aggettivi precisi (non banali!) e spiega la scelta."}, { type: 'image', text: "Questo Gatto Kung Fu ha stile. Fai un complimento a [PLAYER] sulla sua agilità (fisica o mentale) o sul suo stile unico.", image: "images/Gatto_allungato_mossa_KungFu.jpg"}, ];
-        const roasts = [ { type: 'text', text: "Se [PLAYER] fosse un meme famoso, quale sarebbe?"}, { type: 'image', text: "Ammettilo, l'espressione di questo Asino non ti ricorda *perfettamente* [PLAYER] quando è confuso/a?", image: "images/Asino_con_occhi_grandi_cartoon.jpg"}, { type: 'text', text: "Qual è il superpotere più gloriosamente inutile che [PLAYER] potrebbe possedere?"}, { type: 'text', text: "Chiedi a [PLAYER]: 'Da 1 a 10, quanto ti senti 'Mr. Carrot' oggi?' Spiega il punteggio.", image: "images/Mr_Carrot_testa_umanoide_conici.jpg"}, { type: 'image', text: "Questa Arancia con faccia di scimmia è chiaramente l'animale spirituale di [PLAYER]. Concordi? Motiva.", image: "images/Arancia_con_faccia_di_scimmia.jpg"}, { type: 'text', text: "Descrivi la 'modalità Autopilot' di [PLAYER]: cosa fa quando sembra disconnesso?"}, { type: 'image', text: "Se [PLAYER] dovesse usare questa faccia da casa arrabbiata per spaventare qualcuno, funzionerebbe?", image: "images/Casa_con_faccia_umano_arrabbiato.jpg"}, { type: 'text', text: "Traduci la risata di [PLAYER] in un suono onomatopeico strano."}, { type: 'image', text: "Questo è [PLAYER] dopo una serata impegnativa, vero?", image: "images/woody_strafatto.jpg"}, { type: 'text', text: "Fai un roast *gentile* a [PLAYER] su un suo difettuccio, ma poi smorza con un complimento."}, { type: 'text', text: "Imita (senza cattiveria!) un'espressione facciale o un gesto tipico di [PLAYER]."}, { type: 'image', text: "L'urlo di questo Ippopotamo è come quello di [PLAYER] quando... (completa la frase)", image: "images/Ippopotamo_gridante_su_sfondo_giallo.jpg"}, { type: 'image', text: "Onestamente, [PLAYER], quanto ti senti rappresentato/a da questo Gatto Vampiro?", image: "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg"}, ];
-        const uncomfortableQuestions = [ { type: 'image', text: "[PLAYER], fissa questo Alieno Viola per 10 secondi. Ora confessa il primo pensiero *veramente* assurdo che ti è venuto.", image: "images/Alieno_viola_in_foresta_fluorescente.jpg"}, { type: 'text', text: "[PLAYER], domanda fondamentale: che tipo di elettrodomestico ti senti OGGI e perché?"}, { type: 'text', text: "[PLAYER], quale specifica ora NON ESISTENTE del giorno (es: le 25:77) ti senti in questo momento e perché?"}, { type: 'image', text: "Questa immagine rappresenta [PLAYER] quando cerca di spiegare qualcosa di complicato? Siate sinceri.", image: "images/Uomo_con_baffi_filter_volto_allungato.jpg"}, { type: 'text', text: "[PLAYER], preferiresti avere capelli che sanno di Shrek o sudare come un Ippopotamo gridante?", image: "images/Shrek_con_sorriso_memico.jpg"}, { type: 'text', text: "Chiedi a [PLAYER]: 'Qual è stata la cosa più stupida per cui ti sei quasi fatto/a bannare da un gioco online?'"}, { type: 'image', text: "Questa Maschera Inquietante è come ti immagini la coscienza di [PLAYER]? Spiega.", image: "images/Maschera_bianca_inquietante_su_uomo.jpg"}, { type: 'text', text: "[PLAYER], preferiresti poter parlare con le arance con faccia di scimmia o trasformarti in un asino cartoon ogni volta che starnutisci?"}, { type: 'text', text: "Chiedi a [PLAYER]: 'Qual è il pensiero più socialmente inaccettabile (ma che non diresti mai) che hai avuto guardando un reality show?'"}, { type: 'image', text: "Se tu ([MITTENTE]) fossi questo Omino Grasso in armatura, [PLAYER] sarebbe il tuo scudiero o il tuo nemico?", image: "images/Omino_grasso_stile_cartoon_in_armatura.jpg"}, { type: 'image', text: "Se tu ([MITTENTE]) fossi questa Scimmia con caschetto moderno, che consiglio di stile daresti a [PLAYER]?", image: "images/Scimmia_caschetto_stile_moderno.jpg"}, { type: 'text', text: "Confessa una piccola bugia bianca (o non così bianca) che hai detto a [PLAYER] per evitare di fare qualcosa."}, { type: 'text', text: "Devi dire a [PLAYER] una verità scomoda ma costruttiva sul suo profilo social preferito."}, { type: 'text', text: "Fai una domanda super personale a [PLAYER] (può usare un jolly e non rispondere, ma deve subire una piccola penitenza decisa dal gruppo)."}, ];
-        const groupChallenges = [ { type: 'image', text: "Il gruppo deve decidere: chi qui dentro è più probabile che abbia un poster di *questo* in camera?", image: "images/personaggio_imbarazzante.jpg" }, { type: 'image', text: "Questa immagine rappresenta l'umore medio di chi quando si sveglia? Votate!", image: "images/mood_mattutino.png" }, { type: 'text', text: "Gioco della sedia: [PLAYER] (mittente) dice che sedia si sente. Gli altri devono assegnargliene una più adatta." }, { type: 'image', text: "Tutti assegnano a [PLAYER] (mittente) un odore ispirato a questa Lontra Umana (es. 'muschio e mistero', 'salsedine e intelligenza artificiale'...).", image: "images/Lontra_umana_con_occhi_azzurri.jpg"}, { type: 'text', text: "Round di 'Obbligo o Verità' focalizzato su [PLAYER] (mittente). Gli altri scelgono per lui/lei." }, { type: 'image', text: "Inventate collettivamente un titolo clickbait per un articolo sulla vita segreta di questo Gatto Vampiro, impersonato da [PLAYER] (mittente).", image: "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg"}, { type: 'text', text: "Complimento competitivo per [PLAYER] (mittente): chi fa il complimento più originale/strano vince l'approvazione del GM." }, { type: 'image', text: "Descrivi [PLAYER] (mittente) con UN suono ispirato a questo Cane Stupito.", image: "images/Cane_con_faccia_stupita_e_sproporzionata.jpg"}, { type: 'image', text: "Tutti devono imitare l'espressione di Shrek pensando a [PLAYER] (mittente).", image: "images/Shrek_con_sorriso_memico.jpg" }, { type: 'text', text: "Chi conosce meglio [PLAYER]? Il GM fa una domanda su [PLAYER], chi risponde correttamente per primo ottiene il diritto di usare l'espressione 'Te l'avevo detto'." } ];
-        const coupleChallenges = [ { type: 'text', text: "Chi di voi due ([COPPIA_1] e [COPPIA_2]) è più probabile che pianga guardando un cartone animato?" }, { type: 'image', text: "Questa immagine rappresenta la vostra domenica tipo? Siate onesti, coppia!", image: "images/relax_o_caos.jpg"}, { type: 'text', text: "[MITTENTE], chiedi alla coppia qual è il nomignolo più imbarazzante che usano tra loro." }, { type: 'image', text: "Coppia: è vero che l'acconciatura di questa Scimmia è segretamente l'aspirazione di [COPPIA_1] o [COPPIA_2]?", image: "images/Scimmia_caschetto_stile_moderno.jpg"}, { type: 'text', text: "La coppia deve descrivere il partner ideale per l'altro/a usando solo nomi di personaggi dei cartoni animati." }, { type: 'image', text: "Coppia: è vero che la faccia di questo cane puzza ma è felice rappresenta [COPPIA_1] / [COPPIA_2] dopo una lunga giornata?", image: "images/un_cane_puzza.jpg"}, { type: 'text', text: "Se [COPPIA_1] e [COPPIA_2] fossero un gusto di pizza combinato, quale sarebbe? (Es: 'Ananas e Disperazione', 'Salame Piccante e Tenerezza')." }, { type: 'text', text: "Chi dei due è più bravo/a a mentire? L'altro/a deve raccontare un aneddoto a prova." }, { type: 'image', text: "[MITTENTE], fai una domanda alla coppia ispirata da questo Uomo con baffi allungati (es. 'Chi dei due esagera di più nel raccontare storie?').", image: "images/Uomo_con_baffi_filter_volto_allungato.jpg"}, { type: 'text', text: "La coppia deve inventare al momento un ballo di coppia segreto e imbarazzante." }, { type: 'image', text: "Coppia, guardate questo Uovo con gli occhiali. Ora, senza parlare, indicate chi dei due è più 'secchione' o 'precisino'.", image: "images/Uovo_con_occhiali_e_volto_umano.jpg"}, { type: 'text', text: "Se doveste scambiarvi un talento inutile per un giorno, quali scegliereste?" }, ];
+      // Probabilità
+      const oneVsOneProbability = 45;
+      const groupChallengeProbability = 20;
+      const coupleChallengeProbability = 20;
+      const challengeModeProbability = 15;
+      // Punti
+      const likePoints = 1;
+      const dislikePoints = 0;
+      const challengeWinPoints = 3;
+      const groupLaughPoints = 1;
 
-        // *** NUOVO ARRAY PER MODALITÀ SFIDA ***
-        const challengeModeChallenges = [
-            { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: sfida a chi imita meglio il suono di un modem 56k che si connette."},
-            { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: dovete fare braccio di ferro mentale. Fissatevi intensamente finché uno dei due non ride o distoglie lo sguardo. Vietato toccarsi."},
-            { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: sfida di sguardi assassini. Chi mantiene lo sguardo più minaccioso per 15 secondi vince."},
-            { type: 'image', text: "[PLAYER_1] e [PLAYER_2]: chi dei due riesce a imitare meglio la posa di questo Gatto Kung Fu? Il gruppo giudica.", image: "images/Gatto_allungato_mossa_KungFu.jpg"},
-            { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: gara a chi racconta la barzelletta più squallida e imbarazzante."},
-            { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: sfida a chi riesce a stare in equilibrio su una gamba sola per più tempo (senza appoggiarsi!)."},
-            { type: 'image', text: "[PLAYER_1] e [PLAYER_2]: dovete inventare un dialogo tra questa Arancia Scimmia e questo Asino Cartoon. Il più divertente vince.", image: "images/Arancia_con_faccia_di_scimmia.jpg"}, // Potrebbe servire mostrare due immagini? Complesso. Meglio sfide non visuali.
-             { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: sfida a chi fa il verso di animale più strano e inaspettato."},
-             { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: gara di complimenti passivo-aggressivi. Chi riesce a farne uno più tagliente ma velato vince."},
-             { type: 'text', text: "[PLAYER_1] e [PLAYER_2]: dovete recitare la scena madre di un film famoso ma usando solo la parola 'Cancrena'."}
-        ];
+      // -------- ARRAY DELLE SFIDE --------
+      // (Riutilizza gli array completi con le tue immagini dall'ultimo codice - omessi per brevità)
+      const compliments = [
+        {
+          type: "text",
+          text: "Se [PLAYER] fosse un colore, quale sarebbe e perché emana quella particolare 'vibrazione'?",
+        },
+        {
+          type: "text",
+          text: "Quale canzone descrive perfettamente l'energia o lo spirito di [PLAYER]?",
+        },
+        {
+          type: "image",
+          text: "Questa Lontra Umana ([PLAYER]?) ha degli occhi penetranti. Fai un complimento sincero a [PLAYER] sul suo sguardo o sulla sua profondità.",
+          image: "images/Lontra_umana_con_occhi_azzurri.jpg",
+        },
+        {
+          type: "text",
+          text: "Descrivi un piccolo gesto quasi invisibile di [PLAYER] che però trovi significativo.",
+        },
+        {
+          type: "text",
+          text: "Fai un complimento a [PLAYER] su una sua caratteristica fisica o di stile che ti piace.",
+        },
+        {
+          type: "text",
+          text: "Se [PLAYER] fosse un fenomeno atmosferico (sole, pioggia...), quale sarebbe e perché?",
+        },
+        {
+          type: "image",
+          text: "Nonostante la puzza, questo cane ha un suo perché. Trova un pregio 'nascosto' di [PLAYER] e descrivilo.",
+          image: "images/un_cane_puzza.jpg",
+        },
+        {
+          type: "text",
+          text: "Fai un complimento sincero su una qualità del carattere che ammiri profondamente in [PLAYER].",
+        },
+        {
+          type: "text",
+          text: "Condividi qualcosa di concreto che hai imparato grazie a [PLAYER].",
+        },
+        {
+          type: "text",
+          text: "Descrivi [PLAYER] in tre aggettivi precisi (non banali!) e spiega la scelta.",
+        },
+        {
+          type: "image",
+          text: "Questo Gatto Kung Fu ha stile. Fai un complimento a [PLAYER] sulla sua agilità (fisica o mentale) o sul suo stile unico.",
+          image: "images/Gatto_allungato_mossa_KungFu.jpg",
+        },
+        {
+          type: "text",
+          text: "Se [PLAYER] fosse un piatto gourmet, quali ingredienti conterrebbe e perché?",
+        },
+        {
+          type: "text",
+          text: "Descrivi l'aura di [PLAYER] usando solo colori e sensazioni tattili.",
+        },
+        {
+          type: "text",
+          text: "Se [PLAYER] potesse essere un elemento architettonico di un edificio storico, quale sarebbe e perché?",
+        },
+        {
+          type: "text",
+          text: "Se [PLAYER] fosse un profumo, quali note avrebbe e in quale situazione sarebbe perfetto indossarlo?",
+        },
+        {
+          type: "text",
+          text: "Quale superpotere segreto pensi abbia [PLAYER] nella vita quotidiana?",
+        },
+        {
+          type: "text",
+          text: "Quale animale mitologico rappresenta meglio l'essenza di [PLAYER] e perché?",
+        },
+        {
+          type: "text",
+          text: "Descrivi un talento nascosto che [PLAYER] potrebbe avere ma che non ha ancora rivelato al mondo.",
+        },
+        {
+          type: "text",
+          text: "Se [PLAYER] fosse un pianeta del nostro sistema solare, quale sarebbe e perché si adatta alla sua personalità?",
+        },
+      ];
+      const roasts = [
+        {
+          type: "text",
+          text: "Se [PLAYER] fosse un meme famoso, quale sarebbe?",
+        },
+        {
+          type: "image",
+          text: "Ammettilo, l'espressione di questo Asino non ti ricorda *perfettamente* [PLAYER] quando è confuso/a?",
+          image: "images/Asino_con_occhi_grandi_cartoon.jpg",
+        },
+        {
+          type: "text",
+          text: "Qual è il superpotere più gloriosamente inutile che [PLAYER] potrebbe possedere?",
+        },
+        {
+          type: "text",
+          text: "Chiedi a [PLAYER]: 'Da 1 a 10, quanto ti senti 'Mr. Carrot' oggi?' Spiega il punteggio.",
+          image: "images/Mr_Carrot_testa_umanoide_conici.jpg",
+        },
+        {
+          type: "image",
+          text: "Questa Arancia con faccia di scimmia è chiaramente l'animale spirituale di [PLAYER]. Concordi? Motiva.",
+          image: "images/Arancia_con_faccia_di_scimmia.jpg",
+        },
+        {
+          type: "text",
+          text: "Descrivi la 'modalità Autopilot' di [PLAYER]: cosa fa quando sembra disconnesso?",
+        },
+        {
+          type: "image",
+          text: "Se [PLAYER] dovesse usare questa faccia da casa arrabbiata per spaventare qualcuno, funzionerebbe?",
+          image: "images/Casa_con_faccia_umano_arrabbiato.jpg",
+        },
+        {
+          type: "text",
+          text: "Traduci la risata di [PLAYER] in un suono onomatopeico strano.",
+        },
+        {
+          type: "image",
+          text: "Questo è [PLAYER] dopo una serata impegnativa, vero?",
+          image: "images/woody_strafatto.jpg",
+        },
+        {
+          type: "text",
+          text: "Fai un roast *gentile* a [PLAYER] su un suo difettuccio, ma poi smorza con un complimento.",
+        },
+        {
+          type: "text",
+          text: "Imita (senza cattiveria!) un'espressione facciale o un gesto tipico di [PLAYER].",
+        },
+        {
+          type: "image",
+          text: "L'urlo di questo Ippopotamo è come quello di [PLAYER] quando... (completa la frase)",
+          image: "images/Ippopotamo_gridante_su_sfondo_giallo.jpg",
+        },
+        {
+          type: "image",
+          text: "Onestamente, [PLAYER], quanto ti senti rappresentato/a da questo Gatto Vampiro?",
+          image: "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg",
+        },
+        {
+          type: "text",
+          text: "Se [PLAYER] fosse un elettrodomestico malfunzionante, quale sarebbe e cosa farebbe di strano?",
+        },
+        {
+          type: "text",
+          text: "Quale personaggio dei cartoni animati flop degli anni '90 ricorda di più [PLAYER] quando è stanco/a?",
+        },
+        {
+          type: "text",
+          text: "Descrivi [PLAYER] come se fosse la peggiore recensione a 1 stella di un ristorante di lusso.",
+        },
+        {
+          type: "text",
+          text: "Se la postura di [PLAYER] potesse parlare, quale frase ripeterebbe continuamente?",
+        },
+        {
+          type: "text",
+          text: "Quale emoji descrive meglio la faccia di [PLAYER] quando cerca di sembrare intelligente?",
+        },
+        {
+          type: "text",
+          text: "Se la vita di [PLAYER] fosse un film di serie B, quale sarebbe il titolo e la trama assurda?",
+        },
+        {
+          type: "text",
+          text: "Se lo stile di [PLAYER] fosse un piatto di cucina fusion andato male, quali ingredienti incompatibili conterrebbe?",
+        },
+        {
+          type: "text",
+          text: "Quale trend di TikTok ormai superato [PLAYER] probabilmente segue ancora in segreto?",
+        },
+      ];
+      const uncomfortableQuestions = [
+        {
+          type: "image",
+          text: "[PLAYER], fissa questo Alieno Viola per 10 secondi. Ora confessa il primo pensiero *veramente* assurdo che ti è venuto.",
+          image: "images/Alieno_viola_in_foresta_fluorescente.jpg",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], domanda fondamentale: che tipo di elettrodomestico ti senti OGGI e perché?",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], quale specifica ora NON ESISTENTE del giorno (es: le 25:77) ti senti in questo momento e perché?",
+        },
+        {
+          type: "image",
+          text: "Questa immagine rappresenta [PLAYER] quando cerca di spiegare qualcosa di complicato? Siate sinceri.",
+          image: "images/Uomo_con_baffi_filter_volto_allungato.jpg",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], preferiresti avere capelli che sanno di Shrek o sudare come un Ippopotamo gridante?",
+          image: "images/Shrek_con_sorriso_memico.jpg",
+        },
+        {
+          type: "text",
+          text: "Chiedi a [PLAYER]: 'Qual è stata la cosa più stupida per cui ti sei quasi fatto/a bannare da un gioco online?'",
+        },
+        {
+          type: "image",
+          text: "Questa Maschera Inquietante è come ti immagini la coscienza di [PLAYER]? Spiega.",
+          image: "images/Maschera_bianca_inquietante_su_uomo.jpg",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], preferiresti poter parlare con le arance con faccia di scimmia o trasformarti in un asino cartoon ogni volta che starnutisci?",
+        },
+        {
+          type: "text",
+          text: "Chiedi a [PLAYER]: 'Qual è il pensiero più socialmente inaccettabile (ma che non diresti mai) che hai avuto guardando un reality show?'",
+        },
+        {
+          type: "image",
+          text: "[MITTENTE], [PLAYER] sarebbe più l'Omino Grasso o il suo destriero invisibile?",
+          image: "images/Omino_grasso_stile_cartoon_in_armatura.jpg",
+        }, // Modificata
+        {
+          type: "image",
+          text: "[MITTENTE], cosa ne pensa [PLAYER] di questa Scimmia con caschetto?",
+          image: "images/Scimmia_caschetto_stile_moderno.jpg",
+        }, // Modificata
+        {
+          type: "text",
+          text: "Confessa una piccola bugia bianca (o non così bianca) che hai detto a [PLAYER] per evitare di fare qualcosa.",
+        },
+        {
+          type: "text",
+          text: "Devi dire a [PLAYER] una verità scomoda ma costruttiva sul suo profilo social preferito.",
+        },
+        {
+          type: "text",
+          text: "Fai una domanda super personale a [PLAYER] (può usare un jolly e non rispondere, ma deve subire una piccola penitenza decisa dal gruppo).",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], in una scala da 1 a 10, quanto consideri discutibile la tua ultima decisione importante? Spiega.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], se potessi creare una legge assurda ma che tutti devono seguire, quale sarebbe e perché?",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], se i tuoi amici qui presenti creassero un documentario sulla tua vita, quale sarebbe il titolo più imbarazzante ma accurato?",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], qual è la cosa più strana che hai cercato su Google nell'ultima settimana che non vorresti che gli altri sapessero?",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], se il tuo animale domestico (o un oggetto in casa tua) potesse parlare, quale segreto imbarazzante rivelerebbe su di te?",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], considerando i presenti, chi chiameresti alle 3 del mattino per aiutarti a nascondere un pinguino rubato dallo zoo? E perché?",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], se i tuoi DM/messaggi privati venissero esposti pubblicamente, quale sarebbe la conversazione che ti metterebbe più in imbarazzo?",
+        },
+        {
+          type: "text",
+          text: "[PLAYER], quale serie o film ti vergogni segretamente di amare ma difenderesti con passione se qualcuno lo criticasse?",
+        },
+      ];
+      const groupChallenges = [
+        {
+          type: "image",
+          text: "Gruppo: chi qui dentro è più probabile che abbia un poster di *questo* in camera?",
+          image: "images/personaggio_imbarazzante.jpg",
+        },
+        {
+          type: "image",
+          text: "Gruppo: questa immagine rappresenta l'umore medio di chi quando si sveglia? Votate!",
+          image: "images/mood_mattutino.png",
+        },
+        {
+          type: "text",
+          text: "Gioco della sedia: un giocatore volontario dice che sedia si sente. Gli altri devono assegnargliene una più adatta.",
+        },
+        {
+          type: "image",
+          text: "Gruppo: assegnate a un volontario un odore ispirato a questa Lontra Umana.",
+          image: "images/Lontra_umana_con_occhi_azzurri.jpg",
+        },
+        {
+          type: "text",
+          text: "Round di 'Obbligo o Verità' per un volontario. Il gruppo sceglie per lui/lei.",
+        },
+        {
+          type: "image",
+          text: "Gruppo: inventate collettivamente un titolo clickbait per un articolo sulla vita segreta di questo Gatto Vampiro.",
+          image: "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg",
+        },
+        {
+          type: "text",
+          text: "Complimento competitivo per un volontario: chi fa il complimento più originale vince.",
+        },
+        {
+          type: "image",
+          text: "Gruppo: descrivete un volontario con UN suono ispirato a questo Cane Stupito.",
+          image: "images/Cane_con_faccia_stupita_e_sproporzionata.jpg",
+        },
+        {
+          type: "image",
+          text: "Tutti: imitate l'espressione di Shrek ora!",
+          image: "images/Shrek_con_sorriso_memico.jpg",
+        },
+        {
+          type: "text",
+          text: "Domanda Trivia su un giocatore scelto a caso: chi risponde correttamente per primo vince.",
+        },
+        {
+          type: "text",
+          text: "Gruppo: ognuno faccia la sua migliore imitazione del suono di avvio di un vecchio computer Windows. I presenti votano la più realistica.",
+        },
+        {
+          type: "text",
+          text: "Gruppo: create collettivamente una ricetta di cucina usando solo oggetti visibili nella stanza. Più assurda è, meglio è!",
+        },
+        {
+          type: "text",
+          text: "Gruppo: catena di battute pessime - qualcuno inizia con una battuta davvero terribile, e a turno ognuno deve farne una peggiore della precedente.",
+        },
+        {
+          type: "text",
+          text: "Gruppo: ognuno deve inventare un soprannome ridicolo per la persona alla propria destra, basato su un incidente imbarazzante (reale o immaginario).",
+        },
+        {
+          type: "text",
+          text: "Gruppo: imitazione rapida - un volontario fa un gesto o un'espressione bizzarra, e tutti devono immediatamente copiarla il più accuratamente possibile.",
+        },
+        {
+          type: "text",
+          text: "Gruppo: create un breve telegiornale assurdo dove ogni persona aggiunge una notizia sempre più surreale, collegandola alla precedente.",
+        },
+        {
+          type: "text",
+          text: "Gruppo: inventate una danza di gruppo improbabile chiamata 'La Cancrena'. Ogni persona aggiunge un movimento e alla fine eseguitela tutti insieme.",
+        },
+        {
+          type: "text",
+          text: "Gruppo: date vita a un tribunale improvvisato dove si processa un oggetto presente nella stanza per crimini ridicoli. Assegnate i ruoli di giudice, accusa, difesa e testimoni.",
+        },
+      ]; // Rimosso [PLAYER=mittente]
+      const coupleChallenges = [
+        {
+          type: "text",
+          text: "Coppia ([COPPIA_1] & [COPPIA_2]): chi di voi due è più probabile che pianga guardando un cartone?",
+        },
+        {
+          type: "image",
+          text: "Coppia: questa immagine rappresenta la vostra domenica tipo? Siate onesti!",
+          image: "images/relax_o_caos.jpg",
+        },
+        {
+          type: "text",
+          text: "Coppia: qual è il nomignolo più imbarazzante che usate tra voi?",
+        },
+        {
+          type: "image",
+          text: "Coppia: l'acconciatura di questa Scimmia è l'aspirazione segreta di chi dei due?",
+          image: "images/Scimmia_caschetto_stile_moderno.jpg",
+        },
+        {
+          type: "text",
+          text: "Coppia: descrivete il partner ideale per l'altro/a usando solo nomi di personaggi dei cartoni.",
+        },
+        {
+          type: "image",
+          text: "Coppia: la faccia di questo cane rappresenta chi dei due dopo una lunga giornata?",
+          image: "images/un_cane_puzza.jpg",
+        },
+        {
+          type: "text",
+          text: "Coppia: se foste un gusto di pizza combinato, quale sarebbe?",
+        },
+        {
+          type: "text",
+          text: "Coppia: chi dei due è più bravo/a a mentire? L'altro/a deve fornire una prova (aneddoto).",
+        },
+        {
+          type: "image",
+          text: "Coppia: chi dei due esagera di più nel raccontare storie, come suggerisce questo Uomo?",
+          image: "images/Uomo_con_baffi_filter_volto_allungato.jpg",
+        },
+        {
+          type: "text",
+          text: "Coppia: inventate e mostrate un ballo di coppia segreto e imbarazzante.",
+        },
+        {
+          type: "image",
+          text: "Coppia: guardate l'Uovo. Senza parlare, indicate chi dei due è più 'secchione'.",
+          image: "images/Uovo_con_occhiali_e_volto_umano.jpg",
+        },
+        {
+          type: "text",
+          text: "Coppia: se doveste scambiarvi un talento inutile per un giorno, quali?",
+        },
+        {
+          type: "text",
+          text: "Coppia ([COPPIA_1] & [COPPIA_2]): create un nuovo supereroe combinando i vostri 'poteri' e difetti peggiori. Come si chiama e quale sarebbe il suo costume?",
+        },
+        {
+          type: "text",
+          text: "Coppia: improvvisate una breve scena da telenovela drammatica dove uno di voi ha appena scoperto che l'altro è il suo gemello segreto.",
+        },
+        {
+          type: "text",
+          text: "Coppia: create una pubblicità per un prodotto assurdo che risolve un problema che solo voi due avete, alternandovi nelle frasi senza consultarvi prima.",
+        },
+        {
+          type: "text",
+          text: "Coppia: intervista assurda - uno fa domande totalmente random, l'altro deve rispondere seriamente come se fosse un esperto mondiale dell'argomento.",
+        },
+        {
+          type: "text",
+          text: "Coppia: dovete descrivere la giornata tipo dell'altro come se fosse un documentario di National Geographic sulle strane abitudini di una specie rara.",
+        },
+        {
+          type: "text",
+          text: "Coppia: create un nuovo sport estremo combinando i vostri hobby. Mostrate una 'mossa vincente' di questo sport e fatela commentare dagli altri.",
+        },
+        {
+          type: "text",
+          text: "Coppia: inventate una nuova festa nazionale basata sulle vostre personalità combinate. Quali sarebbero le tradizioni e i rituali di questa festa?",
+        },
+        {
+          type: "text",
+          text: "Coppia: dovete farvi a vicenda complimenti assurdamente specifici nello stile di un poeta drammatico dell'800. Chi fa il complimento più elaborato vince.",
+        },
+      ]; // Rimosso [MITTENTE]
+      const challengeModeChallenges = [
+        /* ...identici a prima... */ {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida a chi imita meglio il suono di un modem 56k che si connette.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: dovete fare braccio di ferro mentale. Fissatevi intensamente finché uno dei due non ride o distoglie lo sguardo. Vietato toccarsi.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida di sguardi assassini. Chi mantiene lo sguardo più minaccioso per 15 secondi vince.",
+        },
+        {
+          type: "image",
+          text: "[PLAYER_1] e [PLAYER_2]: chi dei due riesce a imitare meglio la posa di questo Gatto Kung Fu? Il gruppo giudica.",
+          image: "images/Gatto_allungato_mossa_KungFu.jpg",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: gara a chi racconta la barzelletta più squallida e imbarazzante.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida a chi riesce a stare in equilibrio su una gamba sola per più tempo (senza appoggiarsi!).",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida a chi fa il verso di animale più strano e inaspettato.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: gara di complimenti passivo-aggressivi. Chi riesce a farne uno più tagliente ma velato vince.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: dovete recitare la scena madre di un film famoso ma usando solo la parola 'Cancrena'.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: gara a chi riesce a ridere in modo più malvagio e inquietante. Il gruppo decide il vincitore.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida di beatbox improvvisato - ciascuno ha 15 secondi per creare il ritmo più assurdo possibile.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: dovete improvvisare un rap battle usando solo parole che iniziano con la prima lettera del nome dell'avversario.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida delle espressioni facciali - mostrate la vostra migliore faccia da 'ho appena morso un limone mentre ricevo una multa'.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida di mimo - interpretate l'emozione 'delusione cosmica' usando solo il vostro corpo, senza fare alcun suono.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: gara a chi inventa la scusa più assurda per non aver fatto i compiti, come se parlaste con un insegnante severo.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: sfida di danza assurda - dovete ballare nello stile di un animale improbabile (un bradipo, un granchio, ecc.). Il gruppo vota il migliore.",
+        },
+        {
+          type: "text",
+          text: "[PLAYER_1] e [PLAYER_2]: vi sfido a cantare il titolo di una canzone famosa con l'accento più strano possibile. Gli altri devono indovinare la canzone.",
+        },
+      ];
 
-
-        // -------- FUNZIONI GESTIONE GIOCATORI E COPPIE (Invariate) --------
-        function addPlayer() {
-            const playerNameInput = document.getElementById('player-name');
-            const playerName = playerNameInput.value.trim();
-            if (playerName && !players.includes(playerName)) {
-                players.push(playerName);
-                playerScores[playerName] = 0;
-                updatePlayersList();
-                playerNameInput.value = '';
-                document.getElementById('start-btn').disabled = players.length < 2;
-                updateCoupleSectionVisibility();
-            } else if (players.includes(playerName)) { alert("Questo giocatore esiste già!"); }
-            playerNameInput.focus();
+      // -------- FUNZIONI UI e SETUP --------
+      // (createScoreboardItem, updatePlayerScoreVisual, updateScoreboardSidebar - invariate rispetto all'ultima versione)
+      function createScoreboardItem(playerName) {
+        const li = document.createElement("li");
+        li.className = "score-item";
+        li.dataset.playerName = playerName;
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "score-name";
+        nameSpan.textContent = playerName;
+        const pointsSpan = document.createElement("span");
+        pointsSpan.className = "score-points";
+        pointsSpan.textContent = "0";
+        const actionsDiv = document.createElement("div");
+        actionsDiv.className = "score-actions";
+        actionsDiv.style.display = "none";
+        const likeBtn = document.createElement("button");
+        likeBtn.className = "like-btn";
+        likeBtn.title = "Assegna Punto (+1)";
+        likeBtn.innerHTML = "👍";
+        likeBtn.style.display = "none";
+        likeBtn.onclick = (event) => {
+          event.stopPropagation();
+          assignPoints(playerName, "like");
+        };
+        actionsDiv.appendChild(likeBtn);
+        const dislikeBtn = document.createElement("button");
+        dislikeBtn.className = "dislike-btn";
+        dislikeBtn.title = "Nessun Punto";
+        dislikeBtn.innerHTML = "👎";
+        dislikeBtn.style.display = "none";
+        dislikeBtn.onclick = (event) => {
+          event.stopPropagation();
+          assignPoints(playerName, "dislike");
+        };
+        actionsDiv.appendChild(dislikeBtn);
+        const voteBtn = document.createElement("button");
+        voteBtn.className = "vote-winner-btn";
+        voteBtn.title = "Vincitore Sfida!";
+        voteBtn.innerHTML = "";
+        voteBtn.style.display = "none";
+        voteBtn.onclick = (event) => {
+          event.stopPropagation();
+          assignPoints(playerName, "challengeWin");
+        };
+        actionsDiv.appendChild(voteBtn);
+        li.appendChild(nameSpan);
+        li.appendChild(pointsSpan);
+        li.appendChild(actionsDiv);
+        return li;
+      }
+      function updateScoreboardSidebar() {
+        const scoreboardList = document.getElementById("scoreboard-list");
+        scoreboardList.innerHTML = "";
+        players.forEach((player) => {
+          const scoreItem = createScoreboardItem(player);
+          scoreboardList.appendChild(scoreItem);
+          updatePlayerScoreVisual(player);
+        });
+      }
+      function updatePlayerScoreVisual(playerName) {
+        const scoreItem = document.querySelector(
+          `#scoreboard-list .score-item[data-player-name="${playerName}"]`
+        );
+        if (scoreItem) {
+          const pointsSpan = scoreItem.querySelector(".score-points");
+          if (pointsSpan) {
+            pointsSpan.textContent =
+              playerScores[playerName] !== undefined
+                ? playerScores[playerName]
+                : 0;
+          }
         }
-        function removePlayer(index) {
-            const playerName = players[index];
-            const wasInCouple = isPlayerInCouple(playerName);
-            players.splice(index, 1);
-            delete playerScores[playerName];
-            if (wasInCouple) { couples = couples.filter(couple => !couple.includes(playerName)); }
-            updatePlayersList();
-            document.getElementById('start-btn').disabled = players.length < 2;
-            updateCoupleSectionVisibility();
+      }
+
+      // --- Funzioni Setup Giocatori/Coppie (invariate) ---
+      function addPlayer() {
+        const playerNameInput = document.getElementById("player-name");
+        const playerName = playerNameInput.value.trim();
+        if (playerName && !players.includes(playerName)) {
+          players.push(playerName);
+          playerScores[playerName] = 0;
+          updatePlayersList();
+          /* updateScoreboardSidebar viene chiamata da updatePlayersList */ playerNameInput.value =
+            "";
+          document.getElementById("start-btn").disabled = players.length < 2;
+          updateCoupleSectionVisibility();
+        } else if (players.includes(playerName)) {
+          alert("Questo giocatore esiste già!");
         }
-        function updatePlayersList() {
-            const playersListElement = document.getElementById('players-list');
-            playersListElement.innerHTML = '';
-            players.forEach((player, index) => {
-                const li = document.createElement('li'); li.className = 'player-item';
-                const nameSpan = document.createElement('span'); nameSpan.className = 'player-name'; nameSpan.textContent = player; li.appendChild(nameSpan);
-                const actionsDiv = document.createElement('div'); actionsDiv.className = 'player-actions';
-                const coupleIconSpan = document.createElement('span'); coupleIconSpan.className = 'couple-icon'; actionsDiv.appendChild(coupleIconSpan);
-                const uncoupleBtn = document.createElement('button'); uncoupleBtn.className = 'uncouple-btn'; uncoupleBtn.textContent = 'Separa'; uncoupleBtn.onclick = () => uncouplePlayers(player); actionsDiv.appendChild(uncoupleBtn);
-                const deleteBtn = document.createElement('button'); deleteBtn.className = 'delete-btn'; deleteBtn.textContent = 'Rimuovi'; deleteBtn.onclick = () => removePlayer(index); actionsDiv.appendChild(deleteBtn);
-                li.appendChild(actionsDiv); playersListElement.appendChild(li);
-                updatePlayerCoupleStatusVisual(player);
-            });
-            // Assicurati che i dropdown siano aggiornati *dopo* aver aggiornato la lista
-             if(document.getElementById('couple-section').style.display === 'block'){
-                updateCoupleDropdowns();
-             }
+        playerNameInput.focus();
+      }
+      function removePlayer(index) {
+        const playerName = players[index];
+        const wasInCouple = isPlayerInCouple(playerName);
+        players.splice(index, 1);
+        delete playerScores[playerName];
+        if (wasInCouple) {
+          couples = couples.filter((couple) => !couple.includes(playerName));
         }
-        function isPlayerInCouple(playerName) { return couples.some(couple => couple.includes(playerName)); }
-        function updatePlayerCoupleStatusVisual(playerName) {
-            document.querySelectorAll('#players-list li').forEach(li => {
-                const nameSpan = li.querySelector('.player-name');
-                if (nameSpan && nameSpan.textContent === playerName) {
-                    const coupleIconSpan = li.querySelector('.couple-icon');
-                    const uncoupleBtn = li.querySelector('.uncouple-btn');
-                    if (isPlayerInCouple(playerName)) { coupleIconSpan.textContent = ' ❤️'; uncoupleBtn.style.display = 'inline-block'; }
-                    else { coupleIconSpan.textContent = ''; uncoupleBtn.style.display = 'none'; }
-                }
-            });
+        updatePlayersList();
+        /* updateScoreboardSidebar viene chiamata da updatePlayersList */ document.getElementById(
+          "start-btn"
+        ).disabled = players.length < 2;
+        updateCoupleSectionVisibility();
+      }
+      function updatePlayersList() {
+        const playersListElement = document.getElementById("players-list");
+        playersListElement.innerHTML = "";
+        players.forEach((player, index) => {
+          const li = document.createElement("li");
+          li.className = "player-item";
+          const nameSpan = document.createElement("span");
+          nameSpan.className = "player-name";
+          nameSpan.textContent = player;
+          li.appendChild(nameSpan);
+          const actionsDiv = document.createElement("div");
+          actionsDiv.className = "player-actions";
+          const coupleIconSpan = document.createElement("span");
+          coupleIconSpan.className = "couple-icon";
+          actionsDiv.appendChild(coupleIconSpan);
+          const uncoupleBtn = document.createElement("button");
+          uncoupleBtn.className = "uncouple-btn";
+          uncoupleBtn.textContent = "Separa";
+          uncoupleBtn.onclick = () => uncouplePlayers(player);
+          actionsDiv.appendChild(uncoupleBtn);
+          const deleteBtn = document.createElement("button");
+          deleteBtn.className = "delete-btn";
+          deleteBtn.textContent = "Rimuovi";
+          deleteBtn.onclick = () => removePlayer(index);
+          actionsDiv.appendChild(deleteBtn);
+          li.appendChild(actionsDiv);
+          playersListElement.appendChild(li);
+          updatePlayerCoupleStatusVisual(player);
+        });
+        updateScoreboardSidebar();
+        /* Aggiorna ANCHE sidebar */ if (
+          document.getElementById("setup-section").style.display === "block"
+        ) {
+          if (players.length >= 2) {
+            updateCoupleDropdowns();
+          }
         }
-        function updateCoupleSectionVisibility() {
-            const coupleSection = document.getElementById('couple-section');
-            const shouldBeVisible = players.length >= 2;
-            coupleSection.style.display = shouldBeVisible ? 'block' : 'none';
-            if (!shouldBeVisible) { couples = []; }
-            // Chiamiamo updateCoupleDropdowns solo se la sezione è visibile
-            // Altrimenti viene chiamata da updatePlayersList quando necessario
-            if (shouldBeVisible) {
-               updateCoupleDropdowns();
-            }
-        }
-        function updateCoupleDropdowns() {
-            const select1 = document.getElementById('couple-player1');
-            const select2 = document.getElementById('couple-player2');
-            if (!select1 || !select2) return; // Sicurezza se elementi non trovati
-            const currentVal1 = select1.value; const currentVal2 = select2.value;
-            select1.innerHTML = '<option value="">Seleziona...</option>'; select2.innerHTML = '<option value="">Seleziona...</option>';
-            const availablePlayers = players.filter(p => !isPlayerInCouple(p));
-            availablePlayers.forEach(player => {
-                const option1 = document.createElement('option'); option1.value = player; option1.textContent = player; select1.appendChild(option1);
-                const option2 = document.createElement('option'); option2.value = player; option2.textContent = player; select2.appendChild(option2);
-            });
-            if(availablePlayers.includes(currentVal1)) select1.value = currentVal1;
-            if(availablePlayers.includes(currentVal2)) select2.value = currentVal2;
-            document.getElementById('couple-btn').disabled = availablePlayers.length < 2;
-        }
-         function formCouple() {
-             const player1 = document.getElementById('couple-player1').value;
-             const player2 = document.getElementById('couple-player2').value;
-             if (!player1 || !player2) { alert("Seleziona entrambi i giocatori!"); return; }
-             if (player1 === player2) { alert("I giocatori devono essere diversi!"); return; }
-             couples.push([player1, player2]);
-             updatePlayersList();
-             document.getElementById('couple-player1').value = ''; document.getElementById('couple-player2').value = '';
-         }
-         function uncouplePlayers(playerName) {
-             couples = couples.filter(couple => !couple.includes(playerName));
-             updatePlayersList();
-         }
-
-        // -------- FUNZIONI FLUSSO DI GIOCO --------
-
-        function startGame() {
-            if (players.length < 2) return;
-            players.forEach(player => { playerScores[player] = 0; });
-            currentChallengeData = null;
-            document.getElementById('setup-section').style.display = 'none';
-            document.getElementById('game-section').style.display = 'block';
-            document.getElementById('scoreboard-section').style.display = 'none';
-            // Nascondi entrambi i contenitori bottoni all'inizio
-            document.getElementById('reaction-buttons-container').style.display = 'none';
-            document.getElementById('challenge-vote-buttons-container').style.display = 'none';
-            nextChallenge();
-        }
-
-        function determineChallengeType() {
-            const rand = Math.random() * 100;
-            let cumulativeProb = 0;
-
-            cumulativeProb += coupleChallengeProbability;
-            if (couples.length > 0 && rand < cumulativeProb) {
-                return { pool: coupleChallenges, type: 'couple' };
-            }
-
-            cumulativeProb += groupChallengeProbability;
-            if (rand < cumulativeProb) {
-                return { pool: groupChallenges, type: 'group' };
-            }
-
-            cumulativeProb += challengeModeProbability; // NUOVA MODALITÀ SFIDA
-            if (players.length >= 2 && rand < cumulativeProb) { // Solo se ci sono almeno 2 giocatori
-                 return { pool: challengeModeChallenges, type: 'challenge' };
-            }
-
-            // Altrimenti, è 1 vs 1
-            const oneVsOnePool = [...compliments, ...roasts, ...uncomfortableQuestions];
-            return { pool: oneVsOnePool, type: 'single' };
-        }
-
-        function selectParticipants(targetType) {
-            let fromPlayer = null; // Mittente per sfide normali
-            let player1 = null; // Sfidante 1
-            let player2 = null; // Sfidante 2
-            let toTarget = null; // Destinatario (nome, 'TUTTI', array coppia)
-            let currentTargetType = targetType;
-            let currentPool = null; // Per fallback
-
-             // --- LOGICA DI SELEZIONE ---
-            if (targetType === 'challenge') {
-                if (players.length < 2) return null; // Non si può fare sfida
-                 let indices = Array.from(players.keys()); // Array di indici
-                 let index1 = indices.splice(Math.floor(Math.random() * indices.length), 1)[0];
-                 let index2 = indices.splice(Math.floor(Math.random() * indices.length), 1)[0];
-                 player1 = players[index1];
-                 player2 = players[index2];
-             } else if (targetType === 'couple') {
-                 // ... (Logica coppia invariata, usa fromPlayer e toTarget = [p1, p2]) ...
-                 if (couples.length === 0) { currentTargetType = 'group'; currentPool = groupChallenges; }
-                 else {
-                    toTarget = couples[Math.floor(Math.random() * couples.length)];
-                    const potentialSenders = players.filter(p => !toTarget.includes(p));
-                    if (potentialSenders.length === 0 && players.length >= 2) {
-                        fromPlayer = toTarget[0]; currentTargetType = 'single'; currentPool = [...compliments, ...roasts, ...uncomfortableQuestions]; toTarget = toTarget[1];
-                    } else if (potentialSenders.length > 0) { fromPlayer = potentialSenders[Math.floor(Math.random() * potentialSenders.length)]; }
-                    else { return null; }
-                }
-             }
-
-            if (currentTargetType === 'group') {
-                 if (!fromPlayer) fromPlayer = players[Math.floor(Math.random() * players.length)];
-                 toTarget = 'TUTTI';
-             }
-
-            if (currentTargetType === 'single') {
-                  if (!fromPlayer) fromPlayer = players[Math.floor(Math.random() * players.length)];
-                  if (!toTarget) {
-                        let potentialTargets = players.filter(p => p !== fromPlayer);
-                        if (potentialTargets.length === 0 && players.length >= 2) {
-                             currentTargetType = 'group'; currentPool = groupChallenges; toTarget = 'TUTTI';
-                        } else if (potentialTargets.length > 0){ toTarget = potentialTargets[Math.floor(Math.random() * potentialTargets.length)]; }
-                        else { return null; }
-                  }
-             }
-            // --- FINE LOGICA ---
-
-             // Verifica finale
-            if (currentTargetType === 'challenge' && (!player1 || !player2)) return null;
-            if (currentTargetType !== 'challenge' && (!fromPlayer || !toTarget)) return null;
-
-
-            return {
-                from: fromPlayer, // Null se challenge mode
-                player1: player1, // Null se non challenge mode
-                player2: player2, // Null se non challenge mode
-                to: toTarget,     // Null se challenge mode
-                type: currentTargetType,
-                poolOverride: currentPool
-             };
-        }
-
-
-        function nextChallenge() {
-            if (players.length < 2 && couples.length === 0) { // Modifica: basta che ci siano giocatori
-                 endGame();
-                 return;
-            }
-
-            const challengeInfo = determineChallengeType();
-            const participationInfo = selectParticipants(challengeInfo.type);
-
-            if (!participationInfo) { endGame(); return; }
-
-            let currentPool = participationInfo.poolOverride || challengeInfo.pool;
-            let finalTargetType = participationInfo.type;
-
-            if (!currentPool || currentPool.length === 0) {
-                alert("Errore: Pool di sfide vuoto! Usando fallback.");
-                currentPool = [{type: 'text', text:"Fallback: Dite qualcosa di gentile a caso."}];
-                finalTargetType = 'group'; // Forza gruppo
-                participationInfo.from = players[0]; // Assicura un mittente
-                participationInfo.to = 'TUTTI';
-            }
-
-            let challenge = currentPool[Math.floor(Math.random() * currentPool.length)];
-            let challengeTextContent = challenge.text;
-            let challengeImagePath = (challenge.type === 'image' && challenge.image) ? challenge.image : null;
-
-            // Sostituisci placeholder
-            let finalChallengeText = challengeTextContent;
-            if (finalTargetType === 'challenge') {
-                finalChallengeText = finalChallengeText.replace(/\[PLAYER_1\]/g, participationInfo.player1);
-                finalChallengeText = finalChallengeText.replace(/\[PLAYER_2\]/g, participationInfo.player2);
+      }
+      function isPlayerInCouple(playerName) {
+        return couples.some((couple) => couple.includes(playerName));
+      }
+      function updatePlayerCoupleStatusVisual(playerName) {
+        document.querySelectorAll("#players-list li").forEach((li) => {
+          const nameSpan = li.querySelector(".player-name");
+          if (nameSpan && nameSpan.textContent === playerName) {
+            const coupleIconSpan = li.querySelector(".couple-icon");
+            const uncoupleBtn = li.querySelector(".uncouple-btn");
+            if (isPlayerInCouple(playerName)) {
+              coupleIconSpan.textContent = " ❤️";
+              uncoupleBtn.style.display = "inline-block";
             } else {
-                 finalChallengeText = finalChallengeText.replace(/\[MITTENTE\]/g, participationInfo.from);
-                 if (finalTargetType === 'single') { finalChallengeText = finalChallengeText.replace(/\[PLAYER\]/g, participationInfo.to); }
-                 else if (finalTargetType === 'group') { finalChallengeText = finalChallengeText.replace(/\[PLAYER\]/g, participationInfo.from); }
-                 else if (finalTargetType === 'couple') {
-                     finalChallengeText = finalChallengeText.replace(/\[COPPIA_1\]/g, participationInfo.to[0]);
-                     finalChallengeText = finalChallengeText.replace(/\[COPPIA_2\]/g, participationInfo.to[1]);
-                     finalChallengeText = finalChallengeText.replace(/\[PLAYER\]/g, `la coppia ${participationInfo.to[0]} & ${participationInfo.to[1]}`);
-                 }
+              coupleIconSpan.textContent = "";
+              uncoupleBtn.style.display = "none";
+            }
+          }
+        });
+      }
+      function updateCoupleSectionVisibility() {
+        const coupleSection = document.getElementById("couple-section");
+        const shouldBeVisible = players.length >= 2;
+        coupleSection.style.display = shouldBeVisible ? "block" : "none";
+        if (!shouldBeVisible && couples.length > 0) {
+          couples = [];
+          updatePlayersList(); /* Aggiorna lista e sidebar se coppie resettate */
+        }
+        if (shouldBeVisible) {
+          updateCoupleDropdowns();
+        }
+      }
+      function updateCoupleDropdowns() {
+        const select1 = document.getElementById("couple-player1");
+        const select2 = document.getElementById("couple-player2");
+        if (!select1 || !select2) return;
+        const currentVal1 = select1.value;
+        const currentVal2 = select2.value;
+        select1.innerHTML = '<option value="">Seleziona...</option>';
+        select2.innerHTML = '<option value="">Seleziona...</option>';
+        const availablePlayers = players.filter((p) => !isPlayerInCouple(p));
+        availablePlayers.forEach((player) => {
+          const option1 = document.createElement("option");
+          option1.value = player;
+          option1.textContent = player;
+          select1.appendChild(option1);
+          const option2 = document.createElement("option");
+          option2.value = player;
+          option2.textContent = player;
+          select2.appendChild(option2);
+        });
+        if (availablePlayers.includes(currentVal1)) select1.value = currentVal1;
+        if (availablePlayers.includes(currentVal2)) select2.value = currentVal2;
+        document.getElementById("couple-btn").disabled =
+          availablePlayers.length < 2;
+      }
+      function formCouple() {
+        const player1 = document.getElementById("couple-player1").value;
+        const player2 = document.getElementById("couple-player2").value;
+        if (!player1 || !player2) {
+          alert("Seleziona entrambi i giocatori!");
+          return;
+        }
+        if (player1 === player2) {
+          alert("I giocatori devono essere diversi!");
+          return;
+        }
+        couples.push([player1, player2]);
+        updatePlayersList();
+        /* Aggiorna lista e sidebar */ document.getElementById(
+          "couple-player1"
+        ).value = "";
+        document.getElementById("couple-player2").value = "";
+      }
+      function uncouplePlayers(playerName) {
+        couples = couples.filter((couple) => !couple.includes(playerName));
+        updatePlayersList(); /* Aggiorna lista e sidebar */
+      }
+
+      // -------- FUNZIONI FLUSSO DI GIOCO --------
+
+      function startGame() {
+        if (players.length < 2) return;
+        players.forEach((player) => {
+          playerScores[player] = 0;
+        });
+        updateScoreboardSidebar();
+
+        currentChallengeData = null;
+
+        document.getElementById("setup-section").style.display = "none";
+        document.getElementById("scoreboard-section").style.display = "none";
+        document.getElementById("game-section").style.display = "block";
+        document.getElementById("scoreboard-sidebar").style.display = "block";
+        document.getElementById("general-laugh-btn").style.display = "none";
+        document
+          .querySelectorAll(".score-actions")
+          .forEach((div) => (div.style.display = "none"));
+        document.getElementById("next-btn").disabled = true;
+        nextChallenge();
+      }
+
+      function determineChallengeType() {
+        /* ...identica a prima... */ const rand = Math.random() * 100;
+        let cumulativeProb = 0;
+        cumulativeProb += coupleChallengeProbability;
+        if (couples.length > 0 && rand < cumulativeProb) {
+          return { pool: coupleChallenges, type: "couple" };
+        }
+        cumulativeProb += groupChallengeProbability;
+        if (rand < cumulativeProb) {
+          return { pool: groupChallenges, type: "group" };
+        }
+        cumulativeProb += challengeModeProbability;
+        if (players.length >= 2 && rand < cumulativeProb) {
+          return { pool: challengeModeChallenges, type: "challenge" };
+        }
+        const oneVsOnePool = [
+          ...compliments,
+          ...roasts,
+          ...uncomfortableQuestions,
+        ];
+        return { pool: oneVsOnePool, type: "single" };
+      }
+
+      // *** VERSIONE MODIFICATA DI selectParticipants ***
+      function selectParticipants(targetType) {
+        let fromPlayer = null; // Mittente (solo per 'single')
+        let player1 = null; // Sfidante 1
+        let player2 = null; // Sfidante 2
+        let toTarget = null; // Target (nome, 'TUTTI', coppia)
+        let currentTargetType = targetType;
+        let currentPool = null;
+
+        if (targetType === "challenge") {
+          if (players.length < 2) return null;
+          let indices = Array.from(players.keys());
+          let index1 = indices.splice(
+            Math.floor(Math.random() * indices.length),
+            1
+          )[0];
+          let index2 = indices.splice(
+            Math.floor(Math.random() * indices.length),
+            1
+          )[0];
+          player1 = players[index1];
+          player2 = players[index2];
+          // fromPlayer rimane null
+          // toTarget rimane null
+        } else if (targetType === "couple") {
+          if (couples.length === 0) {
+            // Fallback
+            currentTargetType = "group";
+            currentPool = groupChallenges;
+          } else {
+            toTarget = couples[Math.floor(Math.random() * couples.length)];
+            // Decidiamo che per le sfide coppia, il 'mittente' è irrilevante
+            fromPlayer = null; // <-- CAMBIAMENTO: non selezioniamo mittente per coppie
+          }
+        } else if (targetType === "group") {
+          // Non serve un mittente esplicito per la logica di scoring
+          fromPlayer = null; // <-- CAMBIAMENTO
+          toTarget = "TUTTI";
+          // Potremmo comunque selezionare un giocatore FOCUS internamente se le domande lo richiedono
+          // ma non lo usiamo per lo scoring o il display principale
+          // let focusPlayer = players[Math.floor(Math.random() * players.length)]; // Esempio
+        } else if (targetType === "single") {
+          if (players.length < 2) {
+            // Fallback se solo 1 giocatore
+            currentTargetType = "group";
+            currentPool = groupChallenges;
+            toTarget = "TUTTI";
+            fromPlayer = null;
+          } else {
+            fromPlayer = players[Math.floor(Math.random() * players.length)]; // Seleziona mittente
+            let potentialTargets = players.filter((p) => p !== fromPlayer);
+            toTarget =
+              potentialTargets[
+                Math.floor(Math.random() * potentialTargets.length)
+              ];
+          }
+        }
+
+        // Verifica finale coerenza
+        if (currentTargetType === "challenge" && (!player1 || !player2))
+          return null;
+        // Per gli altri tipi, ora non necessariamente serve fromPlayer
+        if (currentTargetType === "single" && (!fromPlayer || !toTarget))
+          return null;
+        if (currentTargetType === "couple" && !toTarget) return null; // Serve solo target coppia
+        if (currentTargetType === "group" && toTarget !== "TUTTI") return null;
+
+        return {
+          from: fromPlayer, // Sarà null tranne per 'single'
+          player1: player1,
+          player2: player2,
+          to: toTarget,
+          type: currentTargetType,
+          poolOverride: currentPool,
+        };
+      }
+
+      // *** VERSIONE MODIFICATA DI determineScorablePlayers ***
+      function determineScorablePlayers(challengeData) {
+        if (!challengeData) return [];
+        const type = challengeData.targetType;
+
+        if (type === "single") {
+          // Premiamo il mittente (chi fa complimento/roast)
+          return challengeData.fromDisplay ? [challengeData.fromDisplay] : [];
+        } else if (type === "couple") {
+          // Premiamo entrambi i membri della coppia target
+          return challengeData.toDisplay &&
+            Array.isArray(challengeData.toDisplay)
+            ? [...challengeData.toDisplay]
+            : [];
+        } else if (type === "challenge") {
+          // Possibili vincitori sono gli sfidanti
+          return [challengeData.player1, challengeData.player2];
+        } else if (type === "group") {
+          // Nessun scorable individuale, c'è il bottone generale
+          return [];
+        }
+        return [];
+      }
+
+      // *** VERSIONE MODIFICATA DI updateChallengeUI ***
+      function updateChallengeUI() {
+        if (!currentChallengeData) return;
+        const card = document.getElementById("challenge-card");
+        const pairElement = document.getElementById("current-pair");
+        const textElement = document.getElementById("challenge-text");
+        const imageContainer = document.getElementById(
+          "challenge-image-container"
+        );
+        const imageElement = document.getElementById("challenge-image");
+
+        // Reset card e header
+        card.className = "challenge-card"; // Rimuove classi specifiche precedenti
+        pairElement.textContent = ""; // Pulisce header
+
+        // Costruisci Header Display in base al tipo
+        let displayHeader = "";
+        const type = currentChallengeData.targetType;
+
+        if (type === "couple") {
+          card.classList.add("couple-challenge");
+          // Ora mostra SOLO la coppia target
+          displayHeader = `COPPIA: ${currentChallengeData.toDisplay[0]} & ${currentChallengeData.toDisplay[1]}`;
+        } else if (type === "group") {
+          card.classList.add("group-challenge");
+          // Ora mostra SOLO TUTTI
+          displayHeader = "SFIDA DI GRUPPO"; // O semplicemente "TUTTI" o niente? Proviamo così.
+        } else if (type === "challenge") {
+          card.classList.add("challenge-mode");
+          displayHeader = `SFIDA: ${currentChallengeData.player1} vs ${currentChallengeData.player2}`;
+        } else {
+          // single
+          // Mostra Mittente -> Target solo qui
+          displayHeader = `${currentChallengeData.fromDisplay} → ${currentChallengeData.toDisplay}`;
+        }
+        pairElement.textContent = displayHeader;
+
+        // Immagine e Testo (come prima)
+        if (currentChallengeData.image) {
+          imageElement.src = currentChallengeData.image;
+          imageContainer.style.display = "block";
+        } else {
+          imageContainer.style.display = "none";
+          imageElement.src = "";
+        }
+        textElement.textContent = currentChallengeData.challenge;
+
+        // Bottone Risate Generali (gestito da updateSidebarHighlightAndActions)
+      }
+
+      // *** VERSIONE MODIFICATA di updateSidebarHighlightAndActions ***
+      function updateSidebarHighlightAndActions() {
+        const scorablePlayers = determineScorablePlayers(currentChallengeData);
+        console.log("Giocatori Scorable:", scorablePlayers); // DEBUG
+
+        document
+          .querySelectorAll("#scoreboard-list .score-item")
+          .forEach((item) => {
+            const playerName = item.dataset.playerName;
+            const actionsDiv = item.querySelector(".score-actions");
+            const likeBtn = actionsDiv?.querySelector(".like-btn");
+            const dislikeBtn = actionsDiv?.querySelector(".dislike-btn");
+            const voteBtn = actionsDiv?.querySelector(".vote-winner-btn");
+
+            // Reset
+            item.classList.remove("highlight");
+            actionsDiv.style.display = "none";
+            if (likeBtn) {
+              likeBtn.style.display = "none";
+              likeBtn.disabled = true;
+            }
+            if (dislikeBtn) {
+              dislikeBtn.style.display = "none";
+              dislikeBtn.disabled = true;
+            }
+            if (voteBtn) {
+              voteBtn.style.display = "none";
+              voteBtn.disabled = true;
             }
 
-            // Salva dati e aggiorna UI
-            currentChallengeData = {
-                from: participationInfo.from, // Può essere null
-                player1: participationInfo.player1, // Può essere null
-                player2: participationInfo.player2, // Può essere null
-                to: participationInfo.to, // Può essere null
-                targetType: finalTargetType,
-                challenge: finalChallengeText,
-                image: challengeImagePath
-            };
-            updateChallengeUI();
-             // Riabilita bottone next DOPO aver impostato la nuova sfida
-             document.getElementById('next-btn').disabled = false;
-        }
+            // Se giocatore è scorable
+            if (scorablePlayers.includes(playerName)) {
+              item.classList.add("highlight");
+              actionsDiv.style.display = "flex";
 
+              const isChallengeMode =
+                currentChallengeData?.targetType === "challenge";
 
-         function updateChallengeUI() {
-             if (!currentChallengeData) return;
-             const card = document.getElementById('challenge-card');
-             const pairElement = document.getElementById('current-pair');
-             const textElement = document.getElementById('challenge-text');
-             const imageContainer = document.getElementById('challenge-image-container');
-             const imageElement = document.getElementById('challenge-image');
-             // Contenitori bottoni
-             const reactionBtnContainer = document.getElementById('reaction-buttons-container');
-             const voteBtnContainer = document.getElementById('challenge-vote-buttons-container');
-             // Bottoni voto
-             const voteBtn1 = document.getElementById('vote-btn-1');
-             const voteBtn2 = document.getElementById('vote-btn-2');
-
-
-             // Reset UI stato precedente
-             card.classList.remove('group-challenge', 'couple-challenge', 'challenge-mode');
-             reactionBtnContainer.style.display = 'none'; // Nascondi entrambi i tipi di bottoni
-             voteBtnContainer.style.display = 'none';
-             document.querySelectorAll('.reaction-button, .challenge-vote-button').forEach(btn => btn.disabled = true); // Disabilita tutti i bottoni inizialmente
-
-
-             // Imposta immagine (se presente)
-             if (currentChallengeData.image) {
-                 imageElement.src = currentChallengeData.image;
-                 imageContainer.style.display = 'block';
-             } else {
-                 imageContainer.style.display = 'none';
-                 imageElement.src = '';
-             }
-             // Imposta testo sfida
-             textElement.textContent = currentChallengeData.challenge;
-
-             // Imposta coppia/target e bottoni specifici
-             let targetDisplay;
-             if (currentChallengeData.targetType === 'challenge') {
-                 targetDisplay = `SFIDA: ${currentChallengeData.player1} vs ${currentChallengeData.player2}`;
-                 card.classList.add('challenge-mode');
-                 // Imposta e mostra bottoni VOTO SFIDA
-                 voteBtn1.textContent = `Vince ${currentChallengeData.player1}`;
-                 voteBtn1.dataset.playerName = currentChallengeData.player1; // Associa il nome al bottone
-                 voteBtn2.textContent = `Vince ${currentChallengeData.player2}`;
-                 voteBtn2.dataset.playerName = currentChallengeData.player2;
-                 voteBtn1.disabled = false; // Abilita
-                 voteBtn2.disabled = false;
-                 voteBtnContainer.style.display = 'flex'; // Mostra contenitore voto
-             } else {
-                 // Sfide "normali" (1vs1, gruppo, coppia)
-                 if (currentChallengeData.targetType === 'couple') {
-                     targetDisplay = `COPPIA: ${currentChallengeData.to[0]} & ${currentChallengeData.to[1]}`;
-                     card.classList.add('couple-challenge');
-                 } else if (currentChallengeData.targetType === 'group') {
-                     targetDisplay = 'TUTTI';
-                     card.classList.add('group-challenge');
-                 } else { // single
-                     targetDisplay = currentChallengeData.to;
-                 }
-                 pairElement.textContent = `${currentChallengeData.from} → ${targetDisplay}`;
-                 // Mostra e abilita bottoni REAZIONE
-                 document.querySelectorAll('.reaction-button').forEach(btn => btn.disabled = false);
-                 reactionBtnContainer.style.display = 'flex'; // Mostra contenitore reazione
-             }
-              // Aggiorna il testo della coppia/sfida SE non è modalità sfida (dove from è irrilevante per il display principale)
-              if (currentChallengeData.targetType !== 'challenge') {
-                 pairElement.textContent = `${currentChallengeData.from} → ${targetDisplay}`;
+              if (isChallengeMode) {
+                // Mostra 🏆 per sfide
+                if (voteBtn) {
+                  voteBtn.style.display = "inline-block";
+                  voteBtn.disabled = false;
+                }
               } else {
-                  pairElement.textContent = targetDisplay; // Mostra solo SFIDA: P1 vs P2
+                // Mostra 👍/👎 per single/couple
+                if (likeBtn) {
+                  likeBtn.style.display = "inline-block";
+                  likeBtn.disabled = false;
+                }
+                if (dislikeBtn) {
+                  dislikeBtn.style.display = "inline-block";
+                  dislikeBtn.disabled = false;
+                }
               }
-         }
+            }
+          });
 
-        // Funzione per sfide normali (invariata logica punti, ma con check tipo)
-        function rateChallenge(reaction) {
-             if (!currentChallengeData || currentChallengeData.targetType === 'challenge') return; // Ignora se è modalità sfida
+        // Bottone Risate Generali
+        const generalLaughBtn = document.getElementById("general-laugh-btn");
+        if (generalLaughBtn) {
+          const isGroup = currentChallengeData?.targetType === "group";
+          generalLaughBtn.style.display = isGroup ? "block" : "none";
+          generalLaughBtn.disabled = !isGroup;
+        }
+      }
 
-             const performer = currentChallengeData.from;
-             let points = 0;
-             const difficultyMultiplier = (currentChallengeData.targetType === 'group' || currentChallengeData.targetType === 'couple') ? 1.5 : 1;
-             if (reaction === 'laugh') points = Math.round(2 * difficultyMultiplier);
-             else if (reaction === 'cry') points = Math.round(1 * difficultyMultiplier);
-
-             if (playerScores.hasOwnProperty(performer)) { playerScores[performer] += points; }
-
-             // Disabilita bottoni e passa al prossimo
-             document.querySelectorAll('.reaction-button').forEach(btn => btn.disabled = true);
-             document.getElementById('next-btn').disabled = true;
-             setTimeout(() => { nextChallenge(); }, 1200);
-         }
-
-         // *** NUOVA FUNZIONE PER VOTARE IL VINCITORE DELLA SFIDA ***
-         function voteChallengeWinner(winnerName) {
-             if (!currentChallengeData || currentChallengeData.targetType !== 'challenge') return; // Solo per modalità sfida
-
-             // Assegna punti al VINCITORE
-             if (playerScores.hasOwnProperty(winnerName)) {
-                 playerScores[winnerName] += challengeWinPoints; // Usa costante definita
-                 console.log(`Sfida vinta da ${winnerName}! +${challengeWinPoints} punti.`);
-             }
-
-             // Disabilita bottoni voto e passa al prossimo
-             document.getElementById('vote-btn-1').disabled = true;
-             document.getElementById('vote-btn-2').disabled = true;
-             document.getElementById('next-btn').disabled = true;
-             setTimeout(() => { nextChallenge(); }, 1200);
-         }
-
-
-        // Funzione endGame (invariata)
-        function endGame() {
-            document.getElementById('game-section').style.display = 'none';
-            document.getElementById('scoreboard-section').style.display = 'block';
-            const sortedPlayers = Object.keys(playerScores)
-                                .filter(p => players.includes(p))
-                                .sort((a, b) => playerScores[b] - playerScores[a]);
-            const scoreList = document.getElementById('score-list');
-            scoreList.innerHTML = '';
-            if (sortedPlayers.length > 0) {
-                const winnerScore = playerScores[sortedPlayers[0]];
-                sortedPlayers.forEach((player, index) => {
-                    const scoreItem = document.createElement('div'); scoreItem.className = 'score-item';
-                    if (playerScores[player] === winnerScore && winnerScore > 0) scoreItem.classList.add('winner');
-                    const playerNameSpan = document.createElement('span'); playerNameSpan.textContent = `${index + 1}. ${player}`;
-                    const playerScoreSpan = document.createElement('span'); playerScoreSpan.textContent = `${playerScores[player]} punti`;
-                    scoreItem.appendChild(playerNameSpan); scoreItem.appendChild(playerScoreSpan); scoreList.appendChild(scoreItem);
-                });
-            } else { scoreList.innerHTML = '<p style="text-align: center;">Nessun punteggio disponibile.</p>'; }
+      // nextChallenge (aggiornata per usare la nuova selectParticipants)
+      function nextChallenge() {
+        if (players.length === 0) {
+          endGame();
+          return;
         }
 
-        // Funzione resetGame (invariata)
-        function resetGame() {
-             players = []; couples = []; playerScores = {}; currentChallengeData = null;
-             document.getElementById('setup-section').style.display = 'block';
-             document.getElementById('game-section').style.display = 'none';
-             document.getElementById('scoreboard-section').style.display = 'none';
-             document.getElementById('players-list').innerHTML = '';
-             document.getElementById('player-name').value = '';
-             document.getElementById('couple-section').style.display = 'none';
-             document.getElementById('couple-player1').innerHTML = '<option value="">Seleziona...</option>';
-             document.getElementById('couple-player2').innerHTML = '<option value="">Seleziona...</option>';
-             document.getElementById('couple-btn').disabled = true;
-             document.getElementById('start-btn').disabled = true;
+        const challengeInfo = determineChallengeType();
+        let participationInfo = selectParticipants(challengeInfo.type); // Ora ritorna from=null per non-single
+
+        if (!participationInfo) {
+          /* ... gestione fallback ... */ console.warn(
+            "Selezione fallita, forzo gruppo."
+          );
+          if (players.length > 0) {
+            participationInfo = {
+              from: null,
+              to: "TUTTI",
+              type: "group",
+              poolOverride: groupChallenges,
+            };
+            challengeInfo.pool = groupChallenges;
+            challengeInfo.type = "group";
+          } else {
+            endGame();
+            return;
+          }
         }
 
-        // Event listener Invio
-         document.getElementById('player-name').addEventListener('keypress', function (e) { if (e.key === 'Enter') { addPlayer(); } });
-         // Setup iniziale UI
-         // La chiamata a updateCoupleSectionVisibility è ora dentro addPlayer/removePlayer per gestire meglio gli stati
-          // Assicuriamoci che la sezione coppie sia nascosta all'inizio se non ci sono giocatori
-         if (players.length < 2) {
-             document.getElementById('couple-section').style.display = 'none';
-         }
+        let currentPool = participationInfo.poolOverride || challengeInfo.pool;
+        let finalTargetType = participationInfo.type;
 
+        if (!currentPool || currentPool.length === 0) {
+          /* ... fallback pool vuoto ... */
+        }
 
+        let challenge =
+          currentPool[Math.floor(Math.random() * currentPool.length)];
+        let challengeTextContent = challenge.text;
+        let challengeImagePath =
+          challenge.type === "image" && challenge.image
+            ? challenge.image
+            : null;
+
+        // Sostituzione Placeholder (Modificata per gestire from=null)
+        let finalChallengeText = challengeTextContent;
+        if (finalTargetType === "challenge") {
+          finalChallengeText = finalChallengeText
+            .replace(/\[PLAYER_1\]/g, participationInfo.player1)
+            .replace(/\[PLAYER_2\]/g, participationInfo.player2);
+        } else if (finalTargetType === "single") {
+          // Qui 'from' esiste
+          finalChallengeText = finalChallengeText
+            .replace(/\[MITTENTE\]/g, participationInfo.from)
+            .replace(/\[PLAYER\]/g, participationInfo.to);
+        } else if (finalTargetType === "group") {
+          // Rimuovi [MITTENTE] se presente, o sostituisci [PLAYER] con info generica se serve
+          // Scegliamo un giocatore focus SOLO per la sostituzione nel testo, se serve
+          let focusPlayer = players[Math.floor(Math.random() * players.length)];
+          finalChallengeText = finalChallengeText
+            .replace(/\[MITTENTE\]/g, "Gioco")
+            .replace(/\[PLAYER\]/g, focusPlayer); // Sostituisce [PLAYER] con un nome a caso per contesto
+        } else if (finalTargetType === "couple") {
+          // Rimuovi [MITTENTE] se presente
+          finalChallengeText = finalChallengeText
+            .replace(/\[MITTENTE\]/g, "Gioco")
+            .replace(/\[COPPIA_1\]/g, participationInfo.to[0])
+            .replace(/\[COPPIA_2\]/g, participationInfo.to[1])
+            .replace(
+              /\[PLAYER\]/g,
+              `la coppia ${participationInfo.to[0]} & ${participationInfo.to[1]}`
+            );
+        }
+
+        // Salva dati sfida
+        currentChallengeData = {
+          targetType: finalTargetType,
+          player1: participationInfo.player1,
+          player2: participationInfo.player2,
+          fromDisplay: participationInfo.from, // Può essere null
+          toDisplay: participationInfo.to,
+          challenge: finalChallengeText,
+          image: challengeImagePath,
+        };
+
+        updateChallengeUI();
+        updateSidebarHighlightAndActions(); // Chiamata DOPO aver definito currentChallengeData
+        document.getElementById("next-btn").disabled = false;
+      }
+
+      // assignPoints, assignGroupPoints, disableActionsAndAdvance (INVARIATE)
+      function assignPoints(playerName, scoreType) {
+        if (!currentChallengeData) return;
+        const scorablePlayers = determineScorablePlayers(currentChallengeData);
+        if (!scorablePlayers.includes(playerName)) return;
+        let pointsToAdd = 0;
+        if (scoreType === "like") pointsToAdd = likePoints;
+        else if (scoreType === "dislike") pointsToAdd = dislikePoints;
+        else if (scoreType === "challengeWin") pointsToAdd = challengeWinPoints;
+        if (playerScores.hasOwnProperty(playerName)) {
+          playerScores[playerName] += pointsToAdd;
+          updatePlayerScoreVisual(playerName);
+          console.log(
+            `${playerName} riceve ${pointsToAdd} punti (${scoreType}). Totale: ${playerScores[playerName]}`
+          );
+        }
+        disableActionsAndAdvance();
+      }
+      function assignGroupPoints() {
+        if (
+          !currentChallengeData ||
+          currentChallengeData.targetType !== "group"
+        )
+          return;
+        players.forEach((player) => {
+          if (playerScores.hasOwnProperty(player)) {
+            playerScores[player] += groupLaughPoints;
+            updatePlayerScoreVisual(player);
+          }
+        });
+        console.log(`Risate generali! +${groupLaughPoints} punti a tutti.`);
+        disableActionsAndAdvance();
+      }
+      function disableActionsAndAdvance() {
+        document
+          .querySelectorAll(".score-actions button")
+          .forEach((btn) => (btn.disabled = true));
+        const generalLaughBtn = document.getElementById("general-laugh-btn");
+        if (generalLaughBtn) generalLaughBtn.disabled = true;
+        document.getElementById("next-btn").disabled = true;
+        document
+          .querySelectorAll("#scoreboard-list .score-item.highlight")
+          .forEach((item) => {
+            item.classList.remove("highlight");
+            item.querySelector(".score-actions").style.display = "none";
+          });
+        setTimeout(() => {
+          nextChallenge();
+        }, 1300);
+      }
+
+      // endGame, resetGame (INVARIATE)
+      function endGame() {
+        /* ... come prima ... */ document.getElementById(
+          "game-section"
+        ).style.display = "none";
+        document.getElementById("scoreboard-sidebar").style.display = "none";
+        document.getElementById("scoreboard-section").style.display = "block";
+        document.getElementById("setup-section").style.display = "none";
+        const sortedPlayers = Object.keys(playerScores)
+          .filter((p) => players.includes(p))
+          .sort((a, b) => playerScores[b] - playerScores[a]);
+        const scoreListFinal = document.getElementById("score-list-final");
+        scoreListFinal.innerHTML = "";
+        if (sortedPlayers.length > 0) {
+          const winnerScore = playerScores[sortedPlayers[0]];
+          sortedPlayers.forEach((player, index) => {
+            const scoreItem = createScoreboardItem(player);
+            const actionsDiv = scoreItem.querySelector(".score-actions");
+            if (actionsDiv) actionsDiv.remove();
+            if (playerScores[player] === winnerScore && winnerScore > 0)
+              scoreItem.classList.add("winner");
+            const nameSpan = scoreItem.querySelector(".score-name");
+            nameSpan.textContent = `${index + 1}. ${player}`;
+            const pointsSpan = scoreItem.querySelector(".score-points");
+            pointsSpan.textContent =
+              playerScores[player] !== undefined ? playerScores[player] : 0;
+            scoreListFinal.appendChild(scoreItem);
+          });
+        } else {
+          scoreListFinal.innerHTML =
+            '<p style="text-align: center;">Nessun punteggio disponibile.</p>';
+        }
+      }
+      function resetGame() {
+        /* ... come prima ... */ players = [];
+        couples = [];
+        playerScores = {};
+        currentChallengeData = null;
+        document.getElementById("setup-section").style.display = "block";
+        document.getElementById("game-section").style.display = "none";
+        document.getElementById("scoreboard-section").style.display = "none";
+        document.getElementById("scoreboard-sidebar").style.display = "none";
+        document.getElementById("scoreboard-list").innerHTML = "";
+        document.getElementById("players-list").innerHTML = "";
+        document.getElementById("player-name").value = "";
+        document.getElementById("couple-section").style.display = "none";
+        if (document.getElementById("couple-player1"))
+          document.getElementById("couple-player1").innerHTML =
+            '<option value="">Seleziona...</option>';
+        if (document.getElementById("couple-player2"))
+          document.getElementById("couple-player2").innerHTML =
+            '<option value="">Seleziona...</option>';
+        if (document.getElementById("couple-btn"))
+          document.getElementById("couple-btn").disabled = true;
+        if (document.getElementById("start-btn"))
+          document.getElementById("start-btn").disabled = true;
+      }
+
+      // Event listener Invio e Setup iniziale
+      const playerNameInput = document.getElementById("player-name");
+      if (playerNameInput) {
+        playerNameInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            addPlayer();
+          }
+        });
+      }
+      resetGame();
     </script>
-</body>
+  </body>
 </html>
