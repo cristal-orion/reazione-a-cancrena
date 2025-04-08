@@ -403,842 +403,1053 @@
 
       // -------- ARRAY DELLE SFIDE --------
       // (Riutilizza gli array completi con le tue immagini dall'ultimo codice - omessi per brevità)
-      const compliments = [
-        {
-          type: "text",
-          text: "Se [PLAYER] fosse un colore, quale sarebbe e perché emana quella particolare 'vibrazione'?",
-        },
-        { type: "text", text: "Se [PLAYER] fosse una marca assurda di dentifricio, quale sarebbe il suo slogan?" },
-  
-  { type: "text", text: "Fai un complimento a [PLAYER] immaginandolo come protagonista di un cartone animato giapponese surreale." },
-        {
-          type: "text",
-          text: "Quale canzone descrive perfettamente l'energia o lo spirito di [PLAYER]?",
-        },
-        {
-          type: "image",
-          text: "Anche questo Gatto Kung Fu ha i suoi momenti di tenerezza. Fai a [PLAYER] un complimento sulla sua capacità nascosta di essere dolce o premuroso/a.",
-          image: "images/Gatto_allungato_mossa_KungFu.jpg",
-        },
-        {
-          type: "text",
-          text: "Descrivi la voce di [PLAYER] usando solo nomi di cibi (es: 'vellutata come un budino', 'croccante come un biscotto', 'frizzante come l'acqua tonica').",
-        },
-        {
-          type: "text",
-          text: "Se l'aura di [PLAYER] avesse un odore, quale sarebbe (deve essere un odore piacevole ma strano, es: 'plastilina nuova e vaniglia', 'benzina e lavanda')?",
-        },
-        {
-          type: "image",
-          text: "Questo Asino Cartoon sembra confuso ma buono. Fai un complimento a [PLAYER] sulla sua genuinità o sulla sua incapacità di essere veramente cattivo/a.",
-          image: "images/Asino_con_occhi_grandi_cartoon.jpg",
-        },
-        {
-          type: "text",
-          text: "Qual è la cosa più intelligentemente pigra che hai visto fare a [PLAYER] e che segretamente ammiri?",
-        },
-        {
-          type: "image",
-          text: "Questa Lontra Umana ([PLAYER]?) ha degli occhi penetranti. Fai un complimento sincero a [PLAYER] sul suo sguardo o sulla sua profondità.",
-          image: "images/Lontra_umana_con_occhi_azzurri.jpg",
-        },
-        {
-          type: "text",
-          text: "Descrivi un piccolo gesto quasi invisibile di [PLAYER] che però trovi significativo.",
-        },
-        {
-          type: "text",
-          text: "Fai un complimento a [PLAYER] su una sua caratteristica fisica o di stile che ti piace.",
-        },
-        {
-          type: "text",
-          text: "Se [PLAYER] fosse un fenomeno atmosferico (sole, pioggia...), quale sarebbe e perché?",
-        },
-        {
-          type: "image",
-          text: "Nonostante la puzza, questo cane ha un suo perché. Trova un pregio 'nascosto' di [PLAYER] e descrivilo.",
-          image: "images/un_cane_puzza.jpg",
-        },
-        {
-          type: "text",
-          text: "Fai un complimento sincero su una qualità del carattere che ammiri profondamente in [PLAYER].",
-        },
-        {
-          type: "text",
-          text: "Condividi qualcosa di concreto che hai imparato grazie a [PLAYER].",
-        },
-        {
-          type: "text",
-          text: "Descrivi [PLAYER] in tre aggettivi precisi (non banali!) e spiega la scelta.",
-        },
-        {
-          type: "image",
-          text: "Questo Gatto Kung Fu ha stile. Fai un complimento a [PLAYER] sulla sua agilità (fisica o mentale) o sul suo stile unico.",
-          image: "images/Gatto_allungato_mossa_KungFu.jpg",
-        },
-        {
-          type: "text",
-          text: "Se [PLAYER] fosse un piatto gourmet, quali ingredienti conterrebbe e perché?",
-        },
-        {
-          type: "text",
-          text: "Descrivi l'aura di [PLAYER] usando solo colori e sensazioni tattili.",
-        },
-        {
-          type: "text",
-          text: "Se [PLAYER] potesse essere un elemento architettonico di un edificio storico, quale sarebbe e perché?",
-        },
-        {
-          type: "text",
-          text: "Se [PLAYER] fosse un profumo, quali note avrebbe e in quale situazione sarebbe perfetto indossarlo?",
-        },
-        {
-          type: "text",
-          text: "Quale superpotere segreto pensi abbia [PLAYER] nella vita quotidiana?",
-        },
-        {
-          type: "text",
-          text: "Quale animale mitologico rappresenta meglio l'essenza di [PLAYER] e perché?",
-        },
-        {
-          type: "text",
-          text: "Descrivi un talento nascosto che [PLAYER] potrebbe avere ma che non ha ancora rivelato al mondo.",
-        },
-        {
-          type: "text",
-          text: "Se [PLAYER] fosse un pianeta del nostro sistema solare, quale sarebbe e perché si adatta alla sua personalità?",
-        },
-      ];
-      const roasts = [
-        {
-          type: "text",
-          text: "Se [PLAYER] fosse un meme famoso, quale sarebbe?",
-        },
-        { type: "text", text: "Se [PLAYER] fosse una pizza, quale topping assolutamente discutibile avrebbe e perché?" },
-  { type: "image", text: "Ammettilo, questo cane strafatto è la rappresentazione perfetta di [PLAYER] quando sa di aver fatto una cazzata.", image: "images/Cane_strafatto.jpg" },
-  { type: "text", text: "Descrivi il talento segreto di [PLAYER] che nessuno vorrebbe mai avere." },
-        {
-          type: "image",
-          text: "Questa immagine è chiaramente [PLAYER] al mattino prima del caffè. Confermi? Motiva il roast.",
-          image: "images/Shrek_con_sorriso_memico.jpg",
-        },
-        {
-          type: "text",
-          text: "Quale oggetto inanimato in questa stanza assomiglia di più (caratterialmente) a [PLAYER]? Spiega il perché.",
-        },
-        {
-          type: "image",
-          text: "Se [PLAYER] dovesse dare un nome 'epico' a questo Cane Stupito, quale sarebbe e perché si addice a entrambi?",
-          image: "images/Cane_con_faccia_stupita_e_sproporzionata.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER] viene morso da un ragno radioattivo. Quale superpotere TOTALMENTE INUTILE ottiene (es: 'sentire il sapore dei colori', 'parlare con i semafori spenti')?",
-        },
-        {
-          type: "text",
-          text: "Imita il modo in cui [PLAYER] cammina quando pensa di essere figo/a ma in realtà sembra solo strano.",
-        },
-        
-        {
-          type: "image",
-          text: "Quale frase tipica di [PLAYER] si abbinerebbe perfettamente a questa immagine dell'Uomo-Baffo?",
-          image: "images/Uomo_con_baffi_filter_volto_allungato.jpg",
-        },
-        {
-          type: "image",
-          text: " Oh no Gorilla Franco ti ha fatto il dito medio! Manda a fanculo pure tu [PLAYER] per una cosa che non ha fatto",
-          image: "images/middlefinger_gorilla",
-        },
-        {
-          type: "text",
-          text: "Se dovessi riassumere l'essenza di [PLAYER] con un rumore di notifica del telefono, quale sarebbe?",
-        },
-        {
-          type: "image",
-          text: "Ammettilo, l'espressione di questo Asino non ti ricorda *perfettamente* [PLAYER] quando è confuso/a?",
-          image: "images/Asino_con_occhi_grandi_cartoon.jpg",
-        },
-        {
-          type: "text",
-          text: "Qual è il superpotere più gloriosamente inutile che [PLAYER] potrebbe possedere?",
-        },
-        {
-          type: "text",
-          text: "Chiedi a [PLAYER]: 'Da 1 a 10, quanto ti senti 'Mr. Carrot' oggi?' Spiega il punteggio.",
-          image: "images/Mr_Carrot_testa_umanoide_conici.jpg",
-        },
-        {
-          type: "image",
-          text: "Questa Arancia con faccia di scimmia è chiaramente l'animale spirituale di [PLAYER]. Concordi? Motiva.",
-          image: "images/Arancia_con_faccia_di_scimmia.jpg",
-        },
-        {
-          type: "text",
-          text: "Descrivi la 'modalità Autopilot' di [PLAYER]: cosa fa quando sembra disconnesso?",
-        },
-        {
-          type: "image",
-          text: "Se [PLAYER] dovesse usare questa faccia da casa arrabbiata per spaventare qualcuno, funzionerebbe?",
-          image: "images/Casa_con_faccia_umano_arrabbiato.jpg",
-        },
-        {
-          type: "text",
-          text: "Traduci la risata di [PLAYER] in un suono onomatopeico strano.",
-        },
-        {
-          type: "image",
-          text: "Questo è [PLAYER] dopo una serata impegnativa, vero?",
-          image: "images/woody_strafatto.jpg",
-        },
-        {
-          type: "text",
-          text: "Fai un roast *gentile* a [PLAYER] su un suo difettuccio, ma poi smorza con un complimento.",
-        },
-        {
-          type: "text",
-          text: "Imita (senza cattiveria!) un'espressione facciale o un gesto tipico di [PLAYER].",
-        },
-        { type: 'text', text: "Quale sarebbe il 'bug' più fastidioso se [PLAYER] fosse un personaggio di un videogioco?" },
-        { type: 'text', text: "Descrivi il peggior incubo di [PLAYER] usando solo 5 parole." },
-        {
-          type: "image",
-          text: "L'urlo di questo Ippopotamo è come quello di [PLAYER] quando... (completa la frase)",
-          image: "images/Ippopotamo_gridante_su_sfondo_giallo.jpg",
-        },
-        {
-          type: "image",
-          text: "Onestamente, [PLAYER], quanto ti senti rappresentato/a da questo Gatto Vampiro?",
-          image: "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg",
-        },
-        {
-          type: "text",
-          text: "Se [PLAYER] fosse un elettrodomestico malfunzionante, quale sarebbe e cosa farebbe di strano?",
-        },
-        
-        {
-          type: "text",
-          text: "Descrivi [PLAYER] come se fosse la peggiore recensione a 1 stella di un ristorante di lusso.",
-        },
-        {
-          type: "text",
-          text: "Se la postura di [PLAYER] potesse parlare, quale frase ripeterebbe continuamente?",
-        },
-        {
-          type: "text",
-          text: "Quale emoji descrive meglio la faccia di [PLAYER] quando cerca di sembrare intelligente?",
-        },
-        {
-          type: "text",
-          text: "Se la vita di [PLAYER] fosse un film di serie B, quale sarebbe il titolo e la trama assurda?",
-        },
-        {
-          type: "text",
-          text: "Se lo stile di [PLAYER] fosse un piatto di cucina fusion andato male, quali ingredienti incompatibili conterrebbe?",
-        },
-        {
-          type: "text",
-          text: "Quale trend di TikTok ormai superato [PLAYER] probabilmente segue ancora in segreto?",
-        },
-      ];
-      const uncomfortableQuestions = [
-        {
-          type: "image",
-          text: "[PLAYER], fissa questo ciccione viola per 10 secondi. Ora confessa il primo pensiero *veramente* assurdo che ti è venuto.",
-          image: "images/Alieno_viola_in_foresta_fluorescente.jpg",
-        },
-        { type: 'gif', gifType: 'sound', text: "[PLAYER], imita il suono agghiacciante che ti immagini faccia questa cosa.", path: "gifs/closing-lots-of-doors-cartoon-closing-door_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], il tuo momento è arrivato. Imita questo balletto con tutta la grazia (o la mancanza di essa) che possiedi.", path: "gifs/ciccione_streap_dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], qual è il contesto di questo abbaiare secondo te? Riproduci il suono.", path: "gifs/dog_bark_tongue_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], scatena il CJ che è in te. Replica questa mossa iconica.", path: "gifs/cj-gta-sanandreas-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], fai la tua migliore imitazione della risata di questa signora.", path: "gifs/female_asian_laugh_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], mostra al mondo la tua interpretazione di questo balletto felice.", path: "gifs/dance-happy-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], riproduci questo miagolio con la massima tenerezza possibile.", path: "gifs/gattino_piccolo_miao_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], interpreta la coreografia di questo gatto rachitico.", path: "gifs/gatto rachitico dance.gif"}, // Nota: manca suffisso, tratterò come 'dance'
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], imita il miagolio potente di questo gattone.", path: "gifs/gatto_grande_miao_sound.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], fai il suono di questo starnuto felino.", path: "gifs/gatto_starnuto_sound.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], cosa sta cercando di comunicare questa capra? Riproduci il suo verso.", path: "gifs/goat_tongue_sound.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], qual è il significato cosmico di questo Gong? Rappresentalo con un suono.", path: "gifs/gong-pink-floyd-gong_sound.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], imita la sequenza di suoni di questo calcio multiplo nelle parti basse.", path: "gifs/karate_calcio_multiplo_nelle_palle_sound.gif"},
-// Fallback 'react'
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], pronuncia 'Eccellente' con l'esatta intonazione di Mr. Burns.", path: "gifs/mr-burns-excellent_sound.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], imita questa risata contagiosa.", path: "gifs/nero_senza_denti_risata_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], unisciti al ballo del piccione. Mostra le tue mosse.", path: "gifs/pigeonpls-pigeon-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], fai il suono dei cavi elettrici usati come corda per saltare.", path: "gifs/power-lines-jump-rope_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], è ora di ballare come questo formaggio psichedelico.", path: "gifs/the-vibin-cheese-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER], esegui la risata malefica di Willem Dafoe.", path: "gifs/willem dafoe_risata_malefica_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], imita la finezza di Ace Ventura in questo balletto.", path: "gifs/ace-ventura-football-dance.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], è il momento di ballare come Bugs Bunny con tanto di cappello immaginario.", path: "gifs/bugs-bunny-hat-dance.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER], dacci la tua migliore interpretazione di questa chiamata del gallo danzante.", path: "gifs/cock-call-fat-albert-dance.gif"},
-        { type: "text", text: "[PLAYER], preferiresti essere seguito/a costantemente da un mariachi band o da un clown triste?" },
- 
-  { type: "text", text: "[PLAYER], devi confessare la canzone più imbarazzante che hai cantato a squarciagola sotto la doccia." },
-        {
-          type: "text",
-          text: "[PLAYER], descrivi al gruppo, con un livello di dettaglio quasi chirurgico (ma senza volgarità gratuita!), la tua procedura ESATTA per lavarti i piedi. Non saltare passaggi.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], devi raccontarci una cosa assolutamente normale e banale che hai fatto oggi (es: versare l'acqua). Raccontala nel modo più piatto e noioso possibile. L'obiettivo è *non* far ridere.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], qual è quella cosa *veramente* strana o super specifica che pensi faccia ridere solo te? Confessala e prova a spiegare perché.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], scenario assurdo: sei all'Eurospin. Quale attore/attrice italiano/a completamente fuori luogo vorresti trovare lì come commesso/a e perché?",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], onestamente, che tipo specifico di scarpa ti senti di essere in questo momento della tua vita (es: 'ciabatta consumata', 'stivale rotto', 'calzino antiscivolo')? Motiva.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], come si chiama il parroco della tua parrocchia/zona? (Se non lo sai, puoi dire 'Passo' o inventare).",
-        }, // Attenzione: potenzialmente sensibile
-       
-        {
-          type: "text",
-          text: "[PLAYER], preferiresti avere un terzo braccio che spunta dalla schiena o non avere più le ginocchia?",
-        },
-       
-        {
-          type: "image",
-          text: "[PLAYER], confessa: quanto spesso ti senti come questo Ippopotamo urlante interiormente durante una normale giornata lavorativa/scolastica?",
-          image: "images/Ippopotamo_gridante_su_sfondo_giallo.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], se la tua vita fosse un film, quale sarebbe il titolo più brutalmente onesto?",
-        },
-        {
-          type: "image",
-          text: "Fissa l'Uovo con gli occhiali per 5 secondi. Ora [PLAYER], chiudi gli occhi e descrivi la prima forma geometrica che ti viene in mente.",
-          image: "images/Uovo_con_occhiali_e_volto_umano.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], quale sarebbe la tua frase celebre se fossi il cattivo in un film di serie B?",
-        },
-        {
-          type: "text",
-          text: "Devi eliminare per sempre una delle seguenti cose dalla tua vita: la pizza o la musica. Cosa scegli, [PLAYER]?",
-        },
-        {
-          type: "image",
-          text: "Questo Mr. Carrot è il tuo spirito guida o il tuo peggior incubo, [PLAYER]?",
-          image: "images/Mr_Carrot_testa_umanoide_conici.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], domanda fondamentale: che tipo di elettrodomestico ti senti OGGI e perché?",
-        },
-         {
-          type: "text",
-          text: "[PLAYER], qual è il tuo albero preferito?",
-        },
-         {
-          type: "text",
-          text: "[PLAYER], qual è il personaggio storico che ti viene in mente quando fai la cacca?",
-        },
-         {
-          type: "text",
-          text: "[PLAYER], hai mai pensato a quanto sono belli i treni?",
-        },
-         {
-          type: "text",
-          text: "[PLAYER], qual è la tua espressione facciale preferita?",
-        },
-         {
-          type: "text",
-          text: "[PLAYER], hai mai urlato contro il pane?",
-        },
-         {
-          type: "text",
-          text: "[PLAYER], hai mai pensato di farti il bagno a mare con i calzini di spugna? Se no, prova, poi mi fai sapere.",
-        },
-         {
-          type: "text",
-          text: "[PLAYER], se la tua macchina potesse parlare cosa ti direbbe? Se non hai una macchina allora le scarpe.",
-        },
-        
-        {
-          type: "text",
-          text: "[PLAYER], quale specifica ora NON ESISTENTE del giorno (es: le 25:77) ti senti in questo momento e perché?",
-        },
-        {
-          type: "image",
-          text: "Questa immagine rappresenta [PLAYER] quando cerca di spiegare qualcosa di complicato? Siate sinceri.",
-          image: "images/Uomo_con_baffi_filter_volto_allungato.jpg",
-        },
-       { type: "text", text: "[PLAYER],crea una frase per questo meme famoso", image: "Gigachad.jpg", },
-        {
-          type: "text",
-          text: "Chiedi a [PLAYER]: 'Hai mai cagato in discoteca? Inteso come posto peggiore / momento peggiore dove aver fatto la cacca'",
-        },
-        {
-          type: "image",
-          text: "Questa Maschera Inquietante è come ti immagini la coscienza di [PLAYER]? Spiega.",
-          image: "images/Maschera_bianca_inquietante_su_uomo.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], preferiresti essere ricercato dalla polizia o da una pericolosa organizzazione criminale?",
-        },
-        {
-          type: "text",
-          text: "Chiedi a [PLAYER]: 'Qual è il pensiero più socialmente inaccettabile (ma che non diresti mai) che hai avuto guardando un reality show?'",
-        },
-        {
-          type: "image",
-          text: "[MITTENTE], [PLAYER] sarebbe più l'Omino Grasso o il suo destriero invisibile?",
-          image: "images/Omino_grasso_stile_cartoon_in_armatura.jpg",
-        }, // Modificata
-        {
-          type: "image",
-          text: "[MITTENTE], cosa ne pensa [PLAYER] di questa Scimmia con caschetto?",
-          image: "images/Scimmia_caschetto_stile_moderno.jpg",
-        }, // Modificata
-        {
-          type: "text",
-          text: "Confessa una piccola bugia bianca (o non così bianca) che hai detto a [PLAYER] per evitare di fare qualcosa.",
-        },
-        {
-          type: "text",
-          text: "Devi dire a [PLAYER] una verità scomoda ma costruttiva sul suo profilo social preferito.",
-        },
-        {
-          type: "text",
-          text: "Fai una domanda super personale a [PLAYER] (può usare un jolly e non rispondere, ma deve subire una piccola penitenza decisa dal gruppo).",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], in una scala da 1 a 10, quanto consideri discutibile la tua ultima decisione importante? Spiega.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], se potessi creare una legge assurda ma che tutti devono seguire, quale sarebbe e perché?",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], se i tuoi amici qui presenti creassero un documentario sulla tua vita, quale sarebbe il titolo più imbarazzante ma accurato?",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], qual è la cosa più strana che hai cercato su Google o chatgpt nell'ultima settimana che non vorresti che gli altri sapessero?",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], se il tuo animale domestico (o un oggetto in casa tua) potesse parlare, quale segreto imbarazzante rivelerebbe su di te?",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], considerando i presenti, chi chiameresti alle 3 del mattino per aiutarti a nascondere un pinguino rubato dallo zoo? E perché?",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], se i tuoi DM/messaggi privati venissero esposti pubblicamente, quale sarebbe la conversazione che ti metterebbe più in imbarazzo?",
-        },
-        {
-          type: "text",
-          text: "[PLAYER], quale serie o film ti vergogni segretamente di amare ma difenderesti con passione se qualcuno lo criticasse?",
-        },
-      ];
-      const groupChallenges = [
-        {
-          type: "image",
-          text: "Gruppo: chi qui dentro è più probabile che abbia un poster di questa vecchia baldracca in camera?",
-          image: "images/hipster alpaca_ This is so cute_",
-        },
-        // --- SFIDE GIF DI GRUPPO (aggiungere a groupChallenges) ---
-{ type: 'gif', gifType: 'dance', text: "TUTTI: Imparate e eseguite INSIEME la coreografia di questo Gatto Rachitico. Sincronizzatevi!", path: "gifs/gatto rachitico dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "TUTTI: A turno, imitate il miagolio di questo gattino. Chi lo fa più simile vince l'approvazione generale.", path: "gifs/gattino_piccolo_miao_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "TUTTI: Ballate come se foste questo Formaggio Vibrante a una festa techno.", path: "gifs/the-vibin-cheese-dance.gif"},
+      // -------- ARRAY DELLE SFIDE (Corretti Automaticamente) --------
 
-{ type: 'gif', gifType: 'dance', text: "TUTTI: Formate un cerchio e ballate come questi Piccioni, annuendo a ritmo.", path: "gifs/pigeonpls-pigeon-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "TUTTI: Create un coro di risate malefiche alla Willem Dafoe.", path: "gifs/willem dafoe_risata_malefica_sound.gif"},
-        {
-          type: "image",
-          text: "Gruppo: non vi conosco, ma sono sicuro che in questa stanza c'è qualcuno che somiglia a questo alpaca.",
-          image: "images/Vecchia_baldracca.jpeg",
-        },
-        { type: "text", text: "Gruppo: create una pubblicità TV improvvisata per vendere qualcosa di completamente inutile (es: 'pantofole per le mani')." },
-  { type: "image", text: "Tutti imitano contemporaneamente la posa epica di questa Tartaruga Ninja Depressa.", image: "images/Tartaruga_ninja_depressa.jpg" },
-  { type: "text", text: "Gruppo: a turno, inventate una nuova parola assurda e datele un significato strano." },
-        {
-          type: "image",
-          text: "TUTTI: guardate attentamente quest'immagine dell'Uomo-Delfino. Al 'VIA!' del GM, dovete scatenare il vostro urlo di puro terrore più convincente.",
-          image: "images/UOMO_FACCIA_DELFINO.jpg",
-        }, // NOME FILE DA VERIFICARE
-        {
-          type: "text",
-          text: "TUTTI (o i più coraggiosi): cantate insieme A CAPPELA il ritornello di 'My Heart Will Go On'. Metteteci sentimento!",
-        },
-        {
-          type: "text",
-          text: "Momento Orchestra Corporea: a turno, ogni giocatore deve fare un suono corporeo (schiocco dita, battito mani, pernacchia...) cercando di creare un ritmo collettivo assurdo.",
-        },
-         {
-          type: "text",
-          text: "Il più alto della stanza deve farsi una foto accanto al più basso della stanza.",
-        },
-         {
-          type: "text",
-          text: "Chi ha pubblicato l'ultima storia su instagram più divertente vince un materasso Eminflex®.",
-        },
-         {
-          type: "text",
-          text: "L'ultimo che ha aggiornato la foto profilo su Facebook verrà chiamato vecchio per il resto del gioco ed interagirete con lui come se fosse un nonno/a che non ci sente.",
-        },
-        
-        {
-          type: "text",
-          text: "A turno, ogni giocatore deve dire una parola. L'obiettivo è creare collettivamente una frase di senso compiuto più lunga possibile, ma che sia completamente idiota.",
-        },
-        {
-          type: "image",
-          text: "Tutti insieme, come ci è finito questo ciccione viola nell'acqua? Spiegamelo perchè veramente non riesco a capire.",
-          image: "images/Alieno_viola_in_foresta_fluorescente.jpg",
-        },
-        {
-          type: "text",
-          text: "Gioco del Sinonimo Improbabile: il GM dice una parola normale (es: 'felice'). A turno, dite un sinonimo sempre più strano e meno attinente (es: 'contento', 'gaio', 'pimpante', 'spumeggiante', 'fotosintetico'...). Chi esita o ripete è fuori (metaforicamente).",
-        },
-        {
-          type: "image",
-          text: "Tutti i giocatori devono camminare per la stanza imitando l'andatura fiera di questo Omino in Armatura.",
-          image: "images/Omino_grasso_stile_cartoon_in_armatura.jpg",
-        },
-        {
-          type: "text",
-          text: "Ogni giocatore deve scegliere un altro giocatore e sussurrargli all'orecchio un complimento VERAMENTE imbarazzante. Le reazioni saranno giudicate!",
-        },
-        {
-          type: "image",
-          text: "Mostrate l'ultimo meme che avete ricevuto o inviato (i vostri nudes non contanto come meme).",
-        },
-        {
-          type: "image",
-          text: "Gruppo: questa immagine rappresenta l'umore medio di chi quando si sveglia? Votate!",
-          image: "images/mood_mattutino.jpg",
-        },
-        {
-          type: "text",
-          text: "Gioco della sedia: un giocatore volontario dice che sedia si sente. Gli altri devono assegnargliene una più adatta.",
-        },
-        {
-          type: "image",
-          text: "Gruppo: assegnate il verso che farebbe questa chincillà umano.",
-          image: "images/Lontra_umana_con_occhi_azzurri.jpg",
-        },
-        {
-          type: "text",
-          text: "Round di 'Obbligo o Verità' per un volontario. Il gruppo sceglie per lui/lei.",
-        },
-        {
-          type: "image",
-          text: "Gruppo: inventate collettivamente un titolo clickbait per un articolo sulla vita segreta di questo Gatto Vampiro.",
-          image: "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg",
-        },
-        {
-          type: "text",
-          text: "Complimento competitivo per un volontario: chi fa il complimento più originale vince.",
-        },
-        {
-          type: "image",
-          text: "Gruppo: descrivete come parlerebbe questo cane.",
-          image: "images/Cane_con_faccia_stupita_e_sproporzionata.jpg",
-        },
-        {
-          type: "image",
-          text: "Tutti: imitate l'espressione di Shrek ora!",
-          image: "images/Shrek_con_sorriso_memico.jpg",
-        },
-        {
-          type: "text",
-          text: "Domanda Trivia su un giocatore scelto a caso: chi risponde correttamente per primo vince.",
-        },
-        {
-          type: "text",
-          text: "Gruppo: ognuno faccia la sua migliore imitazione del suono di avvio di un vecchio computer Windows. I presenti votano la più realistica.",
-        },
-        {
-          type: "text",
-          text: "Gruppo: create collettivamente una ricetta di cucina usando solo oggetti visibili nella stanza. Più assurda è, meglio è!",
-        },
-        {
-          type: "text",
-          text: "Gruppo: catena di battute pessime - qualcuno inizia con una battuta davvero terribile, e a turno ognuno deve farne una peggiore della precedente.",
-        },
-        {
-          type: "text",
-          text: "Gruppo: ognuno deve inventare un soprannome ridicolo per la persona alla propria destra, basato su un incidente imbarazzante (reale o immaginario).",
-        },
-        {
-          type: "text",
-          text: "Gruppo: imitazione rapida - un volontario fa un gesto o un'espressione bizzarra, e tutti devono immediatamente copiarla il più accuratamente possibile.",
-        },
-        {
-          type: "text",
-          text: "Gruppo: create un breve telegiornale assurdo dove ogni persona aggiunge una notizia sempre più surreale, collegandola alla precedente.",
-        },
-        {
-          type: "text",
-          text: "Gruppo: inventate una danza di gruppo improbabile chiamata 'La Cancrena'. Ogni persona aggiunge un movimento e alla fine eseguitela tutti insieme.",
-        },
-        {
-          type: "text",
-          text: "Gruppo: date vita a un tribunale improvvisato dove si processa un oggetto presente nella stanza per crimini ridicoli. Assegnate i ruoli di giudice, accusa, difesa e testimoni.",
-        },
-      ]; // Rimosso [PLAYER=mittente]
-      const coupleChallenges = [
-        {
-          type: "text",
-          text: "Coppia ([COPPIA_1] & [COPPIA_2]): chi di voi due è più probabile che pianga guardando un cartone?",
-        },
-        // --- SFIDE GIF PER COPPIE (aggiungere a coupleChallenges) ---
-{ type: 'gif', gifType: 'dance', text: "COPPIA ([COPPIA_1] & [COPPIA_2]): Dovete eseguire INSIEME questo balletto di Ace Ventura. Coordinazione richiesta!", path: "gifs/ace-ventura-football-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "COPPIA: Uno di voi imita la risata di Mr. Burns, l'altro/a deve rispondere con una risata adeguatamente servile.", path: "gifs/mr-burns-excellent_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "COPPIA: Eseguite un romantico (o ridicolo) passo a due ispirato a questo balletto di Bugs Bunny.", path: "gifs/bugs-bunny-hat-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "COPPIA: Imitate a turno il suono di queste porte che sbattono, creando un dialogo.", path: "gifs/closing-lots-of-doors-cartoon-closing-door_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "COPPIA: Ballate insieme come farebbe questo Ciccione a un matrimonio.", path: "gifs/ciccione_streap_dance.gif"}, // Adattato per coppia
-{ type: 'gif', gifType: 'sound', text: "COPPIA: Uno fa il suono del calcio, l'altro la reazione dolorosa. Sincronizzatevi!", path: "gifs/karate_calcio_multiplo_nelle_palle_sound.gif"},
-        {
-          type: "text",
-          text: "Coppia ([COPPIA_1] & [COPPIA_2]): descrivete a turno il partner usando solo rumori di animali. L'altro deve indovinare l'animale (e l'intenzione).",
-        },
-        {
-          type: "image",
-          text: "Coppia: chi dei due assomiglia di più a quest'Arancia con faccia di scimmia quando prova a fare il/la simpatico/a?",
-          image: "images/Arancia_con_faccia_di_scimmia.jpg",
-        },
-        {
-          type: "text",
-          text: "Coppia: se foste bloccati su un'isola deserta, chi dei due sarebbe il capo e chi il suddito (o il pasto)? Giustificate.",
-        },
-        {
-          type: "text",
-          text: "Coppia: unite i vosti nomi e cognomi per creare un essere mitologico. (tipo mario rossi e francesca esposito digievolve in Mariesca Espositossi) ",
-        },
-        {
-          type: "text",
-          text: "Coppia: qual è la cosa più irritante che il vostro partner fa MA che trovate segretamente adorabile?",
-        },
-        { type: "text", text: "Coppia: inventate una scena da film romantico ma recitatela in stile soap opera anni '80." },
-  { type: "image", text: "Coppia: chi dei due si identifica di più con questo Bradipo Filosofico dopo una discussione?", image: "images/Bradipo_filosofico.jpg" },
-  { type: "text", text: "Coppia: quale sarebbe il vostro nome combinato se foste una boyband o girlband di scarso successo?" },
-        {
-          type: "text",
-          text: "Coppia: dovete scambiarvi i ruoli per 1 minuto. Imitate il modo di parlare e le manie tipiche del partner.",
-        },
-       
-        {
-          type: "text",
-          text: "Coppia: chi dei due è più probabile che inizi a ballare da solo/a in cucina mentre prepara la cena?",
-        },
-     
-        {
-          type: "text",
-          text: "Coppia: qual è la vostra 'canzone da disagio' segreta (quella che ascoltate ma vi vergognate un po')?",
-        },
-        {
-          type: "text",
-          text: "Inventate un nuovo gusto di pizza ispirato alla vostra relazione (es: 'Litigio e Riconciliazione al Gorgonzola', 'Passione e salsiccia').",
-        },
-        {
-          type: "image",
-          text: "Coppia: questa immagine rappresenta la vostra domenica tipo? Siate onesti!",
-          image: "images/relax_o_caos.jpg",
-        },
-        {
-          type: "text",
-          text: "Coppia: qual è il nomignolo più imbarazzante che usate tra voi?",
-        },
-        {
-          type: "image",
-          text: "Coppia: l'acconciatura di questa Scimmia è l'aspirazione segreta di chi dei due?",
-          image: "images/Scimmia_caschetto_stile_moderno.jpg",
-        },
-        {
-          type: "text",
-          text: "Coppia: descrivete il partner ideale per l'altro/a usando solo nomi di personaggi dei cartoni.",
-        },
-        {
-          type: "image",
-          text: "Coppia: la faccia di questo cane rappresenta chi dei due dopo una lunga giornata?",
-          image: "images/un_cane_puzza.jpg",
-        },
-        {
-          type: "text",
-          text: "Coppia: se foste un gusto di pizza combinato, quale sarebbe?",
-        },
-        {
-          type: "text",
-          text: "Coppia: chi dei due è più bravo/a a mentire? L'altro/a deve fornire una prova (aneddoto).",
-        },
-        {
-          type: "image",
-          text: "Coppia: chi dei due esagera di più nel raccontare storie, come suggerisce questo Uomo?",
-          image: "images/Uomo_con_baffi_filter_volto_allungato.jpg",
-        },
-        {
-          type: "text",
-          text: "Coppia: inventate e mostrate un ballo di coppia segreto e imbarazzante.",
-        },
-        {
-          type: "image",
-          text: "Coppia: guardate l'Uovo. Senza parlare, indicate chi dei due è più 'secchione'.",
-          image: "images/Uovo_con_occhiali_e_volto_umano.jpg",
-        },
-        {
-          type: "text",
-          text: "Coppia: chi è il più fortunato fra voi due? (parlo di fortuna intesa come colpo di fortuna, chi trova parcheggio subito, trova i soldi a terra ecc ecc.",
-        },
-        {
-          type: "text",
-          text: "Coppia ([COPPIA_1] & [COPPIA_2]): create un nuovo supereroe combinando i vostri 'poteri' e difetti peggiori. Come si chiama e quale sarebbe il suo costume?",
-        },
-        {
-          type: "text",
-          text: "Coppia: improvvisate una breve scena da telenovela drammatica dove uno di voi ha appena scoperto che l'altro è il suo gemello segreto.",
-        },
-        {
-          type: "text",
-          text: "Coppia: create una pubblicità per un prodotto assurdo che risolve un problema che solo voi due avete, alternandovi nelle frasi senza consultarvi prima.",
-        },
-        {
-          type: "text",
-          text: "Coppia: intervista assurda - uno fa domande totalmente random, l'altro deve rispondere seriamente come se fosse un esperto mondiale dell'argomento.",
-        },
-        {
-          type: "text",
-          text: "Coppia: dovete descrivere la giornata tipo dell'altro come se fosse un documentario di National Geographic sulle strane abitudini di una specie rara.",
-        },
-        {
-          type: "text",
-          text: "Coppia: chi ha inviato l'ultimo nudino.",
-        },
-        {
-          type: "text",
-          text: "Coppia: inventate una nuova festa nazionale basata sulle vostre personalità combinate. Quali sarebbero le tradizioni e i rituali di questa festa?",
-        },
-        {
-          type: "text",
-          text: "Coppia: dovete farvi a vicenda complimenti assurdamente specifici nello stile di un poeta drammatico dell'800. Chi fa il complimento più elaborato vince.",
-        },
-      ]; // Rimosso [MITTENTE]
-      const challengeModeChallenges = [
-        /* ...identici a prima... */ {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida a chi imita meglio il suono di un modem 56k che si connette.",
-        },{ type: "text", text: "[PLAYER_1] e [PLAYER_2]: sfida a chi imita meglio una stampante bloccata che tenta disperatamente di stampare." },
-  { type: "image", text: "[PLAYER_1] vs [PLAYER_2]: Chi riesce a imitare meglio l'intensità drammatica di questo Scoiattolo Eroico?", image: "images/Scoiattolo_eroico.jpg" },
-  { type: "text", text: "[PLAYER_1] e [PLAYER_2]: sfida di improvvisazione - chi racconta la storia più convincente di un'invasione aliena assurda?" },
-        {
-          type: "text",
-          text: "[PLAYER_1] vs [PLAYER_2]: Gara di Rutti Mentali. Chi riesce a mimare il rutto più impressionante senza fare rumore?",
-        },
-        { type: 'gif', gifType: 'dance', text: "[PLAYER_1] vs [PLAYER_2]: Sfida di ballo! Chi imita meglio CJ di GTA San Andreas?" , path: "gifs/cj-gta-sanandreas-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER_1] vs [PLAYER_2]: Gara di abbai! Chi imita meglio questo cane lingua-fuori?", path: "gifs/dog_bark_tongue_sound.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER_1] vs [PLAYER_2]: Chi fa l'imitazione più convincente del verso di questa capra?", path: "gifs/goat_tongue_sound.gif"},
-{ type: 'gif', gifType: 'dance', text: "[PLAYER_1] vs [PLAYER_2]: Chi interpreta meglio la danza di questo ciccione?", path: "gifs/cock-call-fat-albert-dance.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER_1] vs [PLAYER_2]: Gara di starnuti felini. Il più realistico vince.", path: "gifs/gatto_starnuto_sound.gif"},
-{ type: 'gif', gifType: 'sound', text: "[PLAYER_1] vs [PLAYER_2]: Chi riproduce meglio il suono del Gong di Pink Floyd usando solo la voce?", path: "gifs/gong-pink-floyd-gong_sound.gif"},
-        {
-          type: "image",
-          text: "[PLAYER_1] vs [PLAYER_2]: Imitate l'espressione di terrore esistenziale di quest'Uovo con gli occhiali. Il più convincente vince.",
-          image: "images/Uovo_con_occhiali_e_volto_umano.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] vs [PLAYER_2]: Sfida a chi inventa la scusa più assurda e incredibile per non andare a un matrimonio.",
-        },
-        {
-          type: "image",
-          text: "[PLAYER_1] vs [PLAYER_2]: Chi riesce a rimanere serio più a lungo guardando fisso questo Cane?",
-          image: "images/Cane_con_faccia_stupita_e_sproporzionata.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] vs [PLAYER_2]: Sfida di Mimo Veloce. Il GM sussurra un oggetto strano a entrambi, chi lo mima meglio e più velocemente per farlo indovinare al gruppo vince.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] vs [PLAYER_2]: Gara a chi pronuncia più velocemente e correttamente la frase 'Trentatré trentini entrarono a Trento tutti e trentatré trotterellando'.",
-        },
-        // Immagine riferimento 1
-        // { type: 'image', image: "images/Uomo_con_baffi_filter_volto_allungato.jpg"} // Immagine riferimento 2 - complesso da mostrare, forse meglio evitarlo o descrivere il secondo personaggio.
-        {
-          type: "text",
-          text: "[PLAYER_1] vs [PLAYER_2]: Sfida a chi riesce a fare il maggior numero di flessioni... con un solo dito (anche mimandole) in 10 secondi.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: dovete fare braccio di ferro mentale. Fissatevi intensamente finché uno dei due non ride o distoglie lo sguardo. Vietato toccarsi.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida di sguardi assassini. Chi mantiene lo sguardo più minaccioso per 15 secondi vince.",
-        },
-        {
-          type: "image",
-          text: "[PLAYER_1] e [PLAYER_2]: chi dei due riesce a imitare meglio la posa di questo Gatto? Il gruppo giudica.",
-          image: "images/Gatto_allungato_mossa_KungFu.jpg",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: gara a chi racconta la barzelletta più squallida e imbarazzante.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida a chi riesce a stare in equilibrio su una gamba sola per più tempo (senza appoggiarsi!).",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida a chi fa il verso di animale più strano e inaspettato.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: gara di complimenti passivo-aggressivi. Chi riesce a farne uno più tagliente ma velato vince.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: dovete recitare la scena madre di un film famoso ma usando solo la parola 'Cancrena'.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: gara a chi riesce a ridere in modo più malvagio e inquietante. Il gruppo decide il vincitore.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida di beatbox improvvisato - ciascuno ha 15 secondi per creare il ritmo più assurdo possibile.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: dovete improvvisare un rap battle usando solo parole che iniziano con la prima lettera del nome dell'avversario.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida delle espressioni facciali - mostrate la vostra migliore faccia da 'ho appena morso un limone mentre ricevo una multa'.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida di mimo - interpretate l'emozione 'delusione cosmica' usando solo il vostro corpo, senza fare alcun suono.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: gara a chi inventa la scusa più assurda per non aver fatto i compiti, come se parlaste con un insegnante severo.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: sfida di danza assurda - dovete ballare nello stile di un animale improbabile (un bradipo, un granchio, ecc.). Il gruppo vota il migliore.",
-        },
-        {
-          type: "text",
-          text: "[PLAYER_1] e [PLAYER_2]: vi sfido a cantare il titolo di una canzone famosa con l'accento più strano possibile. Gli altri devono indovinare la canzone.",
-        },
-      ];
+const compliments = [
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse un colore, quale sarebbe e perché emana quella particolare 'vibrazione'?"
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse una marca assurda di dentifricio, quale sarebbe il suo slogan?"
+  },
+  {
+    "type": "text",
+    "text": "Fai un complimento a [PLAYER] immaginandolo come protagonista di un cartone animato giapponese surreale."
+  },
+  {
+    "type": "text",
+    "text": "Quale canzone descrive perfettamente l'energia o lo spirito di [PLAYER]?"
+  },
+  {
+    "type": "image",
+    "text": "Anche questo Gatto Kung Fu ha i suoi momenti di tenerezza. Fai a [PLAYER] un complimento sulla sua capacità nascosta di essere dolce o premuroso/a.",
+    "image": "images/Gatto_allungato_mossa_KungFu.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi la voce di [PLAYER] usando solo nomi di cibi (es: 'vellutata come un budino', 'croccante come un biscotto', 'frizzante come l'acqua tonica')."
+  },
+  {
+    "type": "text",
+    "text": "Se l'aura di [PLAYER] avesse un odore, quale sarebbe (deve essere un odore piacevole ma strano, es: 'plastilina nuova e vaniglia', 'benzina e lavanda')?"
+  },
+  {
+    "type": "image",
+    "text": "Questo Asino Cartoon sembra confuso ma buono. Fai un complimento a [PLAYER] sulla sua genuinità o sulla sua incapacità di essere veramente cattivo/a.",
+    "image": "images/Asino_con_occhi_grandi_cartoon.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Qual è la cosa più intelligentemente pigra che hai visto fare a [PLAYER] e che segretamente ammiri?"
+  },
+  {
+    "type": "image",
+    "text": "Questa Lontra Umana ([PLAYER]?) ha degli occhi penetranti. Fai un complimento sincero a [PLAYER] sul suo sguardo o sulla sua profondità.",
+    "image": "images/Lontra_umana_con_occhi_azzurri.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi un piccolo gesto quasi invisibile di [PLAYER] che però trovi significativo."
+  },
+  {
+    "type": "text",
+    "text": "Fai un complimento a [PLAYER] su una sua caratteristica fisica o di stile che ti piace."
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse un fenomeno atmosferico (sole, pioggia...), quale sarebbe e perché?"
+  },
+  {
+    "type": "image",
+    "text": "Nonostante la puzza, questo cane ha un suo perché. Trova un pregio 'nascosto' di [PLAYER] e descrivilo.",
+    "image": "images/un_cane_puzza.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Fai un complimento sincero su una qualità del carattere che ammiri profondamente in [PLAYER]."
+  },
+  {
+    "type": "text",
+    "text": "Condividi qualcosa di concreto che hai imparato grazie a [PLAYER]."
+  },
+  {
+    "type": "text",
+    "text": "Descrivi [PLAYER] in tre aggettivi precisi (non banali!) e spiega la scelta."
+  },
+  {
+    "type": "image",
+    "text": "Questo Gatto Kung Fu ha stile. Fai un complimento a [PLAYER] sulla sua agilità (fisica o mentale) o sul suo stile unico.",
+    "image": "images/Gatto_allungato_mossa_KungFu.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse un piatto gourmet, quali ingredienti conterrebbe e perché?"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi l'aura di [PLAYER] usando solo colori e sensazioni tattili."
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] potesse essere un elemento architettonico di un edificio storico, quale sarebbe e perché?"
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse un profumo, quali note avrebbe e in quale situazione sarebbe perfetto indossarlo?"
+  },
+  {
+    "type": "text",
+    "text": "Quale superpotere segreto pensi abbia [PLAYER] nella vita quotidiana?"
+  },
+  {
+    "type": "text",
+    "text": "Quale animale mitologico rappresenta meglio l'essenza di [PLAYER] e perché?"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi un talento nascosto che [PLAYER] potrebbe avere ma che non ha ancora rivelato al mondo."
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse un pianeta del nostro sistema solare, quale sarebbe e perché si adatta alla sua personalità?"
+  }
+];
+
+const roasts = [
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse un meme famoso, quale sarebbe?"
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse una pizza, quale topping assolutamente discutibile avrebbe e perché?"
+  },
+  {
+    "type": "image",
+    "text": "Ammettilo, questo cane strafatto è la rappresentazione perfetta di [PLAYER] quando sa di aver fatto una cazzata.",
+    "image": "images/Cane_strafatto.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi il talento segreto di [PLAYER] che nessuno vorrebbe mai avere."
+  },
+  {
+    "type": "image",
+    "text": "Questa immagine è chiaramente [PLAYER] al mattino prima del caffè. Confermi? Motiva il roast.",
+    "image": "images/Shrek_con_sorriso_memico.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Quale oggetto inanimato in questa stanza assomiglia di più (caratterialmente) a [PLAYER]? Spiega il perché."
+  },
+  {
+    "type": "image",
+    "text": "Se [PLAYER] dovesse dare un nome 'epico' a questo Cane Stupito, quale sarebbe e perché si addice a entrambi?",
+    "image": "images/Cane_con_faccia_stupita_e_sproporzionata.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER] viene morso da un ragno radioattivo. Quale superpotere TOTALMENTE INUTILE ottiene (es: 'sentire il sapore dei colori', 'parlare con i semafori spenti')?"
+  },
+  {
+    "type": "text",
+    "text": "Imita il modo in cui [PLAYER] cammina quando pensa di essere figo/a ma in realtà sembra solo strano."
+  },
+  {
+    "type": "image",
+    "text": "Quale frase tipica di [PLAYER] si abbinerebbe perfettamente a questa immagine dell'Uomo-Baffo?",
+    "image": "images/Uomo_con_baffi_filter_volto_allungato.jpg"
+  },
+  {
+    "type": "image",
+    "text": " Oh no Gorilla Franco ti ha fatto il dito medio! Manda a fanculo pure tu [PLAYER] per una cosa che non ha fatto",
+    "image": "images/middlefinger_gorilla"
+  },
+  {
+    "type": "text",
+    "text": "Se dovessi riassumere l'essenza di [PLAYER] con un rumore di notifica del telefono, quale sarebbe?"
+  },
+  {
+    "type": "image",
+    "text": "Ammettilo, l'espressione di questo Asino non ti ricorda *perfettamente* [PLAYER] quando è confuso/a?",
+    "image": "images/Asino_con_occhi_grandi_cartoon.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Qual è il superpotere più gloriosamente inutile che [PLAYER] potrebbe possedere?"
+  },
+  {
+    "type": "text",
+    "text": "Chiedi a [PLAYER]: 'Da 1 a 10, quanto ti senti 'Mr. Carrot' oggi?' Spiega il punteggio.",
+    "image": "images/Mr_Carrot_testa_umanoide_conici.jpg"
+  },
+  {
+    "type": "image",
+    "text": "Questa Arancia con faccia di scimmia è chiaramente l'animale spirituale di [PLAYER]. Concordi? Motiva.",
+    "image": "images/Arancia_con_faccia_di_scimmia.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi la 'modalità Autopilot' di [PLAYER]: cosa fa quando sembra disconnesso?"
+  },
+  {
+    "type": "image",
+    "text": "Se [PLAYER] dovesse usare questa faccia da casa arrabbiata per spaventare qualcuno, funzionerebbe?",
+    "image": "images/Casa_con_faccia_umano_arrabbiato.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Traduci la risata di [PLAYER] in un suono onomatopeico strano."
+  },
+  {
+    "type": "image",
+    "text": "Questo è [PLAYER] dopo una serata impegnativa, vero?",
+    "image": "images/woody_strafatto.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Fai un roast *gentile* a [PLAYER] su un suo difettuccio, ma poi smorza con un complimento."
+  },
+  {
+    "type": "text",
+    "text": "Imita (senza cattiveria!) un'espressione facciale o un gesto tipico di [PLAYER]."
+  },
+  {
+    "type": "text",
+    "text": "Quale sarebbe il 'bug' più fastidioso se [PLAYER] fosse un personaggio di un videogioco?"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi il peggior incubo di [PLAYER] usando solo 5 parole."
+  },
+  {
+    "type": "image",
+    "text": "L'urlo di questo Ippopotamo è come quello di [PLAYER] quando... (completa la frase)",
+    "image": "images/Ippopotamo_gridante_su_sfondo_giallo.jpg"
+  },
+  {
+    "type": "image",
+    "text": "Onestamente, [PLAYER], quanto ti senti rappresentato/a da questo Gatto Vampiro?",
+    "image": "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Se [PLAYER] fosse un elettrodomestico malfunzionante, quale sarebbe e cosa farebbe di strano?"
+  },
+  {
+    "type": "text",
+    "text": "Descrivi [PLAYER] come se fosse la peggiore recensione a 1 stella di un ristorante di lusso."
+  },
+  {
+    "type": "text",
+    "text": "Se la postura di [PLAYER] potesse parlare, quale frase ripeterebbe continuamente?"
+  },
+  {
+    "type": "text",
+    "text": "Quale emoji descrive meglio la faccia di [PLAYER] quando cerca di sembrare intelligente?"
+  },
+  {
+    "type": "text",
+    "text": "Se la vita di [PLAYER] fosse un film di serie B, quale sarebbe il titolo e la trama assurda?"
+  },
+  {
+    "type": "text",
+    "text": "Se lo stile di [PLAYER] fosse un piatto di cucina fusion andato male, quali ingredienti incompatibili conterrebbe?"
+  },
+  {
+    "type": "text",
+    "text": "Quale trend di TikTok ormai superato [PLAYER] probabilmente segue ancora in segreto?"
+  }
+];
+
+const uncomfortableQuestions = [
+  {
+    "type": "image",
+    "text": "[PLAYER], fissa questo ciccione viola per 10 secondi. Ora confessa il primo pensiero *veramente* assurdo che ti è venuto.",
+    "image": "images/Alieno_viola_in_foresta_fluorescente.jpg"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], imita il suono agghiacciante che ti immagini faccia questa cosa.",
+    "image": "gifs/closing-lots-of-doors-cartoon-closing-door_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], il tuo momento è arrivato. Imita questo balletto con tutta la grazia (o la mancanza di essa) che possiedi.",
+    "image": "gifs/ciccione_streap_dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], qual è il contesto di questo abbaiare secondo te? Riproduci il suono.",
+    "image": "gifs/dog_bark_tongue_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], scatena il CJ che è in te. Replica questa mossa iconica.",
+    "image": "gifs/cj-gta-sanandreas-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], fai la tua migliore imitazione della risata di questa signora.",
+    "image": "gifs/female_asian_laugh_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], mostra al mondo la tua interpretazione di questo balletto felice.",
+    "image": "gifs/dance-happy-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], riproduci questo miagolio con la massima tenerezza possibile.",
+    "image": "gifs/gattino_piccolo_miao_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], interpreta la coreografia di questo gatto rachitico.",
+    "image": "gifs/gatto rachitico dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], imita il miagolio potente di questo gattone.",
+    "image": "gifs/gatto_grande_miao_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], fai il suono di questo starnuto felino.",
+    "image": "gifs/gatto_starnuto_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], cosa sta cercando di comunicare questa capra? Riproduci il suo verso.",
+    "image": "gifs/goat_tongue_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], qual è il significato cosmico di questo Gong? Rappresentalo con un suono.",
+    "image": "gifs/gong-pink-floyd-gong_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], imita la sequenza di suoni di questo calcio multiplo nelle parti basse.",
+    "image": "gifs/karate_calcio_multiplo_nelle_palle_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], pronuncia 'Eccellente' con l'esatta intonazione di Mr. Burns.",
+    "image": "gifs/mr-burns-excellent_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], imita questa risata contagiosa.",
+    "image": "gifs/nero_senza_denti_risata_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], unisciti al ballo del piccione. Mostra le tue mosse.",
+    "image": "gifs/pigeonpls-pigeon-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], fai il suono dei cavi elettrici usati come corda per saltare.",
+    "image": "gifs/power-lines-jump-rope_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], è ora di ballare come questo formaggio psichedelico.",
+    "image": "gifs/the-vibin-cheese-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], esegui la risata malefica di Willem Dafoe.",
+    "image": "gifs/willem dafoe_risata_malefica_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], imita la finezza di Ace Ventura in questo balletto.",
+    "image": "gifs/ace-ventura-football-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], è il momento di ballare come Bugs Bunny con tanto di cappello immaginario.",
+    "image": "gifs/bugs-bunny-hat-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], dacci la tua migliore interpretazione di questa chiamata del gallo danzante.",
+    "image": "gifs/cock-call-fat-albert-dance.gif"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], preferiresti essere seguito/a costantemente da un mariachi band o da un clown triste?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], devi confessare la canzone più imbarazzante che hai cantato a squarciagola sotto la doccia."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], descrivi al gruppo, con un livello di dettaglio quasi chirurgico (ma senza volgarità gratuita!), la tua procedura ESATTA per lavarti i piedi. Non saltare passaggi."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], devi raccontarci una cosa assolutamente normale e banale che hai fatto oggi (es: versare l'acqua). Raccontala nel modo più piatto e noioso possibile. L'obiettivo è *non* far ridere."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], qual è quella cosa *veramente* strana o super specifica che pensi faccia ridere solo te? Confessala e prova a spiegare perché."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], scenario assurdo: sei all'Eurospin. Quale attore/attrice italiano/a completamente fuori luogo vorresti trovare lì come commesso/a e perché?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], onestamente, che tipo specifico di scarpa ti senti di essere in questo momento della tua vita (es: 'ciabatta consumata', 'stivale rotto', 'calzino antiscivolo')? Motiva."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], come si chiama il parroco della tua parrocchia/zona? (Se non lo sai, puoi dire 'Passo' o inventare)."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], preferiresti avere un terzo braccio che spunta dalla schiena o non avere più le ginocchia?"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER], confessa: quanto spesso ti senti come questo Ippopotamo urlante interiormente durante una normale giornata lavorativa/scolastica?",
+    "image": "images/Ippopotamo_gridante_su_sfondo_giallo.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], se la tua vita fosse un film, quale sarebbe il titolo più brutalmente onesto?"
+  },
+  {
+    "type": "image",
+    "text": "Fissa l'Uovo con gli occhiali per 5 secondi. Ora [PLAYER], chiudi gli occhi e descrivi la prima forma geometrica che ti viene in mente.",
+    "image": "images/Uovo_con_occhiali_e_volto_umano.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], quale sarebbe la tua frase celebre se fossi il cattivo in un film di serie B?"
+  },
+  {
+    "type": "text",
+    "text": "Devi eliminare per sempre una delle seguenti cose dalla tua vita: la pizza o la musica. Cosa scegli, [PLAYER]?"
+  },
+  {
+    "type": "image",
+    "text": "Questo Mr. Carrot è il tuo spirito guida o il tuo peggior incubo, [PLAYER]?",
+    "image": "images/Mr_Carrot_testa_umanoide_conici.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], domanda fondamentale: che tipo di elettrodomestico ti senti OGGI e perché?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], qual è il tuo albero preferito?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], qual è il personaggio storico che ti viene in mente quando fai la cacca?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], hai mai pensato a quanto sono belli i treni?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], qual è la tua espressione facciale preferita?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], hai mai urlato contro il pane?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], hai mai pensato di farti il bagno a mare con i calzini di spugna? Se no, prova, poi mi fai sapere."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], se la tua macchina potesse parlare cosa ti direbbe? Se non hai una macchina allora le scarpe."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], quale specifica ora NON ESISTENTE del giorno (es: le 25:77) ti senti in questo momento e perché?"
+  },
+  {
+    "type": "image",
+    "text": "Questa immagine rappresenta [PLAYER] quando cerca di spiegare qualcosa di complicato? Siate sinceri.",
+    "image": "images/Uomo_con_baffi_filter_volto_allungato.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER],crea una frase per questo meme famoso",
+    "image": "Gigachad.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Chiedi a [PLAYER]: 'Hai mai cagato in discoteca? Inteso come posto peggiore / momento peggiore dove aver fatto la cacca'"
+  },
+  {
+    "type": "image",
+    "text": "Questa Maschera Inquietante è come ti immagini la coscienza di [PLAYER]? Spiega.",
+    "image": "images/Maschera_bianca_inquietante_su_uomo.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], preferiresti essere ricercato dalla polizia o da una pericolosa organizzazione criminale?"
+  },
+  {
+    "type": "text",
+    "text": "Chiedi a [PLAYER]: 'Qual è il pensiero più socialmente inaccettabile (ma che non diresti mai) che hai avuto guardando un reality show?'"
+  },
+  {
+    "type": "image",
+    "text": "[MITTENTE], [PLAYER] sarebbe più l'Omino Grasso o il suo destriero invisibile?",
+    "image": "images/Omino_grasso_stile_cartoon_in_armatura.jpg"
+  },
+  {
+    "type": "image",
+    "text": "[MITTENTE], cosa ne pensa [PLAYER] di questa Scimmia con caschetto?",
+    "image": "images/Scimmia_caschetto_stile_moderno.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Confessa una piccola bugia bianca (o non così bianca) che hai detto a [PLAYER] per evitare di fare qualcosa."
+  },
+  {
+    "type": "text",
+    "text": "Devi dire a [PLAYER] una verità scomoda ma costruttiva sul suo profilo social preferito."
+  },
+  {
+    "type": "text",
+    "text": "Fai una domanda super personale a [PLAYER] (può usare un jolly e non rispondere, ma deve subire una piccola penitenza decisa dal gruppo)."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], in una scala da 1 a 10, quanto consideri discutibile la tua ultima decisione importante? Spiega."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], se potessi creare una legge assurda ma che tutti devono seguire, quale sarebbe e perché?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], se i tuoi amici qui presenti creassero un documentario sulla tua vita, quale sarebbe il titolo più imbarazzante ma accurato?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], qual è la cosa più strana che hai cercato su Google o chatgpt nell'ultima settimana che non vorresti che gli altri sapessero?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], se il tuo animale domestico (o un oggetto in casa tua) potesse parlare, quale segreto imbarazzante rivelerebbe su di te?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], considerando i presenti, chi chiameresti alle 3 del mattino per aiutarti a nascondere un pinguino rubato dallo zoo? E perché?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], se i tuoi DM/messaggi privati venissero esposti pubblicamente, quale sarebbe la conversazione che ti metterebbe più in imbarazzo?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER], quale serie o film ti vergogni segretamente di amare ma difenderesti con passione se qualcuno lo criticasse?"
+  }
+];
+
+const groupChallenges = [
+  {
+    "type": "image",
+    "text": "Gruppo: chi qui dentro è più probabile che abbia un poster di questa vecchia baldracca in camera?",
+    "image": "images/hipster alpaca_ This is so cute_"
+  },
+  {
+    "type": "image",
+    "text": "TUTTI: Imparate e eseguite INSIEME la coreografia di questo Gatto Rachitico. Sincronizzatevi!",
+    "image": "gifs/gatto rachitico dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "TUTTI: A turno, imitate il miagolio di questo gattino. Chi lo fa più simile vince l'approvazione generale.",
+    "image": "gifs/gattino_piccolo_miao_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "TUTTI: Ballate come se foste questo Formaggio Vibrante a una festa techno.",
+    "image": "gifs/the-vibin-cheese-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "TUTTI: Formate un cerchio e ballate come questi Piccioni, annuendo a ritmo.",
+    "image": "gifs/pigeonpls-pigeon-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "TUTTI: Create un coro di risate malefiche alla Willem Dafoe.",
+    "image": "gifs/willem dafoe_risata_malefica_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "Gruppo: non vi conosco, ma sono sicuro che in questa stanza c'è qualcuno che somiglia a questo alpaca.",
+    "image": "images/Vecchia_baldracca.jpeg"
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: create una pubblicità TV improvvisata per vendere qualcosa di completamente inutile (es: 'pantofole per le mani')."
+  },
+  {
+    "type": "image",
+    "text": "Tutti imitano contemporaneamente la posa epica di questa Tartaruga Ninja Depressa.",
+    "image": "images/Tartaruga_ninja_depressa.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: a turno, inventate una nuova parola assurda e datele un significato strano."
+  },
+  {
+    "type": "image",
+    "text": "TUTTI: guardate attentamente quest'immagine dell'Uomo-Delfino. Al 'VIA!' del GM, dovete scatenare il vostro urlo di puro terrore più convincente.",
+    "image": "images/UOMO_FACCIA_DELFINO.jpg"
+  },
+  {
+    "type": "text",
+    "text": "TUTTI (o i più coraggiosi): cantate insieme A CAPPELA il ritornello di 'My Heart Will Go On'. Metteteci sentimento!"
+  },
+  {
+    "type": "text",
+    "text": "Momento Orchestra Corporea: a turno, ogni giocatore deve fare un suono corporeo (schiocco dita, battito mani, pernacchia...) cercando di creare un ritmo collettivo assurdo."
+  },
+  {
+    "type": "text",
+    "text": "Il più alto della stanza deve farsi una foto accanto al più basso della stanza."
+  },
+  {
+    "type": "text",
+    "text": "Chi ha pubblicato l'ultima storia su instagram più divertente vince un materasso Eminflex®."
+  },
+  {
+    "type": "text",
+    "text": "L'ultimo che ha aggiornato la foto profilo su Facebook verrà chiamato vecchio per il resto del gioco ed interagirete con lui come se fosse un nonno/a che non ci sente."
+  },
+  {
+    "type": "text",
+    "text": "A turno, ogni giocatore deve dire una parola. L'obiettivo è creare collettivamente una frase di senso compiuto più lunga possibile, ma che sia completamente idiota."
+  },
+  {
+    "type": "image",
+    "text": "Tutti insieme, come ci è finito questo ciccione viola nell'acqua? Spiegamelo perchè veramente non riesco a capire.",
+    "image": "images/Alieno_viola_in_foresta_fluorescente.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Gioco del Sinonimo Improbabile: il GM dice una parola normale (es: 'felice'). A turno, dite un sinonimo sempre più strano e meno attinente (es: 'contento', 'gaio', 'pimpante', 'spumeggiante', 'fotosintetico'...). Chi esita o ripete è fuori (metaforicamente)."
+  },
+  {
+    "type": "image",
+    "text": "Tutti i giocatori devono camminare per la stanza imitando l'andatura fiera di questo Omino in Armatura.",
+    "image": "images/Omino_grasso_stile_cartoon_in_armatura.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Ogni giocatore deve scegliere un altro giocatore e sussurrargli all'orecchio un complimento VERAMENTE imbarazzante. Le reazioni saranno giudicate!"
+  },
+  {
+    "type": "image",
+    "text": "Mostrate l'ultimo meme che avete ricevuto o inviato (i vostri nudes non contanto come meme)."
+  },
+  {
+    "type": "image",
+    "text": "Gruppo: questa immagine rappresenta l'umore medio di chi quando si sveglia? Votate!",
+    "image": "images/mood_mattutino.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Gioco della sedia: un giocatore volontario dice che sedia si sente. Gli altri devono assegnargliene una più adatta."
+  },
+  {
+    "type": "image",
+    "text": "Gruppo: assegnate il verso che farebbe questa chincillà umano.",
+    "image": "images/Lontra_umana_con_occhi_azzurri.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Round di 'Obbligo o Verità' per un volontario. Il gruppo sceglie per lui/lei."
+  },
+  {
+    "type": "image",
+    "text": "Gruppo: inventate collettivamente un titolo clickbait per un articolo sulla vita segreta di questo Gatto Vampiro.",
+    "image": "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Complimento competitivo per un volontario: chi fa il complimento più originale vince."
+  },
+  {
+    "type": "image",
+    "text": "Gruppo: descrivete come parlerebbe questo cane.",
+    "image": "images/Cane_con_faccia_stupita_e_sproporzionata.jpg"
+  },
+  {
+    "type": "image",
+    "text": "Tutti: imitate l'espressione di Shrek ora!",
+    "image": "images/Shrek_con_sorriso_memico.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Domanda Trivia su un giocatore scelto a caso: chi risponde correttamente per primo vince."
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: ognuno faccia la sua migliore imitazione del suono di avvio di un vecchio computer Windows. I presenti votano la più realistica."
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: create collettivamente una ricetta di cucina usando solo oggetti visibili nella stanza. Più assurda è, meglio è!"
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: catena di battute pessime - qualcuno inizia con una battuta davvero terribile, e a turno ognuno deve farne una peggiore della precedente."
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: ognuno deve inventare un soprannome ridicolo per la persona alla propria destra, basato su un incidente imbarazzante (reale o immaginario)."
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: imitazione rapida - un volontario fa un gesto o un'espressione bizzarra, e tutti devono immediatamente copiarla il più accuratamente possibile."
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: create un breve telegiornale assurdo dove ogni persona aggiunge una notizia sempre più surreale, collegandola alla precedente."
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: inventate una danza di gruppo improbabile chiamata 'La Cancrena'. Ogni persona aggiunge un movimento e alla fine eseguitela tutti insieme."
+  },
+  {
+    "type": "text",
+    "text": "Gruppo: date vita a un tribunale improvvisato dove si processa un oggetto presente nella stanza per crimini ridicoli. Assegnate i ruoli di giudice, accusa, difesa e testimoni."
+  }
+];
+
+const coupleChallenges = [
+  {
+    "type": "text",
+    "text": "Coppia ([COPPIA_1] & [COPPIA_2]): chi di voi due è più probabile che pianga guardando un cartone?"
+  },
+  {
+    "type": "image",
+    "text": "COPPIA ([COPPIA_1] & [COPPIA_2]): Dovete eseguire INSIEME questo balletto di Ace Ventura. Coordinazione richiesta!",
+    "image": "gifs/ace-ventura-football-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "COPPIA: Uno di voi imita la risata di Mr. Burns, l'altro/a deve rispondere con una risata adeguatamente servile.",
+    "image": "gifs/mr-burns-excellent_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "COPPIA: Eseguite un romantico (o ridicolo) passo a due ispirato a questo balletto di Bugs Bunny.",
+    "image": "gifs/bugs-bunny-hat-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "COPPIA: Imitate a turno il suono di queste porte che sbattono, creando un dialogo.",
+    "image": "gifs/closing-lots-of-doors-cartoon-closing-door_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "COPPIA: Ballate insieme come farebbe questo Ciccione a un matrimonio.",
+    "image": "gifs/ciccione_streap_dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "COPPIA: Uno fa il suono del calcio, l'altro la reazione dolorosa. Sincronizzatevi!",
+    "image": "gifs/karate_calcio_multiplo_nelle_palle_sound.gif"
+  },
+  {
+    "type": "text",
+    "text": "Coppia ([COPPIA_1] & [COPPIA_2]): descrivete a turno il partner usando solo rumori di animali. L'altro deve indovinare l'animale (e l'intenzione)."
+  },
+  {
+    "type": "image",
+    "text": "Coppia: chi dei due assomiglia di più a quest'Arancia con faccia di scimmia quando prova a fare il/la simpatico/a?",
+    "image": "images/Arancia_con_faccia_di_scimmia.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: se foste bloccati su un'isola deserta, chi dei due sarebbe il capo e chi il suddito (o il pasto)? Giustificate."
+  },
+  {
+    "type": "text",
+    "text": "Coppia: unite i vosti nomi e cognomi per creare un essere mitologico. (tipo mario rossi e francesca esposito digievolve in Mariesca Espositossi) "
+  },
+  {
+    "type": "text",
+    "text": "Coppia: qual è la cosa più irritante che il vostro partner fa MA che trovate segretamente adorabile?"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: inventate una scena da film romantico ma recitatela in stile soap opera anni '80."
+  },
+  {
+    "type": "image",
+    "text": "Coppia: chi dei due si identifica di più con questo Bradipo Filosofico dopo una discussione?",
+    "image": "images/Bradipo_filosofico.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: quale sarebbe il vostro nome combinato se foste una boyband o girlband di scarso successo?"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: dovete scambiarvi i ruoli per 1 minuto. Imitate il modo di parlare e le manie tipiche del partner."
+  },
+  {
+    "type": "text",
+    "text": "Coppia: chi dei due è più probabile che inizi a ballare da solo/a in cucina mentre prepara la cena?"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: qual è la vostra 'canzone da disagio' segreta (quella che ascoltate ma vi vergognate un po')?"
+  },
+  {
+    "type": "text",
+    "text": "Inventate un nuovo gusto di pizza ispirato alla vostra relazione (es: 'Litigio e Riconciliazione al Gorgonzola', 'Passione e salsiccia')."
+  },
+  {
+    "type": "image",
+    "text": "Coppia: questa immagine rappresenta la vostra domenica tipo? Siate onesti!",
+    "image": "images/relax_o_caos.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: qual è il nomignolo più imbarazzante che usate tra voi?"
+  },
+  {
+    "type": "image",
+    "text": "Coppia: l'acconciatura di questa Scimmia è l'aspirazione segreta di chi dei due?",
+    "image": "images/Scimmia_caschetto_stile_moderno.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: descrivete il partner ideale per l'altro/a usando solo nomi di personaggi dei cartoni."
+  },
+  {
+    "type": "image",
+    "text": "Coppia: la faccia di questo cane rappresenta chi dei due dopo una lunga giornata?",
+    "image": "images/un_cane_puzza.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: se foste un gusto di pizza combinato, quale sarebbe?"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: chi dei due è più bravo/a a mentire? L'altro/a deve fornire una prova (aneddoto)."
+  },
+  {
+    "type": "image",
+    "text": "Coppia: chi dei due esagera di più nel raccontare storie, come suggerisce questo Uomo?",
+    "image": "images/Uomo_con_baffi_filter_volto_allungato.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: inventate e mostrate un ballo di coppia segreto e imbarazzante."
+  },
+  {
+    "type": "image",
+    "text": "Coppia: guardate l'Uovo. Senza parlare, indicate chi dei due è più 'secchione'.",
+    "image": "images/Uovo_con_occhiali_e_volto_umano.jpg"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: chi è il più fortunato fra voi due? (parlo di fortuna intesa come colpo di fortuna, chi trova parcheggio subito, trova i soldi a terra ecc ecc."
+  },
+  {
+    "type": "text",
+    "text": "Coppia ([COPPIA_1] & [COPPIA_2]): create un nuovo supereroe combinando i vostri 'poteri' e difetti peggiori. Come si chiama e quale sarebbe il suo costume?"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: improvvisate una breve scena da telenovela drammatica dove uno di voi ha appena scoperto che l'altro è il suo gemello segreto."
+  },
+  {
+    "type": "text",
+    "text": "Coppia: create una pubblicità per un prodotto assurdo che risolve un problema che solo voi due avete, alternandovi nelle frasi senza consultarvi prima."
+  },
+  {
+    "type": "text",
+    "text": "Coppia: intervista assurda - uno fa domande totalmente random, l'altro deve rispondere seriamente come se fosse un esperto mondiale dell'argomento."
+  },
+  {
+    "type": "text",
+    "text": "Coppia: dovete descrivere la giornata tipo dell'altro come se fosse un documentario di National Geographic sulle strane abitudini di una specie rara."
+  },
+  {
+    "type": "text",
+    "text": "Coppia: chi ha inviato l'ultimo nudino."
+  },
+  {
+    "type": "text",
+    "text": "Coppia: inventate una nuova festa nazionale basata sulle vostre personalità combinate. Quali sarebbero le tradizioni e i rituali di questa festa?"
+  },
+  {
+    "type": "text",
+    "text": "Coppia: dovete farvi a vicenda complimenti assurdamente specifici nello stile di un poeta drammatico dell'800. Chi fa il complimento più elaborato vince."
+  }
+];
+
+const challengeModeChallenges = [
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida a chi imita meglio il suono di un modem 56k che si connette."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida a chi imita meglio una stampante bloccata che tenta disperatamente di stampare."
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Chi riesce a imitare meglio l'intensità drammatica di questo Scoiattolo Eroico?",
+    "image": "images/Scoiattolo_eroico.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida di improvvisazione - chi racconta la storia più convincente di un'invasione aliena assurda?"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Gara di Rutti Mentali. Chi riesce a mimare il rutto più impressionante senza fare rumore?"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Sfida di ballo! Chi imita meglio CJ di GTA San Andreas?",
+    "image": "gifs/cj-gta-sanandreas-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Gara di abbai! Chi imita meglio questo cane lingua-fuori?",
+    "image": "gifs/dog_bark_tongue_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Chi fa l'imitazione più convincente del verso di questa capra?",
+    "image": "gifs/goat_tongue_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Chi interpreta meglio la danza di questo ciccione?",
+    "image": "gifs/cock-call-fat-albert-dance.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Gara di starnuti felini. Il più realistico vince.",
+    "image": "gifs/gatto_starnuto_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Chi riproduce meglio il suono del Gong di Pink Floyd usando solo la voce?",
+    "image": "gifs/gong-pink-floyd-gong_sound.gif"
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Imitate l'espressione di terrore esistenziale di quest'Uovo con gli occhiali. Il più convincente vince.",
+    "image": "images/Uovo_con_occhiali_e_volto_umano.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Sfida a chi inventa la scusa più assurda e incredibile per non andare a un matrimonio."
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Chi riesce a rimanere serio più a lungo guardando fisso questo Cane?",
+    "image": "images/Cane_con_faccia_stupita_e_sproporzionata.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Sfida di Mimo Veloce. Il GM sussurra un oggetto strano a entrambi, chi lo mima meglio e più velocemente per farlo indovinare al gruppo vince."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Gara a chi pronuncia più velocemente e correttamente la frase 'Trentatré trentini entrarono a Trento tutti e trentatré trotterellando'."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] vs [PLAYER_2]: Sfida a chi riesce a fare il maggior numero di flessioni... con un solo dito (anche mimandole) in 10 secondi."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: dovete fare braccio di ferro mentale. Fissatevi intensamente finché uno dei due non ride o distoglie lo sguardo. Vietato toccarsi."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida di sguardi assassini. Chi mantiene lo sguardo più minaccioso per 15 secondi vince."
+  },
+  {
+    "type": "image",
+    "text": "[PLAYER_1] e [PLAYER_2]: chi dei due riesce a imitare meglio la posa di questo Gatto? Il gruppo giudica.",
+    "image": "images/Gatto_allungato_mossa_KungFu.jpg"
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: gara a chi racconta la barzelletta più squallida e imbarazzante."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida a chi riesce a stare in equilibrio su una gamba sola per più tempo (senza appoggiarsi!)."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida a chi fa il verso di animale più strano e inaspettato."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: gara di complimenti passivo-aggressivi. Chi riesce a farne uno più tagliente ma velato vince."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: dovete recitare la scena madre di un film famoso ma usando solo la parola 'Cancrena'."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: gara a chi riesce a ridere in modo più malvagio e inquietante. Il gruppo decide il vincitore."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida di beatbox improvvisato - ciascuno ha 15 secondi per creare il ritmo più assurdo possibile."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: dovete improvvisare un rap battle usando solo parole che iniziano con la prima lettera del nome dell'avversario."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida delle espressioni facciali - mostrate la vostra migliore faccia da 'ho appena morso un limone mentre ricevo una multa'."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida di mimo - interpretate l'emozione 'delusione cosmica' usando solo il vostro corpo, senza fare alcun suono."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: gara a chi inventa la scusa più assurda per non aver fatto i compiti, come se parlaste con un insegnante severo."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: sfida di danza assurda - dovete ballare nello stile di un animale improbabile (un bradipo, un granchio, ecc.). Il gruppo vota il migliore."
+  },
+  {
+    "type": "text",
+    "text": "[PLAYER_1] e [PLAYER_2]: vi sfido a cantare il titolo di una canzone famosa con l'accento più strano possibile. Gli altri devono indovinare la canzone."
+  }
+];
+
 
       // -------- FUNZIONI UI e SETUP --------
       // (createScoreboardItem, updatePlayerScoreVisual, updateScoreboardSidebar - invariate rispetto all'ultima versione)
