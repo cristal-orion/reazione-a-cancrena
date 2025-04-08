@@ -8,875 +8,275 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <style>
-      /* Nuova palette colori più vivace */
-      :root {
-        --primary-color: #ff4757; /* Rosso più vibrante */
-        --primary-dark: #e83142;
-        --secondary-color: #5352ed; /* Blu vivace */
-        --secondary-dark: #3f3fbf;
-        --accent-color: #f9f9fa;
-        --dark-text: #2c3a47;
-        --light-bg: #f1f2f6;
-        --laugh-color: #2ed573; /* Verde più vivace */
-        --laugh-dark: #1cb058;
-        --cry-color: #70a1ff; /* Blu più chiaro */
-        --cry-dark: #5886e0;
-        --warning-color: #ffa502; /* Arancione più brillante */
-        --warning-dark: #e08a00;
-        --winner-bg: #ffd700;
-        --challenge-color: #9b59b6; /* Viola più moderno */
+   <style>
+    /* Importa Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    /* === NUOVA PALETTE DARK THEME === */
+    :root {
+        /* Colori Logo */
+        --logo-red: #be4636;
+        --logo-yellow: #eeb045;
+        --logo-green: #65a538;
+
+        /* Dark Theme Base */
+        --bg-main: #1c1c1c; /* Sfondo quasi nero */
+        --bg-card: #2a2a2a; /* Grigio scuro per card e sidebar */
+        --bg-item: #383838; /* Grigio medio per elementi lista */
+        --text-main: #f0f0f0; /* Testo principale bianco sporco */
+        --text-secondary: #b0b0b0; /* Testo secondario grigio chiaro */
+        --border-color: #444444; /* Colore bordi sottili */
+
+        /* Colori UI basati sul Logo + Dark Theme */
+        --primary-color: var(--logo-red); /* Rosso Logo come primario */
+        --primary-dark: #a33526; /* Rosso più scuro per hover */
+        --secondary-color: var(--logo-yellow); /* Giallo Logo come secondario (titoli?) */
+        --warning-color: var(--logo-yellow); /* Giallo per bottoni "Termina" */
+        --warning-dark: #d49d39;
+        --accent-color: var(--logo-green); /* Verde Logo come accento (es. Like) */
+        --accent-dark: #4f832a;
+
+        /* Colori Specifici Componenti */
+        --winner-bg: var(--logo-yellow); /* Giallo per sfondo vincitore */
+        --challenge-color: #9b59b6; /* Viola/Fucsia per contrasto Sfida */
         --challenge-dark: #8e44ad;
-        --couple-icon-color: #ff6b81; /* Rosa più moderno */
-        --like-color: #2ed573;
-        --dislike-color: #ff4757;
-        --highlight-bg: #e0f7fa;
-        --border-radius-main: 16px; /* Bordi più arrotondati */
-        --box-shadow-light: 0 6px 20px rgba(0, 0, 0, 0.08);
-        --box-shadow-medium: 0 10px 28px rgba(0, 0, 0, 0.15);
-        --box-shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.2);
-      }
-
-      /* Importazione font più giocosi */
-      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-
-      body {
-        font-family: "Nunito", sans-serif;
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        min-height: 100vh;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        box-sizing: border-box;
-      }
-
-      /* Titolo principale più accattivante */
-      h1 {
-        color: var(--primary-color);
-        text-align: center;
-        margin-bottom: 30px;
-        font-family: "Fredoka One", cursive;
-        font-size: 3em;
-        width: 100%;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        letter-spacing: 1px;
-        background: linear-gradient(
-          90deg,
-          var(--primary-color),
-          var(--secondary-color)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      /* Container con sfondo sfumato */
-      .container,
-      #setup-section,
-      #game-section,
-      #scoreboard-section {
-        border-radius: var(--border-radius-main);
-        background: white;
-        box-shadow: var(--box-shadow-medium);
-        padding: 30px 40px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* Miglioramento aspetto bottoni */
-      #setup-section button,
-      #game-section button {
-        padding: 14px 28px;
-        margin: 10px 5px;
-        border-radius: 12px;
-        border: none;
-        cursor: pointer;
-        font-weight: 700;
-        font-size: 1em;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-      }
-
-      #setup-section button:hover:not(:disabled),
-      #game-section button:hover:not(:disabled) {
-        transform: translateY(-3px);
-        box-shadow: var(--box-shadow-hover);
-      }
-
-      /* Pulsante principale più attraente */
-      .input-group button,
-      #start-btn,
-      #couple-btn {
-        background: linear-gradient(
-          45deg,
-          var(--primary-color),
-          var(--primary-dark)
-        );
-        color: white;
-      }
-
-      /* Card sfida più attraente */
-      .challenge-card {
-        border-radius: var(--border-radius-main);
-        padding: 35px 40px;
-        margin: 0 0 25px 0;
-        box-shadow: var(--box-shadow-medium);
-        min-height: 280px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition: all 0.5s ease;
-        border: none;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-      }
-
-      /* Sfondi sfumati per le card sfida */
-      .group-challenge {
-        background: linear-gradient(135deg, #ffefba, #ffffff);
-        border-left: 6px solid var(--warning-color);
-      }
-
-      .couple-challenge {
-        background: linear-gradient(135deg, #e0c3fc, #fff);
-        border-left: 6px solid var(--challenge-color);
-      }
-
-      .challenge-mode {
-        background: linear-gradient(135deg, #a1c4fd, #fff);
-        border-left: 6px solid var(--secondary-color);
-      }
-
-      /* Miglioramento visualizzazione giocatori */
-      li.player-item {
-        padding: 14px 16px;
-        margin: 8px 0;
-        background-color: var(--light-bg);
-        border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1.1em;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      }
-
-      li.player-item:hover {
-        background-color: #e9ecef;
-        transform: translateX(3px);
-      }
-
-      /* Scoreboard più attraente */
-      .scoreboard-sidebar {
-        border-radius: var(--border-radius-main);
-        background: white;
-        box-shadow: var(--box-shadow-medium);
-        padding: 25px;
-        height: fit-content;
-        position: sticky;
-        top: 20px;
-      }
-
-      .scoreboard-sidebar h2 {
-        font-family: "Fredoka One", cursive;
-        color: var(--primary-color);
-        border-bottom: 3px solid var(--primary-color);
-        padding-bottom: 10px;
-      }
-
-      li.score-item {
-        padding: 14px 16px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        background-color: var(--light-bg);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      }
-
-      li.score-item.highlight {
-        background: linear-gradient(45deg, var(--highlight-bg), #f5ffff);
-        box-shadow: 0 0 12px rgba(79, 189, 217, 0.6);
-        transform: scale(1.02);
-      }
-
-      /* Animazione per le azioni di punteggio */
-      .score-actions button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 1.6em;
-        transition: all 0.2s ease;
-      }
-
-      .score-actions button:hover {
-        transform: scale(1.3);
-      }
-
-      /* Sezione coppie più attraente */
-      #couple-section {
-        margin-top: 30px;
-        padding: 25px;
-        border-radius: var(--border-radius-main);
-        background: linear-gradient(135deg, #e0f7fa, #ffffff);
-        box-shadow: var(--box-shadow-light);
-      }
-
-      /* Input più moderni */
-      #setup-section input[type="text"],
-      #setup-section select {
-        padding: 14px 18px;
-        margin: 5px 0 15px 0;
-        border-radius: 10px;
-        border: 1px solid #ddd;
-        width: calc(100% - 36px);
-        font-size: 1em;
-        box-sizing: border-box;
-        transition: all 0.3s ease;
-        background-color: white;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-      }
-
-      #setup-section input[type="text"]:focus,
-      #setup-section select:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
-      }
-
-      /* Animazioni per elementi interattivi */
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      #general-laugh-btn {
-        animation: pulse 2s infinite;
-      }
-
-      /* Media query per responsiveness migliorata */
-      @media (max-width: 900px) {
-        .main-layout {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        h1 {
-          font-size: 2.4em;
-        }
-
-        .scoreboard-sidebar,
-        .game-content {
-          width: 100%;
-          max-width: 100%;
-        }
-      }
-
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 2em;
-        }
-
-        #setup-section,
-        #game-section,
-        #scoreboard-section {
-          padding: 20px;
-        }
-
-        .challenge-card {
-          padding: 25px 20px;
-        }
-      }
-      /* ===== EFFETTI E ANIMAZIONI ===== */
-
-      /* Animazione per i cambi di schermata */
-      .fade-in {
-        animation: fadeIn 0.5s ease forwards;
-      }
-
-      .fade-out {
-        animation: fadeOut 0.3s ease forwards;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeOut {
-        from {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        to {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-      }
-
-      /* Animazione per l'aggiunta di player */
-      .player-added {
-        animation: playerAdded 0.5s ease;
-      }
-
-      @keyframes playerAdded {
-        0% {
-          transform: translateX(-20px);
-          opacity: 0;
-        }
-        100% {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-
-      /* Animazione per rimozione player */
-      .player-removed {
-        animation: playerRemoved 0.3s ease forwards;
-      }
-
-      @keyframes playerRemoved {
-        0% {
-          transform: translateX(0);
-          opacity: 1;
-        }
-        100% {
-          transform: translateX(20px);
-          opacity: 0;
-        }
-      }
-
-      /* Shake per input errati */
-      .shake {
-        animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-      }
-
-      @keyframes shake {
-        10%,
-        90% {
-          transform: translate3d(-1px, 0, 0);
-        }
-        20%,
-        80% {
-          transform: translate3d(2px, 0, 0);
-        }
-        30%,
-        50%,
-        70% {
-          transform: translate3d(-3px, 0, 0);
-        }
-        40%,
-        60% {
-          transform: translate3d(3px, 0, 0);
-        }
-      }
-
-      /* Toast di notifica */
-      .toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%) translateY(100px);
-        background-color: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 12px 20px;
-        border-radius: 6px;
-        font-size: 0.95em;
-        z-index: 1000;
-        opacity: 0;
-        transition: all 0.3s ease;
-      }
-
-      .toast.show {
-        transform: translateX(-50%) translateY(0);
-        opacity: 1;
-      }
-
-      /* Animazione cambio card */
-      .card-change {
-        animation: cardChange 0.3s ease;
-      }
-
-      @keyframes cardChange {
-        0% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale(0.95);
-          opacity: 0.5;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      /* Animazione apparizione testo */
-      .text-appear {
-        animation: textAppear 0.6s ease;
-      }
-
-      @keyframes textAppear {
-        0% {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Effetti per l'assegnazione punti */
-      .point-bubble {
-        position: absolute;
-        top: -20px;
-        right: 10px;
-        background-color: var(--like-color);
-        color: white;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        animation: bubbleUp 1s forwards;
-      }
-
-      @keyframes bubbleUp {
-        0% {
-          transform: scale(0.5);
-          opacity: 0;
-        }
-        20% {
-          transform: scale(1.2);
-          opacity: 1;
-        }
-        80% {
-          transform: scale(1) translateY(-15px);
-          opacity: 1;
-        }
-        100% {
-          transform: scale(0.5) translateY(-30px);
-          opacity: 0;
-        }
-      }
-
-      /* Effetto vittoria sfida */
-      .winner-effect {
-        position: absolute;
-        top: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(45deg, #ffd700, #f7c200);
-        color: #1e1e1e;
-        padding: 5px 12px;
-        border-radius: 15px;
-        font-weight: bold;
-        box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
-        animation: winnerEffect 1.5s forwards;
-      }
-
-      @keyframes winnerEffect {
-        0% {
-          transform: translateX(-50%) scale(0.8);
-          opacity: 0;
-        }
-        20% {
-          transform: translateX(-50%) scale(1.1);
-          opacity: 1;
-        }
-        80% {
-          transform: translateX(-50%) scale(1) translateY(-10px);
-          opacity: 1;
-        }
-        100% {
-          transform: translateX(-50%) scale(0.8) translateY(-20px);
-          opacity: 0;
-        }
-      }
-
-      /* Effetto risata di gruppo */
-      .group-laugh-effect {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(
-          45deg,
-          var(--laugh-color),
-          var(--laugh-dark)
-        );
-        color: white;
-        padding: 15px 25px;
-        border-radius: 20px;
-        font-size: 1.2em;
-        font-weight: bold;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(46, 213, 115, 0.5);
-        animation: groupLaughEffect 1.5s forwards;
-        z-index: 100;
-      }
-
-      @keyframes groupLaughEffect {
-        0% {
-          transform: translate(-50%, -50%) scale(0.5);
-          opacity: 0;
-        }
-        20% {
-          transform: translate(-50%, -50%) scale(1.1);
-          opacity: 1;
-        }
-        70% {
-          transform: translate(-50%, -50%) scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: translate(-50%, -50%) scale(1.5);
-          opacity: 0;
-        }
-      }
-
-      /* Badge tipo sfida */
-      .challenge-type-badge {
-        position: absolute;
-        top: -12px;
-        left: 20px;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.85em;
-        font-weight: bold;
-        color: white;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-      }
-
-      .single-badge {
-        background: linear-gradient(
-          45deg,
-          var(--primary-color),
-          var(--primary-dark)
-        );
-      }
-
-      .couple-badge {
-        background: linear-gradient(45deg, #9b59b6, #8e44ad);
-      }
-
-      .group-badge {
-        background: linear-gradient(
-          45deg,
-          var(--warning-color),
-          var(--warning-dark)
-        );
-      }
-
-      .challenge-badge {
-        background: linear-gradient(
-          45deg,
-          var(--secondary-color),
-          var(--secondary-dark)
-        );
-      }
-
-      /* Contatore giocatori */
-      .player-counter {
-        text-align: center;
-        margin: 10px 0 15px;
-        padding: 5px 10px;
-        border-radius: 15px;
-        display: inline-block;
-        font-size: 0.9em;
-        font-weight: 600;
-        background-color: #f1f2f6;
-        color: var(--dark-text);
-        transition: all 0.3s ease;
-      }
-
-      .few-players {
-        color: var(--warning-color);
-      }
-
-      .enough-players {
-        color: var(--secondary-color);
-      }
-
-      .many-players {
-        color: var(--primary-color);
-        font-weight: 700;
-      }
-
-      /* Indicatore turno */
-      .turn-indicator {
-        text-align: center;
-        margin-top: 15px;
-        font-size: 0.9em;
-        color: var(--secondary-color);
-        font-weight: 600;
-      }
-
-      /* Animazione foto caricata */
-      .image-loaded {
-        animation: imageReveal 0.5s ease forwards;
-      }
-
-      @keyframes imageReveal {
-        0% {
-          opacity: 0;
-          transform: scale(0.9);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      /* Regole del gioco */
-      .rules-container {
-        margin-top: 25px;
-        border-top: 1px solid #eee;
-        padding-top: 15px;
-      }
-
-      .rules-toggle {
-        background: none;
-        border: none;
-        color: var(--secondary-color);
-        cursor: pointer;
-        font-size: 0.9em;
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition: all 0.2s;
-        width: 100%;
-        text-align: left;
-        display: flex;
-        align-items: center;
-      }
-
-      .rules-toggle i {
-        margin-right: 5px;
-      }
-
-      .rules-toggle:hover {
-        background-color: #f8f9fa;
-      }
-
-      .rules-content {
-        font-size: 0.85em;
-        padding: 10px;
-        margin-top: 10px;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        line-height: 1.4;
-      }
-
-      .rules-content p {
-        margin-top: 0;
-      }
-
-      .rules-content ul {
-        padding-left: 20px;
-        margin-bottom: 0;
-      }
-
-      /* Stile per la schermata finale */
-      .final-score-item {
-        display: flex;
-        align-items: center;
-        padding: 12px 15px;
-        margin-bottom: 10px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-        opacity: 0;
-        transform: translateY(10px);
-        transition: all 0.3s ease;
-      }
-
-      .final-score-item.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .final-score-item.winner {
-        background: linear-gradient(to right, #ffd700, #faf0be);
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        transform: scale(1.03);
-      }
-
-      .rank {
-        width: 35px;
-        height: 35px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--secondary-color);
-        color: white;
-        border-radius: 50%;
-        font-weight: bold;
-        margin-right: 15px;
-        font-size: 1.2em;
-      }
-
-      .final-score-item.winner .rank {
-        background-color: var(--primary-color);
-      }
-
-      .final-name {
-        flex-grow: 1;
-        font-weight: 600;
-        font-size: 1.1em;
-      }
-
-      .final-points {
-        font-weight: 700;
-        color: var(--secondary-color);
-        font-size: 1.15em;
-      }
-
-      .final-score-item.winner .final-points {
-        color: var(--primary-dark);
-      }
-
-      /* Statistiche finali */
-      .final-stats {
-        margin-top: 30px;
-        padding: 20px;
-        background: white;
-        border-radius: var(--border-radius-main);
-        box-shadow: var(--box-shadow-light);
-      }
-
-      .final-stats h3 {
-        text-align: center;
-        color: var(--secondary-color);
-        margin-top: 0;
-        margin-bottom: 20px;
-        font-size: 1.3em;
-      }
-
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-        margin-bottom: 20px;
-      }
-
-      .stat-item {
-        text-align: center;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #f8f9fa;
-        transition: all 0.2s;
-      }
-
-      .stat-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
-      }
-
-      .stat-icon {
-        font-size: 1.5em;
-        color: var(--secondary-color);
-        margin-bottom: 5px;
-      }
-
-      .stat-value {
-        font-size: 1.8em;
-        font-weight: 700;
-        color: var(--dark-text);
-      }
-
-      .stat-label {
-        font-size: 0.85em;
-        color: #777;
-      }
-
-      .special-stats {
-        font-size: 0.95em;
-        color: var(--dark-text);
+        --couple-color: #3498db; /* Blu per Coppie */
+        --couple-dark: #2980b9;
+        --highlight-bg: #404040;  /* Sfondo per nomi evidenziati */
+
+        /* Colori Bottoni Azione Scoreboard */
+        --like-color: var(--accent-color); /* Verde Logo */
+        --dislike-color: #e74c3c; /* Rosso standard per Dislike */
+        --vote-color: var(--secondary-color); /* Giallo per Trofeo Voto */
+
+        /* Layout & Stili Generali (invariati) */
+        --border-radius-main: 12px;
+        --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.4); /* Ombre più scure */
+        --box-shadow-medium: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+    /* === FINE PALETTE === */
+
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0; padding: 20px; /* Tolto align-items */
+        background-color: var(--bg-main); /* Usa sfondo principale dark */
+        color: var(--text-main); /* Usa testo principale light */
         line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    /* Layout Principale (invariato) */
+    .main-layout { display: flex; gap: 25px; width: 100%; max-width: 1200px; }
+    .game-content { flex-grow: 1; min-width: 0; }
+    .scoreboard-sidebar {
+        flex-basis: 300px; flex-shrink: 0;
+        background-color: var(--bg-card); /* Sfondo Card */
+        border-radius: var(--border-radius-main);
+        padding: 20px; box-shadow: var(--box-shadow-medium);
+        height: fit-content; position: sticky; top: 20px;
+    }
+
+    /* Logo e Titoli */
+     .logo-container { /* Nuovo contenitore logo */
+          text-align: center;
+          margin-bottom: 30px;
+     }
+     .logo-container img {
+          max-width: 300px; /* O dimensione preferita */
+          height: auto;
+          filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4)); /* Aggiunge ombra al logo */
+     }
+     /* H1 Rimosso, non serve stile */
+     .game-content h2 {
+        color: var(--secondary-color); /* Giallo Logo per titoli sezione */
+        margin-top: 0; margin-bottom: 25px; font-weight: 600;
+        text-align: center; border-bottom: 1px solid var(--border-color); /* Bordo visibile */
+        padding-bottom: 10px;
+    }
+    .game-content h3 { /* Titolo coppie */
+        color: var(--text-main); /* Testo chiaro */
+        margin-top: 25px; margin-bottom: 15px; font-weight: 600;
+        text-align: center; font-size: 1.1em;
+    }
+     .scoreboard-sidebar h2 {
+         margin-top: 0; font-size: 1.5em; color: var(--secondary-color); /* Giallo Logo */
+         border-bottom: 2px solid var(--secondary-color); padding-bottom: 8px; text-align: center;
+    }
+
+
+    /* Input / Select / Button nel Setup */
+    #setup-section input[type="text"], #setup-section select {
+        padding: 12px 15px; margin: 5px 0 10px 0; border-radius: 8px;
+        border: 1px solid var(--border-color); /* Bordo visibile */
+        width: calc(100% - 32px); font-size: 1em; box-sizing: border-box;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        background-color: var(--bg-item); /* Sfondo input scuro */
+        color: var(--text-main); /* Testo input chiaro */
+    }
+    #setup-section select { /* Stile specifico select */
+        width: 100%; margin-bottom: 15px; appearance: none;
+        /* Freccia SVG scura - difficile farla dinamica con var(), usiamo un colore fisso o un SVG inline */
+         background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23cccccc%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+         background-repeat: no-repeat; background-position: right 15px center; background-size: 10px auto; padding-right: 40px;
+    }
+    #setup-section input[type="text"]:focus, #setup-section select:focus {
+        outline: none; border-color: var(--secondary-color); /* Focus Giallo */
+        box-shadow: 0 0 8px rgba(238, 176, 69, 0.5); /* Ombra Gialla */
+    }
+    .input-group { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .input-group input { flex-grow: 1; margin: 0; }
+    .input-group button { margin: 0; flex-shrink: 0; padding: 12px 20px; }
+
+     /* Stile Bottoni Generico */
+     button { padding: 12px 25px; margin: 10px 5px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px; transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; color: var(--text-main); /* Testo chiaro di default */ }
+     button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: var(--box-shadow-light); }
+     button:active:not(:disabled) { transform: translateY(0px); }
+     button:disabled { background-color: #555 !important; /* Grigio scuro disabilitato */ cursor: not-allowed; transform: none; box-shadow: none; opacity: 0.6; color: #999; }
+
+     /* Bottoni Setup (Primari) */
+    .input-group button, #start-btn, #couple-btn { background-color: var(--primary-color); /* Rosso Logo */ }
+    .input-group button:hover:not(:disabled), #start-btn:hover:not(:disabled), #couple-btn:hover:not(:disabled) { background-color: var(--primary-dark); }
+
+     /* Lista Giocatori Setup */
+     ul#players-list { list-style-type: none; padding: 0; margin-top: 20px; margin-bottom: 30px; }
+     li.player-item { padding: 10px 12px; margin: 6px 0; background-color: var(--bg-item); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 1em; transition: background-color 0.3s; gap: 8px; }
+     li.player-item:hover { background-color: #4a4a4a; }
+     .player-name { flex-grow: 1; font-weight: 600; color: var(--text-main); }
+     .couple-icon { color: var(--couple-icon-color); font-size: 1em; margin: 0 3px; }
+     .player-actions button { padding: 5px 8px; font-size: 0.8em; text-transform: none; letter-spacing: 0; margin: 0 2px; min-width: 60px; text-align: center; color: var(--text-main); /* Testo chiaro anche qui */}
+     .player-actions button:hover { transform: none; box-shadow: none; }
+     .delete-btn { background-color: #555; }
+     .delete-btn:hover { background-color: #777; }
+     .uncouple-btn { background-color: var(--warning-color); display: none; }
+     .uncouple-btn:hover { background-color: var(--warning-dark); }
+      /* Sezione Coppie Setup */
+      #couple-section { margin-top: 30px; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--border-radius-main); background-color: var(--bg-card); }
+      .couple-selectors { display: flex; gap: 15px; align-items: center; margin-bottom: 15px; }
+      .couple-selectors label { flex-basis: 100px; text-align: right; font-weight: 600; font-size: 0.9em; color: var(--text-secondary); }
+      .couple-selectors > div { flex-grow: 1; }
+      #couple-btn { display: block; width: 100%; margin-top: 10px; }
+
+    /* === SEZIONE GIOCO (#game-section) === */
+    #setup-section, #game-section, #scoreboard-section {
+         background-color: var(--bg-card); /* Sfondo Card per tutte le sezioni */
+         border-radius: var(--border-radius-main);
+         padding: 30px 40px;
+         box-shadow: var(--box-shadow-medium);
+     }
+     .challenge-card {
+        padding: 25px 30px; margin: 0 0 20px 0;
+        min-height: 280px; display: flex; flex-direction: column; justify-content: center;
+        transition: background-color 0.5s ease, border-color 0.5s ease;
+        border: 2px solid var(--border-color); /* Bordo base */
+        overflow: hidden; text-align: center;
+         border-radius: var(--border-radius-main); /* Assicura bordi arrotondati */
+         background: none; /* Rimuove doppio sfondo */
+         box-shadow: none; /* Rimuove doppia ombra */
+    }
+    /* Stili specifici sfondi/bordi tipi sfida */
+    .group-challenge.challenge-card { background: linear-gradient(135deg, #4a433a, #5a534a); border-color: var(--warning-color); } /* Dark Yellowish */
+    .couple-challenge.challenge-card { background: linear-gradient(135deg, #3a4a5a, #4a5a6a); border-color: var(--couple-color); } /* Dark Bluish */
+    .challenge-mode.challenge-card { background: linear-gradient(135deg, #4a3a5a, #5a4a6a); border-color: var(--challenge-color); } /* Dark Purplish */
+
+    #challenge-image-container { display: none; margin-bottom: 15px; text-align: center; }
+    #challenge-image { max-width: 90%; max-height: 200px; height: auto; width: auto; border-radius: 8px; display: inline-block; object-fit: contain; background-color: rgba(255,255,255,0.1); /* Leggero sfondo per immagini trasparenti */ }
+    .players-pair { font-weight: 700; font-size: 1.3em; color: var(--text-main); margin-bottom: 15px; }
+    /* Colori specifici header */
+    .couple-challenge .players-pair { color: var(--couple-color); }
+    .challenge-mode .players-pair { color: var(--challenge-color); }
+    .group-challenge .players-pair { color: var(--warning-color); } /* Giallo/Arancio per Gruppo */
+    /* Per 1vs1, usa il colore primario? */
+     .challenge-card:not(.group-challenge):not(.couple-challenge):not(.challenge-mode) .players-pair {
+         color: var(--primary-color); /* Rosso per 1vs1 */
+     }
+
+    .challenge-text { font-size: 1.35em; line-height: 1.5; color: var(--text-main); margin: 0; }
+
+    /* Bottone Risate Generali */
+    #general-laugh-btn { display: none; margin: 20px auto 0 auto; background-color: var(--accent-color); /* Verde Logo */ color: var(--bg-card); /* Testo scuro su verde */ padding: 10px 20px; font-size: 1em; }
+    #general-laugh-btn:hover:not(:disabled) { background-color: var(--accent-dark); }
+
+    /* Bottoni Controllo Gioco */
+    .game-controls { margin-top: 20px; text-align: center; }
+    #next-btn { background-color: var(--primary-color); color: white; }
+    #next-btn:hover:not(:disabled) { background-color: var(--primary-dark); }
+    .end-btn { background-color: var(--warning-color); color: var(--bg-card); } /* Testo scuro su giallo */
+    .end-btn:hover { background-color: var(--warning-dark); }
+
+
+     /* === SCOREBOARD SIDEBAR === */
+     ul#scoreboard-list { list-style: none; padding: 0; margin: 0; }
+     li.score-item {
+        padding: 10px 12px; margin-bottom: 8px; border-radius: 8px;
+        background-color: var(--bg-item); /* Grigio Item */
+        display: flex; justify-content: space-between; align-items: center;
+        transition: background-color 0.3s, box-shadow 0.3s;
+     }
+     li.score-item.highlight { background-color: var(--highlight-bg); box-shadow: 0 0 8px rgba(255, 255, 255, 0.2); }
+     .score-name { font-weight: 600; flex-grow: 1; margin-right: 10px; color: var(--text-main); }
+     .score-points { font-weight: 700; color: var(--text-secondary); margin-right: 10px;}
+     .score-actions { display: none; gap: 8px; /* Aumentato gap */ }
+     li.score-item.highlight .score-actions { display: flex; } /* Mostra se evidenziato */
+     .score-actions button { background: none; border: none; padding: 0; cursor: pointer; font-size: 1.6em; /* Icone più grandi */ transition: transform 0.2s; display: none; /* Nascosti di default, mostrati da JS */}
+     .score-actions button:hover { transform: scale(1.2); }
+     /* Mostra specifici bottoni */
+      li.score-item.highlight .like-btn, li.score-item.highlight .dislike-btn, li.score-item.highlight .vote-winner-btn { display: inline-block; }
+
+     .like-btn { color: var(--like-color); }
+     .dislike-btn { color: var(--dislike-color); }
+     .vote-winner-btn { color: var(--vote-color); font-size: 1.4em; }
+     .vote-winner-btn::before { content: '🏆'; margin-right: 0px; }
+
+
+     /* Scoreboard Finale (Sinistra) */
+      #scoreboard-section h2 { color: var(--secondary-color); font-size: 1.8em;}
+      #scoreboard-section .score-list-final { width: 100%; text-align: left; }
+      #scoreboard-section .score-item { background-color: var(--bg-item); box-shadow: var(--box-shadow-light); font-size: 1.1em; }
+      #scoreboard-section .winner {
+           background: var(--winner-bg); /* Giallo logo */
+           font-weight: 700 !important;
+           border: 2px solid var(--warning-dark);
+           transform: scale(1.03);
+           box-shadow: var(--box-shadow-medium);
+           color: var(--bg-card); /* Testo scuro su sfondo oro/giallo */
+      }
+     #scoreboard-section .winner .score-name { color: var(--bg-card); }
+     #scoreboard-section .winner .score-points { color: var(--primary-dark); /* Rosso scuro per contrasto su giallo */ font-size: 1.1em;}
+     #scoreboard-section .game-controls { margin-top: 30px; }
+     #scoreboard-section .game-controls button { background-color: var(--primary-color); color: white; } /* Bottone Nuova Partita */
+
+
+     /* === RESPONSIVENESS (Minime modifiche necessarie) === */
+     @media (max-width: 900px) {
+        .main-layout { flex-direction: column; align-items: stretch; /* Allunga elementi */ }
+        .scoreboard-sidebar { width: auto; max-width: none; position: static; margin-top: 20px; order: 2; flex-basis: auto; }
+        .game-content { width: auto; max-width: none; order: 1; }
+        body { padding: 15px; }
+     }
+      @media (max-width: 600px) {
+          h1 { font-size: 2em; } /* Rimosso, non serve */
+          .logo-container img { max-width: 240px; } /* Logo più piccolo */
+          #setup-section, #game-section, #scoreboard-section { padding: 20px; }
+          .input-group { flex-direction: column; align-items: stretch; }
+          .input-group input, .input-group button { width: 100%; }
+          button { padding: 12px 18px; font-size: 0.95em; }
+          .challenge-card { padding: 20px; min-height: 250px; }
+          #challenge-image { max-height: 150px; }
+          .players-pair { font-size: 1.1em; }
+          .challenge-text { font-size: 1.25em; }
+          .scoreboard-sidebar { padding: 15px; }
+          li.score-item { flex-wrap: wrap; padding: 8px 10px; }
+          .score-actions { margin-top: 5px; width: 100%; justify-content: flex-end; }
+          .score-actions button { font-size: 1.4em; }
+          #scoreboard-section .score-item { font-size: 1em; padding: 10px 12px;}
+          /* Adatta altri padding/font se necessario */
       }
 
-      .special-stat {
-        padding: 8px 12px;
-        margin-bottom: 8px;
-        background: #f1f2f6;
-        border-radius: 8px;
-      }
-
-      .special-stat i {
-        color: var(--primary-color);
-        margin-right: 5px;
-      }
-
-      /* Bottone start game */
-      .start-game-container {
-        margin-top: 25px;
-        text-align: center;
-      }
-
-      #start-btn {
-        padding: 15px 35px;
-        font-size: 1.2em;
-        background: linear-gradient(
-          45deg,
-          var(--primary-color),
-          var(--primary-dark)
-        );
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
-      }
-
-      #start-btn:not(:disabled):hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
-      }
-
-      #start-btn i {
-        margin-right: 8px;
-      }
-
-      /* Animazioni responsive */
-      @media (max-width: 768px) {
-        .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (max-width: 480px) {
-        .winner-effect,
-        .point-bubble {
-          font-size: 0.9em;
-        }
-
-        .group-laugh-effect {
-          padding: 10px 15px;
-          font-size: 1em;
-        }
-      }
-    </style>
+</style>
   </head>
   <body>
     <div class="main-layout">
