@@ -388,18 +388,11 @@
       let players = [];
       let couples = [];
       let playerScores = {};
-      let currentChallengeData = null;
-
-      // Probabilità
-      const oneVsOneProbability = 45;
-      const groupChallengeProbability = 20;
-      const coupleChallengeProbability = 20;
-      const challengeModeProbability = 15;
-      // Punti
-      const likePoints = 1;
-      const dislikePoints = 0;
-      const challengeWinPoints = 3;
-      const groupLaughPoints = 1;
+      let currentChallengeData = null; // Ora conterrà anche l'oggetto sfida originale
+  
+      // Probabilità e Punti (invariati)
+      const oneVsOneProbability = 45; const groupChallengeProbability = 20; const coupleChallengeProbability = 20; const challengeModeProbability = 15; const gifChallengeProbability = 0; // Metto 0 per ora finché non inseriamo array GIF
+      const likePoints = 1; const dislikePoints = 0; const challengeWinPoints = 3; const groupLaughPoints = 1;
 
       // -------- ARRAY DELLE SFIDE --------
       // (Riutilizza gli array completi con le tue immagini dall'ultimo codice - omessi per brevità)
@@ -538,17 +531,13 @@ const roasts = [
   {
     "type": "image",
     "text": "Questa immagine è chiaramente [PLAYER] al mattino prima del caffè. Confermi? Motiva il roast.",
-    "image": "images/Shrek_con_sorriso_memico.jpg"
+    "image": "images/Casa_con_faccia_umano_arrabbiato.jpg"
   },
   {
     "type": "text",
     "text": "Quale oggetto inanimato in questa stanza assomiglia di più (caratterialmente) a [PLAYER]? Spiega il perché."
   },
-  {
-    "type": "image",
-    "text": "Se [PLAYER] dovesse dare un nome 'epico' a questo Cane Stupito, quale sarebbe e perché si addice a entrambi?",
-    "image": "images/Cane_con_faccia_stupita_e_sproporzionata.jpg"
-  },
+  
   {
     "type": "text",
     "text": "[PLAYER] viene morso da un ragno radioattivo. Quale superpotere TOTALMENTE INUTILE ottiene (es: 'sentire il sapore dei colori', 'parlare con i semafori spenti')?"
@@ -583,7 +572,8 @@ const roasts = [
   {
     "type": "text",
     "text": "Chiedi a [PLAYER]: 'Da 1 a 10, quanto ti senti 'Mr. Carrot' oggi?' Spiega il punteggio.",
-    "image": "images/Mr_Carrot_testa_umanoide_conici.jpg"
+    "image": "images/Mr_Carrot_testa_umanoide_conici.jpg", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
@@ -632,7 +622,8 @@ const roasts = [
   {
     "type": "image",
     "text": "Onestamente, [PLAYER], quanto ti senti rappresentato/a da questo Gatto Vampiro?",
-    "image": "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg"
+    "image": "images/Gatto_arrabbiato_con_denti_da_vampiro.jpg", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
@@ -678,22 +669,26 @@ const uncomfortableQuestions = [
   {
     "type": "image",
     "text": "[PLAYER], il tuo momento è arrivato. Imita questo balletto con tutta la grazia (o la mancanza di essa) che possiedi.",
-    "image": "gifs/ciccione_streap_dance.gif"
+    "image": "gifs/ciccione_streap_dance.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], qual è il contesto di questo abbaiare secondo te? Riproduci il suono.",
-    "image": "gifs/dog_bark_tongue_sound.gif"
+    "image": "gifs/dog_bark_tongue_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], scatena il CJ che è in te. Replica questa mossa iconica.",
-    "image": "gifs/cj-gta-sanandreas-dance.gif"
+    "image": "gifs/cj-gta-sanandreas-dance.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
-    "text": "[PLAYER], fai la tua migliore imitazione della risata di questa signora.",
-    "image": "gifs/female_asian_laugh_sound.gif"
+    "text": "[PLAYER], fai la tua migliore imitazione della risata di questa signorina per cortesia.",
+    "image": "gifs/female_asian_laugh_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
@@ -701,24 +696,28 @@ const uncomfortableQuestions = [
     "image": "gifs/dance-happy-dance.gif"
   },
   {
-    "type": "image",
-    "text": "[PLAYER], riproduci questo miagolio con la massima tenerezza possibile.",
-    "image": "gifs/gattino_piccolo_miao_sound.gif"
-  },
+"type": "image",
+"text": "[PLAYER], riproduci questo miagolio con la massima tenerezza possibile.",
+"image": "gifs/gattino_piccolo_miao_sound.gif", // <-- VIRGOLA AGGIUNTA!
+evalTarget: true
+},
   {
     "type": "image",
     "text": "[PLAYER], interpreta la coreografia di questo gatto rachitico.",
-    "image": "gifs/gatto rachitico dance.gif"
+    "image": "gifs/gatto rachitico dance.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], imita il miagolio potente di questo gattone.",
-    "image": "gifs/gatto_grande_miao_sound.gif"
+    "image": "gifs/gatto_grande_miao_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], fai il suono di questo starnuto felino.",
-    "image": "gifs/gatto_starnuto_sound.gif"
+    "image": "gifs/gatto_starnuto_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
@@ -728,47 +727,56 @@ const uncomfortableQuestions = [
   {
     "type": "image",
     "text": "[PLAYER], qual è il significato cosmico di questo Gong? Rappresentalo con un suono.",
-    "image": "gifs/gong-pink-floyd-gong_sound.gif"
+    "image": "gifs/gong-pink-floyd-gong_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], imita la sequenza di suoni di questo calcio multiplo nelle parti basse.",
-    "image": "gifs/karate_calcio_multiplo_nelle_palle_sound.gif"
+    "image": "gifs/karate_calcio_multiplo_nelle_palle_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], pronuncia 'Eccellente' con l'esatta intonazione di Mr. Burns.",
-    "image": "gifs/mr-burns-excellent_sound.gif"
+    "image": "gifs/mr-burns-excellent_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], imita questa risata contagiosa.",
-    "image": "gifs/nero_senza_denti_risata_sound.gif"
+    "image": "gifs/nero_senza_denti_risata_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], unisciti al ballo del piccione. Mostra le tue mosse.",
-    "image": "gifs/pigeonpls-pigeon-dance.gif"
+    "image": "gifs/pigeonpls-pigeon-dance.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], fai il suono dei cavi elettrici usati come corda per saltare.",
-    "image": "gifs/power-lines-jump-rope_sound.gif"
+    "image": "gifs/power-lines-jump-rope_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], è ora di ballare come questo formaggio psichedelico.",
-    "image": "gifs/the-vibin-cheese-dance.gif"
+    "image": "gifs/the-vibin-cheese-dance.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], esegui la risata malefica di Willem Dafoe.",
-    "image": "gifs/willem dafoe_risata_malefica_sound.gif"
+    "image": "gifs/willem dafoe_risata_malefica_sound.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], imita la finezza di Ace Ventura in questo balletto.",
-    "image": "gifs/ace-ventura-football-dance.gif"
+    "image": "gifs/ace-ventura-football-dance.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
@@ -777,66 +785,81 @@ const uncomfortableQuestions = [
   },
   {
     "type": "image",
-    "text": "[PLAYER], dacci la tua migliore interpretazione di questa chiamata del ciccione danzante.",
-    "image": "gifs/cock-call-fat-albert-dance.gif"
+    "text": "[PLAYER], dacci la tua migliore interpretazione di questo ciccione danzante.",
+    "image": "gifs/cock-call-fat-albert-dance.gif", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], preferiresti essere seguito/a costantemente da un mariachi band o da un clown triste?"
+    "text": "[PLAYER], preferiresti essere seguito/a costantemente da un mariachi band o da un uomo vestito con un armatura medioevale?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], devi confessare la canzone più imbarazzante che hai cantato a squarciagola sotto la doccia."
+    "text": "[PLAYER], devi confessare la canzone più imbarazzante che hai cantato a squarciagola sotto la doccia.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], descrivi al gruppo, con un livello di dettaglio quasi chirurgico (ma senza volgarità gratuita!), la tua procedura ESATTA per lavarti i piedi. Non saltare passaggi."
+    "text": "[PLAYER], descrivi al gruppo, con un livello di dettaglio quasi chirurgico (ma senza volgarità gratuita!), la tua procedura ESATTA per lavarti i piedi. Non saltare passaggi.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], devi raccontarci una cosa assolutamente normale e banale che hai fatto oggi (es: versare l'acqua). Raccontala nel modo più piatto e noioso possibile. L'obiettivo è *non* far ridere."
+    "text": "[PLAYER], devi raccontarci una cosa assolutamente normale e banale che hai fatto oggi (es: versare l'acqua). Raccontala nel modo più piatto e noioso possibile. L'obiettivo è *non* far ridere.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], qual è quella cosa *veramente* strana o super specifica che pensi faccia ridere solo te? Confessala e prova a spiegare perché."
+    "text": "[PLAYER], qual è quella cosa *veramente* strana o super specifica che pensi faccia ridere solo te? Confessala e prova a spiegare perché.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], scenario assurdo: sei all'Eurospin. Quale attore/attrice italiano/a completamente fuori luogo vorresti trovare lì come commesso/a e perché?"
+    "text": "[PLAYER], scenario assurdo: sei all'Eurospin. Quale attore/attrice italiano/a  vorresti trovare lì come commesso/a e perché?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], onestamente, che tipo specifico di scarpa ti senti di essere in questo momento della tua vita (es: 'ciabatta consumata', 'stivale rotto', 'calzino antiscivolo')? Motiva."
+    "text": "[PLAYER], onestamente, che tipo specifico di scarpa ti senti di essere in questo momento della tua vita (es: 'ciabatta consumata', 'stivale rotto', 'calzino antiscivolo')? Motiva.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], come si chiama il parroco della tua parrocchia/zona? (Se non lo sai, puoi dire 'Passo' o inventare)."
+    "text": "[PLAYER], come si chiama il parroco della tua parrocchia/zona? (Se non lo sai, puoi dire 'Passo' o inventare).", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], preferiresti avere un terzo braccio che spunta dalla schiena o non avere più le ginocchia?"
+    "text": "[PLAYER], preferiresti avere un terzo braccio che spunta dalla schiena o non avere più le ginocchia?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "[PLAYER], confessa: quanto spesso ti senti come questo Ippopotamo urlante interiormente durante una normale giornata lavorativa/scolastica?",
-    "image": "images/Ippopotamo_gridante_su_sfondo_giallo.jpg"
+    "image": "images/Ippopotamo_gridante_su_sfondo_giallo.jpg", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], se la tua vita fosse un film, quale sarebbe il titolo più brutalmente onesto?"
+    "text": "[PLAYER], se la tua vita fosse un film, quale sarebbe il titolo più brutalmente onesto?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
     "text": "Fissa l'Uovo con gli occhiali per 5 secondi. Ora [PLAYER], chiudi gli occhi e descrivi la prima forma geometrica che ti viene in mente.",
-    "image": "images/Uovo_con_occhiali_e_volto_umano.jpg"
+    "image": "images/Uovo_con_occhiali_e_volto_umano.jpg", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], quale sarebbe la tua frase celebre se fossi il cattivo in un film di serie B?"
+    "text": "[PLAYER], quale sarebbe la tua frase celebre se fossi il cattivo in un film di serie B?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "Devi eliminare per sempre una delle seguenti cose dalla tua vita: la pizza o la musica. Cosa scegli, [PLAYER]?"
+    "text": "Devi eliminare per sempre una delle seguenti cose dalla tua vita: la pizza o la musica. Cosa scegli, [PLAYER]?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
@@ -845,19 +868,23 @@ const uncomfortableQuestions = [
   },
   {
     "type": "text",
-    "text": "[PLAYER], domanda fondamentale: che tipo di elettrodomestico ti senti OGGI e perché?"
+    "text": "[PLAYER], domanda fondamentale: che tipo di elettrodomestico ti senti OGGI e perché?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], qual è il tuo albero preferito?"
+    "text": "[PLAYER], qual è il tuo albero preferito?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], qual è il personaggio storico che ti viene in mente quando fai la cacca?"
+    "text": "[PLAYER], qual è il personaggio storico che ti viene in mente quando fai la cacca?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], hai mai pensato a quanto sono belli i treni?"
+    "text": "[PLAYER], hai mai pensato a quanto sono belli i treni?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
@@ -865,19 +892,23 @@ const uncomfortableQuestions = [
   },
   {
     "type": "text",
-    "text": "[PLAYER], hai mai urlato contro il pane?"
+    "text": "[PLAYER], hai mai urlato contro il pane?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], hai mai pensato di farti il bagno a mare con i calzini di spugna? Se no, prova, poi mi fai sapere."
+    "text": "[PLAYER], hai mai pensato di farti il bagno a mare con i calzini di spugna? Se no, prova, poi mi fai sapere.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], se la tua macchina potesse parlare cosa ti direbbe? Se non hai una macchina allora le scarpe."
+    "text": "[PLAYER], se la tua macchina potesse parlare cosa ti direbbe? Se non hai una macchina allora le scarpe.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], quale specifica ora NON ESISTENTE del giorno (es: le 25:77) ti senti in questo momento e perché?"
+    "text": "[PLAYER], quale specifica ora NON ESISTENTE del giorno (es: le 25:77) ti senti in questo momento e perché?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
@@ -885,13 +916,16 @@ const uncomfortableQuestions = [
     "image": "images/Uomo_con_baffi_filter_volto_allungato.jpg"
   },
   {
-    "type": "text",
+    "type": "image",
     "text": "[PLAYER],crea una frase per questo meme famoso",
-    "image": "Gigachad.jpg"
+    "image": "Gigachad.jpg", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
+  
   {
     "type": "text",
-    "text": "Chiedi a [PLAYER]: 'Hai mai cagato in discoteca? Inteso come posto peggiore / momento peggiore dove aver fatto la cacca'"
+    "text": "[PLAYER]: 'Hai mai cagato in discoteca? Inteso come posto peggiore / momento peggiore dove aver fatto la cacca'", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "image",
@@ -900,12 +934,15 @@ const uncomfortableQuestions = [
   },
   {
     "type": "text",
-    "text": "[PLAYER], preferiresti essere ricercato dalla polizia o da una pericolosa organizzazione criminale?"
+    "text": "[PLAYER], preferiresti essere ricercato dalla polizia o da una pericolosa organizzazione criminale?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "Chiedi a [PLAYER]: 'Qual è il pensiero più socialmente inaccettabile (ma che non diresti mai) che hai avuto guardando un reality show?'"
+    "text": "[PLAYER]: 'Qual è il pensiero più socialmente inaccettabile (ma che non diresti mai) che hai avuto guardando un un gruppo di scimmie?'", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
+  
   {
     "type": "image",
     "text": "[MITTENTE], [PLAYER] sarebbe più l'Omino Grasso o il suo destriero invisibile?",
@@ -930,11 +967,13 @@ const uncomfortableQuestions = [
   },
   {
     "type": "text",
-    "text": "[PLAYER], in una scala da 1 a 10, quanto consideri discutibile la tua ultima decisione importante? Spiega."
+    "text": "[PLAYER], in una scala da 1 a 10, quanto consideri discutibile la tua ultima decisione importante? Spiega.", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], se potessi creare una legge assurda ma che tutti devono seguire, quale sarebbe e perché?"
+    "text": "[PLAYER], se potessi creare una legge assurda ma che tutti devono seguire, quale sarebbe e perché?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
@@ -946,7 +985,8 @@ const uncomfortableQuestions = [
   },
   {
     "type": "text",
-    "text": "[PLAYER], se il tuo animale domestico (o un oggetto in casa tua) potesse parlare, quale segreto imbarazzante rivelerebbe su di te?"
+    "text": "[PLAYER], se il tuo animale domestico (o un oggetto in casa tua) potesse parlare, quale segreto imbarazzante rivelerebbe su di te?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
@@ -954,11 +994,13 @@ const uncomfortableQuestions = [
   },
   {
     "type": "text",
-    "text": "[PLAYER], se i tuoi DM/messaggi privati venissero esposti pubblicamente, quale sarebbe la conversazione che ti metterebbe più in imbarazzo?"
+    "text": "[PLAYER], se i tuoi DM/messaggi privati venissero esposti pubblicamente, quale sarebbe la conversazione che ti metterebbe più in imbarazzo?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   },
   {
     "type": "text",
-    "text": "[PLAYER], quale serie o film ti vergogni segretamente di amare ma difenderesti con passione se qualcuno lo criticasse?"
+    "text": "[PLAYER], quale serie o film ti vergogni segretamente di amare ma difenderesti con passione se qualcuno lo criticasse?", // <-- VIRGOLA AGGIUNTA!
+    evalTarget: true
   }
 ];
 
@@ -1453,698 +1495,133 @@ const challengeModeChallenges = [
 
       // -------- FUNZIONI UI e SETUP --------
       // (createScoreboardItem, updatePlayerScoreVisual, updateScoreboardSidebar - invariate rispetto all'ultima versione)
-      function createScoreboardItem(playerName) {
-        const li = document.createElement("li");
-        li.className = "score-item";
-        li.dataset.playerName = playerName;
-        const nameSpan = document.createElement("span");
-        nameSpan.className = "score-name";
-        nameSpan.textContent = playerName;
-        const pointsSpan = document.createElement("span");
-        pointsSpan.className = "score-points";
-        pointsSpan.textContent = "0";
-        const actionsDiv = document.createElement("div");
-        actionsDiv.className = "score-actions";
-        actionsDiv.style.display = "none";
-        const likeBtn = document.createElement("button");
-        likeBtn.className = "like-btn";
-        likeBtn.title = "Assegna Punto (+1)";
-        likeBtn.innerHTML = "👍";
-        likeBtn.style.display = "none";
-        likeBtn.onclick = (event) => {
-          event.stopPropagation();
-          assignPoints(playerName, "like");
-        };
-        actionsDiv.appendChild(likeBtn);
-        const dislikeBtn = document.createElement("button");
-        dislikeBtn.className = "dislike-btn";
-        dislikeBtn.title = "Nessun Punto";
-        dislikeBtn.innerHTML = "👎";
-        dislikeBtn.style.display = "none";
-        dislikeBtn.onclick = (event) => {
-          event.stopPropagation();
-          assignPoints(playerName, "dislike");
-        };
-        actionsDiv.appendChild(dislikeBtn);
-        const voteBtn = document.createElement("button");
-        voteBtn.className = "vote-winner-btn";
-        voteBtn.title = "Vincitore Sfida!";
-        voteBtn.innerHTML = "";
-        voteBtn.style.display = "none";
-        voteBtn.onclick = (event) => {
-          event.stopPropagation();
-          assignPoints(playerName, "challengeWin");
-        };
-        actionsDiv.appendChild(voteBtn);
-        li.appendChild(nameSpan);
-        li.appendChild(pointsSpan);
-        li.appendChild(actionsDiv);
-        return li;
-      }
-      function updateScoreboardSidebar() {
-        const scoreboardList = document.getElementById("scoreboard-list");
-        scoreboardList.innerHTML = "";
-        players.forEach((player) => {
-          const scoreItem = createScoreboardItem(player);
-          scoreboardList.appendChild(scoreItem);
-          updatePlayerScoreVisual(player);
-        });
-      }
-      function updatePlayerScoreVisual(playerName) {
-        const scoreItem = document.querySelector(
-          `#scoreboard-list .score-item[data-player-name="${playerName}"]`
-        );
-        if (scoreItem) {
-          const pointsSpan = scoreItem.querySelector(".score-points");
-          if (pointsSpan) {
-            pointsSpan.textContent =
-              playerScores[playerName] !== undefined
-                ? playerScores[playerName]
-                : 0;
-          }
-        }
-      }
+       function createScoreboardItem(playerName) { const li = document.createElement('li'); li.className = 'score-item'; li.dataset.playerName = playerName; const nameSpan = document.createElement('span'); nameSpan.className = 'score-name'; nameSpan.textContent = playerName; const pointsSpan = document.createElement('span'); pointsSpan.className = 'score-points'; pointsSpan.textContent = '0'; const actionsDiv = document.createElement('div'); actionsDiv.className = 'score-actions'; actionsDiv.style.display = 'none'; const likeBtn = document.createElement('button'); likeBtn.className = 'like-btn'; likeBtn.title = 'Assegna Punto (+1)'; likeBtn.innerHTML = '👍'; likeBtn.style.display = 'none'; likeBtn.onclick = (event) => { event.stopPropagation(); assignPoints(playerName, 'like'); }; actionsDiv.appendChild(likeBtn); const dislikeBtn = document.createElement('button'); dislikeBtn.className = 'dislike-btn'; dislikeBtn.title = 'Nessun Punto'; dislikeBtn.innerHTML = '👎'; dislikeBtn.style.display = 'none'; dislikeBtn.onclick = (event) => { event.stopPropagation(); assignPoints(playerName, 'dislike'); }; actionsDiv.appendChild(dislikeBtn); const voteBtn = document.createElement('button'); voteBtn.className = 'vote-winner-btn'; voteBtn.title = 'Vincitore Sfida!'; voteBtn.innerHTML = ''; voteBtn.style.display = 'none'; voteBtn.onclick = (event) => { event.stopPropagation(); assignPoints(playerName, 'challengeWin'); }; actionsDiv.appendChild(voteBtn); li.appendChild(nameSpan); li.appendChild(pointsSpan); li.appendChild(actionsDiv); return li; }
+     function updateScoreboardSidebar() { const scoreboardList = document.getElementById('scoreboard-list'); scoreboardList.innerHTML = ''; players.forEach(player => { const scoreItem = createScoreboardItem(player); scoreboardList.appendChild(scoreItem); updatePlayerScoreVisual(player); }); }
+     function updatePlayerScoreVisual(playerName) { const scoreItem = document.querySelector(`#scoreboard-list .score-item[data-player-name="${playerName}"]`); if (scoreItem) { const pointsSpan = scoreItem.querySelector('.score-points'); if (pointsSpan) { pointsSpan.textContent = playerScores[playerName] !== undefined ? playerScores[playerName] : 0; } } }
+     function addPlayer() { const playerNameInput = document.getElementById('player-name'); const playerName = playerNameInput.value.trim(); if (playerName && !players.includes(playerName)) { players.push(playerName); playerScores[playerName] = 0; updatePlayersList(); /* updateScoreboardSidebar viene chiamata da updatePlayersList */ playerNameInput.value = ''; document.getElementById('start-btn').disabled = players.length < 2; updateCoupleSectionVisibility(); } else if (players.includes(playerName)) { alert("Questo giocatore esiste già!"); } playerNameInput.focus(); }
+     function removePlayer(index) { const playerName = players[index]; const wasInCouple = isPlayerInCouple(playerName); players.splice(index, 1); delete playerScores[playerName]; if (wasInCouple) { couples = couples.filter(couple => !couple.includes(playerName)); } updatePlayersList(); /* updateScoreboardSidebar viene chiamata da updatePlayersList */ document.getElementById('start-btn').disabled = players.length < 2; updateCoupleSectionVisibility(); }
+     function updatePlayersList() { const playersListElement = document.getElementById('players-list'); playersListElement.innerHTML = ''; players.forEach((player, index) => { const li = document.createElement('li'); li.className = 'player-item'; const nameSpan = document.createElement('span'); nameSpan.className = 'player-name'; nameSpan.textContent = player; li.appendChild(nameSpan); const actionsDiv = document.createElement('div'); actionsDiv.className = 'player-actions'; const coupleIconSpan = document.createElement('span'); coupleIconSpan.className = 'couple-icon'; actionsDiv.appendChild(coupleIconSpan); const uncoupleBtn = document.createElement('button'); uncoupleBtn.className = 'uncouple-btn'; uncoupleBtn.textContent = 'Separa'; uncoupleBtn.onclick = () => uncouplePlayers(player); actionsDiv.appendChild(uncoupleBtn); const deleteBtn = document.createElement('button'); deleteBtn.className = 'delete-btn'; deleteBtn.textContent = 'Rimuovi'; deleteBtn.onclick = () => removePlayer(index); actionsDiv.appendChild(deleteBtn); li.appendChild(actionsDiv); playersListElement.appendChild(li); updatePlayerCoupleStatusVisual(player); }); updateScoreboardSidebar(); /* Aggiorna ANCHE sidebar */ if(document.getElementById('setup-section').style.display === 'block'){ if(players.length >= 2) { updateCoupleDropdowns();} } }
+     function isPlayerInCouple(playerName) { return couples.some(couple => couple.includes(playerName)); }
+     function updatePlayerCoupleStatusVisual(playerName) { document.querySelectorAll('#players-list li').forEach(li => { const nameSpan = li.querySelector('.player-name'); if (nameSpan && nameSpan.textContent === playerName) { const coupleIconSpan = li.querySelector('.couple-icon'); const uncoupleBtn = li.querySelector('.uncouple-btn'); if (isPlayerInCouple(playerName)) { coupleIconSpan.textContent = ' ❤️'; uncoupleBtn.style.display = 'inline-block'; } else { coupleIconSpan.textContent = ''; uncoupleBtn.style.display = 'none'; } } }); }
+     function updateCoupleSectionVisibility() { const coupleSection = document.getElementById('couple-section'); const shouldBeVisible = players.length >= 2; coupleSection.style.display = shouldBeVisible ? 'block' : 'none'; if (!shouldBeVisible && couples.length > 0) { couples = []; updatePlayersList(); } if (shouldBeVisible) { updateCoupleDropdowns(); } }
+     function updateCoupleDropdowns() { const select1 = document.getElementById('couple-player1'); const select2 = document.getElementById('couple-player2'); if (!select1 || !select2) return; const currentVal1 = select1.value; const currentVal2 = select2.value; select1.innerHTML = '<option value="">Seleziona...</option>'; select2.innerHTML = '<option value="">Seleziona...</option>'; const availablePlayers = players.filter(p => !isPlayerInCouple(p)); availablePlayers.forEach(player => { const option1 = document.createElement('option'); option1.value = player; option1.textContent = player; select1.appendChild(option1); const option2 = document.createElement('option'); option2.value = player; option2.textContent = player; select2.appendChild(option2); }); if(availablePlayers.includes(currentVal1)) select1.value = currentVal1; if(availablePlayers.includes(currentVal2)) select2.value = currentVal2; document.getElementById('couple-btn').disabled = availablePlayers.length < 2; }
+     function formCouple() { const player1 = document.getElementById('couple-player1').value; const player2 = document.getElementById('couple-player2').value; if (!player1 || !player2) { alert("Seleziona entrambi i giocatori!"); return; } if (player1 === player2) { alert("I giocatori devono essere diversi!"); return; } couples.push([player1, player2]); updatePlayersList(); document.getElementById('couple-player1').value = ''; document.getElementById('couple-player2').value = ''; }
+     function uncouplePlayers(playerName) { couples = couples.filter(couple => !couple.includes(playerName)); updatePlayersList(); }
 
-      // --- Funzioni Setup Giocatori/Coppie (invariate) ---
-      function addPlayer() {
-        const playerNameInput = document.getElementById("player-name");
-        const playerName = playerNameInput.value.trim();
-        if (playerName && !players.includes(playerName)) {
-          players.push(playerName);
-          playerScores[playerName] = 0;
-          updatePlayersList();
-          /* updateScoreboardSidebar viene chiamata da updatePlayersList */ playerNameInput.value =
-            "";
-          document.getElementById("start-btn").disabled = players.length < 2;
-          updateCoupleSectionVisibility();
-        } else if (players.includes(playerName)) {
-          alert("Questo giocatore esiste già!");
-        }
-        playerNameInput.focus();
-      }
-      function removePlayer(index) {
-        const playerName = players[index];
-        const wasInCouple = isPlayerInCouple(playerName);
-        players.splice(index, 1);
-        delete playerScores[playerName];
-        if (wasInCouple) {
-          couples = couples.filter((couple) => !couple.includes(playerName));
-        }
-        updatePlayersList();
-        /* updateScoreboardSidebar viene chiamata da updatePlayersList */ document.getElementById(
-          "start-btn"
-        ).disabled = players.length < 2;
-        updateCoupleSectionVisibility();
-      }
-      function updatePlayersList() {
-        const playersListElement = document.getElementById("players-list");
-        playersListElement.innerHTML = "";
-        players.forEach((player, index) => {
-          const li = document.createElement("li");
-          li.className = "player-item";
-          const nameSpan = document.createElement("span");
-          nameSpan.className = "player-name";
-          nameSpan.textContent = player;
-          li.appendChild(nameSpan);
-          const actionsDiv = document.createElement("div");
-          actionsDiv.className = "player-actions";
-          const coupleIconSpan = document.createElement("span");
-          coupleIconSpan.className = "couple-icon";
-          actionsDiv.appendChild(coupleIconSpan);
-          const uncoupleBtn = document.createElement("button");
-          uncoupleBtn.className = "uncouple-btn";
-          uncoupleBtn.textContent = "Separa";
-          uncoupleBtn.onclick = () => uncouplePlayers(player);
-          actionsDiv.appendChild(uncoupleBtn);
-          const deleteBtn = document.createElement("button");
-          deleteBtn.className = "delete-btn";
-          deleteBtn.textContent = "Rimuovi";
-          deleteBtn.onclick = () => removePlayer(index);
-          actionsDiv.appendChild(deleteBtn);
-          li.appendChild(actionsDiv);
-          playersListElement.appendChild(li);
-          updatePlayerCoupleStatusVisual(player);
-        });
-        updateScoreboardSidebar();
-        /* Aggiorna ANCHE sidebar */ if (
-          document.getElementById("setup-section").style.display === "block"
-        ) {
-          if (players.length >= 2) {
-            updateCoupleDropdowns();
-          }
-        }
-      }
-      function isPlayerInCouple(playerName) {
-        return couples.some((couple) => couple.includes(playerName));
-      }
-      function updatePlayerCoupleStatusVisual(playerName) {
-        document.querySelectorAll("#players-list li").forEach((li) => {
-          const nameSpan = li.querySelector(".player-name");
-          if (nameSpan && nameSpan.textContent === playerName) {
-            const coupleIconSpan = li.querySelector(".couple-icon");
-            const uncoupleBtn = li.querySelector(".uncouple-btn");
-            if (isPlayerInCouple(playerName)) {
-              coupleIconSpan.textContent = " ❤️";
-              uncoupleBtn.style.display = "inline-block";
-            } else {
-              coupleIconSpan.textContent = "";
-              uncoupleBtn.style.display = "none";
-            }
-          }
-        });
-      }
-      function updateCoupleSectionVisibility() {
-        const coupleSection = document.getElementById("couple-section");
-        const shouldBeVisible = players.length >= 2;
-        coupleSection.style.display = shouldBeVisible ? "block" : "none";
-        if (!shouldBeVisible && couples.length > 0) {
-          couples = [];
-          updatePlayersList(); /* Aggiorna lista e sidebar se coppie resettate */
-        }
-        if (shouldBeVisible) {
-          updateCoupleDropdowns();
-        }
-      }
-      function updateCoupleDropdowns() {
-        const select1 = document.getElementById("couple-player1");
-        const select2 = document.getElementById("couple-player2");
-        if (!select1 || !select2) return;
-        const currentVal1 = select1.value;
-        const currentVal2 = select2.value;
-        select1.innerHTML = '<option value="">Seleziona...</option>';
-        select2.innerHTML = '<option value="">Seleziona...</option>';
-        const availablePlayers = players.filter((p) => !isPlayerInCouple(p));
-        availablePlayers.forEach((player) => {
-          const option1 = document.createElement("option");
-          option1.value = player;
-          option1.textContent = player;
-          select1.appendChild(option1);
-          const option2 = document.createElement("option");
-          option2.value = player;
-          option2.textContent = player;
-          select2.appendChild(option2);
-        });
-        if (availablePlayers.includes(currentVal1)) select1.value = currentVal1;
-        if (availablePlayers.includes(currentVal2)) select2.value = currentVal2;
-        document.getElementById("couple-btn").disabled =
-          availablePlayers.length < 2;
-      }
-      function formCouple() {
-        const player1 = document.getElementById("couple-player1").value;
-        const player2 = document.getElementById("couple-player2").value;
-        if (!player1 || !player2) {
-          alert("Seleziona entrambi i giocatori!");
-          return;
-        }
-        if (player1 === player2) {
-          alert("I giocatori devono essere diversi!");
-          return;
-        }
-        couples.push([player1, player2]);
-        updatePlayersList();
-        /* Aggiorna lista e sidebar */ document.getElementById(
-          "couple-player1"
-        ).value = "";
-        document.getElementById("couple-player2").value = "";
-      }
-      function uncouplePlayers(playerName) {
-        couples = couples.filter((couple) => !couple.includes(playerName));
-        updatePlayersList(); /* Aggiorna lista e sidebar */
-      }
 
-      // -------- FUNZIONI FLUSSO DI GIOCO --------
+    // -------- FUNZIONI FLUSSO DI GIOCO --------
 
-      function startGame() {
+    function startGame() { // Invariata
         if (players.length < 2) return;
-        players.forEach((player) => {
-          playerScores[player] = 0;
-        });
+        players.forEach(player => { playerScores[player] = 0; });
         updateScoreboardSidebar();
-
         currentChallengeData = null;
-
-        document.getElementById("setup-section").style.display = "none";
-        document.getElementById("scoreboard-section").style.display = "none";
-        document.getElementById("game-section").style.display = "block";
-        document.getElementById("scoreboard-sidebar").style.display = "block";
-        document.getElementById("general-laugh-btn").style.display = "none";
-        document
-          .querySelectorAll(".score-actions")
-          .forEach((div) => (div.style.display = "none"));
-        document.getElementById("next-btn").disabled = true;
+        document.getElementById('setup-section').style.display = 'none';
+        document.getElementById('scoreboard-section').style.display = 'none';
+        document.getElementById('game-section').style.display = 'block';
+        document.getElementById('scoreboard-sidebar').style.display = 'block';
+        document.getElementById('general-laugh-btn').style.display = 'none';
+        document.querySelectorAll('.score-actions').forEach(div => div.style.display = 'none');
+        document.getElementById('next-btn').disabled = true;
         nextChallenge();
-      }
+    }
 
-      function determineChallengeType() {
-        /* ...identica a prima... */ const rand = Math.random() * 100;
-        let cumulativeProb = 0;
-        cumulativeProb += coupleChallengeProbability;
-        if (couples.length > 0 && rand < cumulativeProb) {
-          return { pool: coupleChallenges, type: "couple" };
-        }
-        cumulativeProb += groupChallengeProbability;
-        if (rand < cumulativeProb) {
-          return { pool: groupChallenges, type: "group" };
-        }
-        cumulativeProb += challengeModeProbability;
-        if (players.length >= 2 && rand < cumulativeProb) {
-          return { pool: challengeModeChallenges, type: "challenge" };
-        }
-        const oneVsOnePool = [
-          ...compliments,
-          ...roasts,
-          ...uncomfortableQuestions,
-        ];
-        return { pool: oneVsOnePool, type: "single" };
-      }
+    function determineChallengeType() { // Invariata
+        const rand = Math.random() * 100; let cumulativeProb = 0; cumulativeProb += coupleChallengeProbability; if (couples.length > 0 && rand < cumulativeProb) { return { pool: coupleChallenges, type: 'couple' }; } cumulativeProb += groupChallengeProbability; if (rand < cumulativeProb) { return { pool: groupChallenges, type: 'group' }; } cumulativeProb += challengeModeProbability; if (players.length >= 2 && rand < cumulativeProb) { return { pool: challengeModeChallenges, type: 'challenge' }; } /* Aggiungeremo GIF qui dopo */ const oneVsOnePool = [...compliments, ...roasts, ...uncomfortableQuestions]; return { pool: oneVsOnePool, type: 'single' }; }
 
-      // *** VERSIONE MODIFICATA DI selectParticipants ***
-      function selectParticipants(targetType) {
-        let fromPlayer = null; // Mittente (solo per 'single')
-        let player1 = null; // Sfidante 1
-        let player2 = null; // Sfidante 2
-        let toTarget = null; // Target (nome, 'TUTTI', coppia)
-        let currentTargetType = targetType;
-        let currentPool = null;
+    function selectParticipants(targetType) { // Invariata
+         let fromPlayer = null; let player1 = null; let player2 = null; let toTarget = null; let currentTargetType = targetType; let currentPool = null; if (targetType === 'challenge') { if (players.length < 2) return null; let indices = Array.from(players.keys()); let index1 = indices.splice(Math.floor(Math.random() * indices.length), 1)[0]; let index2 = indices.splice(Math.floor(Math.random() * indices.length), 1)[0]; player1 = players[index1]; player2 = players[index2]; } else if (targetType === 'couple') { if (couples.length === 0) { currentTargetType = 'group'; currentPool = groupChallenges; } else { toTarget = couples[Math.floor(Math.random() * couples.length)]; } } else if (targetType === 'group') { toTarget = 'TUTTI'; } else if (targetType === 'single') { if (players.length < 2) { currentTargetType = 'group'; currentPool = groupChallenges; toTarget = 'TUTTI'; } else { fromPlayer = players[Math.floor(Math.random() * players.length)]; let potentialTargets = players.filter(p => p !== fromPlayer); toTarget = potentialTargets[Math.floor(Math.random() * potentialTargets.length)]; } } if (currentTargetType === 'challenge' && (!player1 || !player2)) return null; if (currentTargetType === 'single' && (!fromPlayer || !toTarget)) return null; if (currentTargetType === 'couple' && !toTarget) return null; if (currentTargetType === 'group' && toTarget !== 'TUTTI') return null; return { from: fromPlayer, player1: player1, player2: player2, to: toTarget, type: currentTargetType, poolOverride: currentPool }; }
 
-        if (targetType === "challenge") {
-          if (players.length < 2) return null;
-          let indices = Array.from(players.keys());
-          let index1 = indices.splice(
-            Math.floor(Math.random() * indices.length),
-            1
-          )[0];
-          let index2 = indices.splice(
-            Math.floor(Math.random() * indices.length),
-            1
-          )[0];
-          player1 = players[index1];
-          player2 = players[index2];
-          // fromPlayer rimane null
-          // toTarget rimane null
-        } else if (targetType === "couple") {
-          if (couples.length === 0) {
-            // Fallback
-            currentTargetType = "group";
-            currentPool = groupChallenges;
-          } else {
-            toTarget = couples[Math.floor(Math.random() * couples.length)];
-            // Decidiamo che per le sfide coppia, il 'mittente' è irrilevante
-            fromPlayer = null; // <-- CAMBIAMENTO: non selezioniamo mittente per coppie
-          }
-        } else if (targetType === "group") {
-          // Non serve un mittente esplicito per la logica di scoring
-          fromPlayer = null; // <-- CAMBIAMENTO
-          toTarget = "TUTTI";
-          // Potremmo comunque selezionare un giocatore FOCUS internamente se le domande lo richiedono
-          // ma non lo usiamo per lo scoring o il display principale
-          // let focusPlayer = players[Math.floor(Math.random() * players.length)]; // Esempio
-        } else if (targetType === "single") {
-          if (players.length < 2) {
-            // Fallback se solo 1 giocatore
-            currentTargetType = "group";
-            currentPool = groupChallenges;
-            toTarget = "TUTTI";
-            fromPlayer = null;
-          } else {
-            fromPlayer = players[Math.floor(Math.random() * players.length)]; // Seleziona mittente
-            let potentialTargets = players.filter((p) => p !== fromPlayer);
-            toTarget =
-              potentialTargets[
-                Math.floor(Math.random() * potentialTargets.length)
-              ];
-          }
-        }
+     // *** nextChallenge MODIFICATA per salvare originalChallenge ***
+     function nextChallenge() {
+         if (players.length === 0) { endGame(); return; }
 
-        // Verifica finale coerenza
-        if (currentTargetType === "challenge" && (!player1 || !player2))
-          return null;
-        // Per gli altri tipi, ora non necessariamente serve fromPlayer
-        if (currentTargetType === "single" && (!fromPlayer || !toTarget))
-          return null;
-        if (currentTargetType === "couple" && !toTarget) return null; // Serve solo target coppia
-        if (currentTargetType === "group" && toTarget !== "TUTTI") return null;
+         const challengeInfo = determineChallengeType();
+         let participationInfo = selectParticipants(challengeInfo.type);
 
-        return {
-          from: fromPlayer, // Sarà null tranne per 'single'
-          player1: player1,
-          player2: player2,
-          to: toTarget,
-          type: currentTargetType,
-          poolOverride: currentPool,
-        };
-      }
+         if (!participationInfo) { /* ... gestione fallback ... */ }
 
-      // *** VERSIONE MODIFICATA DI determineScorablePlayers ***
-      function determineScorablePlayers(challengeData) {
-        if (!challengeData) return [];
-        const type = challengeData.targetType;
+         let currentPool = participationInfo.poolOverride || challengeInfo.pool;
+         let finalTargetType = participationInfo.type;
 
-        if (type === "single") {
-          // Premiamo il mittente (chi fa complimento/roast)
-          return challengeData.fromDisplay ? [challengeData.fromDisplay] : [];
-        } else if (type === "couple") {
-          // Premiamo entrambi i membri della coppia target
-          return challengeData.toDisplay &&
-            Array.isArray(challengeData.toDisplay)
-            ? [...challengeData.toDisplay]
-            : [];
-        } else if (type === "challenge") {
-          // Possibili vincitori sono gli sfidanti
-          return [challengeData.player1, challengeData.player2];
-        } else if (type === "group") {
-          // Nessun scorable individuale, c'è il bottone generale
-          return [];
-        }
-        return [];
-      }
+         if (!currentPool || currentPool.length === 0) { /* ... fallback pool vuoto ... */ }
 
-      // *** VERSIONE MODIFICATA DI updateChallengeUI ***
-      function updateChallengeUI() {
-        if (!currentChallengeData) return;
-        const card = document.getElementById("challenge-card");
-        const pairElement = document.getElementById("current-pair");
-        const textElement = document.getElementById("challenge-text");
-        const imageContainer = document.getElementById(
-          "challenge-image-container"
-        );
-        const imageElement = document.getElementById("challenge-image");
+         let challenge = currentPool[Math.floor(Math.random() * currentPool.length)]; // <-- OGGETTO SFIDA ORIGINALE
+         let challengeTextContent = challenge.text;
+         let challengeImagePath = (challenge.type === 'image' && challenge.image) ? challenge.image : null;
 
-        // Reset card e header
-        card.className = "challenge-card"; // Rimuove classi specifiche precedenti
-        pairElement.textContent = ""; // Pulisce header
+         // Sostituzione Placeholder
+         let finalChallengeText = challengeTextContent; /* ... logica sostituzione ... */ if (finalTargetType === 'challenge') { finalChallengeText = finalChallengeText.replace(/\[PLAYER_1\]/g, participationInfo.player1).replace(/\[PLAYER_2\]/g, participationInfo.player2); } else if (finalTargetType === 'single') { finalChallengeText = finalChallengeText.replace(/\[MITTENTE\]/g, participationInfo.from).replace(/\[PLAYER\]/g, participationInfo.to); } else if (finalTargetType === 'group') { let focusPlayer = players[Math.floor(Math.random() * players.length)]; finalChallengeText = finalChallengeText.replace(/\[MITTENTE\]/g, 'Gioco').replace(/\[PLAYER\]/g, focusPlayer); } else if (finalTargetType === 'couple') { finalChallengeText = finalChallengeText.replace(/\[MITTENTE\]/g, 'Gioco').replace(/\[COPPIA_1\]/g, participationInfo.to[0]).replace(/\[COPPIA_2\]/g, participationInfo.to[1]).replace(/\[PLAYER\]/g, `la coppia ${participationInfo.to[0]} & ${participationInfo.to[1]}`); }
 
-        // Costruisci Header Display in base al tipo
-        let displayHeader = "";
-        const type = currentChallengeData.targetType;
+         // Salva dati sfida - *** AGGIUNTA originalChallenge ***
+         currentChallengeData = {
+             targetType: finalTargetType,
+             player1: participationInfo.player1,
+             player2: participationInfo.player2,
+             fromDisplay: participationInfo.from, // Mittente (per display e scoring 'single' default)
+             toDisplay: participationInfo.to,     // Target (per display e scoring 'single' con evalTarget, e 'couple')
+             challenge: finalChallengeText,
+             image: challengeImagePath,
+             originalChallenge: challenge // <-- SALVA L'OGGETTO ORIGINALE CON IL TAG
+         };
 
-        if (type === "couple") {
-          card.classList.add("couple-challenge");
-          // Ora mostra SOLO la coppia target
-          displayHeader = `COPPIA: ${currentChallengeData.toDisplay[0]} & ${currentChallengeData.toDisplay[1]}`;
-        } else if (type === "group") {
-          card.classList.add("group-challenge");
-          // Ora mostra SOLO TUTTI
-          displayHeader = "SFIDA DI GRUPPO"; // O semplicemente "TUTTI" o niente? Proviamo così.
-        } else if (type === "challenge") {
-          card.classList.add("challenge-mode");
-          displayHeader = `SFIDA: ${currentChallengeData.player1} vs ${currentChallengeData.player2}`;
-        } else {
-          // single
-          // Mostra Mittente -> Target solo qui
-          displayHeader = `${currentChallengeData.fromDisplay} → ${currentChallengeData.toDisplay}`;
-        }
-        pairElement.textContent = displayHeader;
+         updateChallengeUI();
+         updateSidebarHighlightAndActions();
+         document.getElementById('next-btn').disabled = false;
+     }
 
-        // Immagine e Testo (come prima)
-        if (currentChallengeData.image) {
-          imageElement.src = currentChallengeData.image;
-          imageContainer.style.display = "block";
-        } else {
-          imageContainer.style.display = "none";
-          imageElement.src = "";
-        }
-        textElement.textContent = currentChallengeData.challenge;
+     // *** determineScorablePlayers MODIFICATA per leggere evalTarget ***
+     function determineScorablePlayers(challengeData) {
+         if (!challengeData) return [];
+         const type = challengeData.targetType;
+         const currentChallengeObject = challengeData.originalChallenge || {}; // Usa l'oggetto originale salvato
 
-        // Bottone Risate Generali (gestito da updateSidebarHighlightAndActions)
-      }
+         if (type === 'single') {
+             // NUOVA LOGICA: Controlla il flag evalTarget
+             if (currentChallengeObject.evalTarget === true) {
+                 console.log("Tipo Single - Valutando Target:", challengeData.toDisplay);
+                 return challengeData.toDisplay ? [challengeData.toDisplay] : []; // Ritorna il TARGET
+             } else {
+                 console.log("Tipo Single - Valutando Mittente (Default):", challengeData.fromDisplay);
+                 return challengeData.fromDisplay ? [challengeData.fromDisplay] : []; // Ritorna il MITTENTE (default)
+             }
+         } else if (type === 'couple') {
+             // Qui premiamo sempre i membri della coppia target
+             console.log("Tipo Couple - Valutando Target:", challengeData.toDisplay);
+             return (challengeData.toDisplay && Array.isArray(challengeData.toDisplay)) ? [...challengeData.toDisplay] : [];
+         } else if (type === 'challenge') {
+             // Qui premiamo uno dei due sfidanti
+             console.log("Tipo Challenge - Valutando Sfidanti:", challengeData.player1, challengeData.player2);
+             return [challengeData.player1, challengeData.player2];
+         } else if (type === 'group') {
+             // Nessuno scorable individualmente
+             console.log("Tipo Group - Nessun scorable individuale.");
+             return [];
+         }
+         console.log("Tipo non riconosciuto o dati mancanti, nessun scorable.");
+         return [];
+     }
 
-      // *** VERSIONE MODIFICATA di updateSidebarHighlightAndActions ***
-      function updateSidebarHighlightAndActions() {
-        const scorablePlayers = determineScorablePlayers(currentChallengeData);
-        console.log("Giocatori Scorable:", scorablePlayers); // DEBUG
 
-        document
-          .querySelectorAll("#scoreboard-list .score-item")
-          .forEach((item) => {
-            const playerName = item.dataset.playerName;
-            const actionsDiv = item.querySelector(".score-actions");
-            const likeBtn = actionsDiv?.querySelector(".like-btn");
-            const dislikeBtn = actionsDiv?.querySelector(".dislike-btn");
-            const voteBtn = actionsDiv?.querySelector(".vote-winner-btn");
+    // updateChallengeUI (invariata rispetto all'ultima)
+     function updateChallengeUI() { if (!currentChallengeData) return; const card = document.getElementById('challenge-card'); const pairElement = document.getElementById('current-pair'); const textElement = document.getElementById('challenge-text'); const imageContainer = document.getElementById('challenge-image-container'); const imageElement = document.getElementById('challenge-image'); card.className = 'challenge-card'; pairElement.textContent = ''; let displayHeader = ''; const type = currentChallengeData.targetType; if (type === 'couple') { card.classList.add('couple-challenge'); displayHeader = `COPPIA: ${currentChallengeData.toDisplay[0]} & ${currentChallengeData.toDisplay[1]}`; } else if (type === 'group') { card.classList.add('group-challenge'); displayHeader = 'SFIDA DI GRUPPO'; } else if (type === 'challenge') { card.classList.add('challenge-mode'); displayHeader = `SFIDA: ${currentChallengeData.player1} vs ${currentChallengeData.player2}`; } else { displayHeader = `${currentChallengeData.fromDisplay} → ${currentChallengeData.toDisplay}`; } pairElement.textContent = displayHeader; if (currentChallengeData.image) { imageElement.src = currentChallengeData.image; imageContainer.style.display = 'block'; } else { imageContainer.style.display = 'none'; imageElement.src = ''; } textElement.textContent = currentChallengeData.challenge; }
 
-            // Reset
-            item.classList.remove("highlight");
-            actionsDiv.style.display = "none";
-            if (likeBtn) {
-              likeBtn.style.display = "none";
-              likeBtn.disabled = true;
-            }
-            if (dislikeBtn) {
-              dislikeBtn.style.display = "none";
-              dislikeBtn.disabled = true;
-            }
-            if (voteBtn) {
-              voteBtn.style.display = "none";
-              voteBtn.disabled = true;
-            }
+    // updateSidebarHighlightAndActions (invariata rispetto all'ultima)
+     function updateSidebarHighlightAndActions() { const scorablePlayers = determineScorablePlayers(currentChallengeData); console.log("Giocatori Scorable:", scorablePlayers); document.querySelectorAll('#scoreboard-list .score-item').forEach(item => { const playerName = item.dataset.playerName; const actionsDiv = item.querySelector('.score-actions'); const likeBtn = actionsDiv?.querySelector('.like-btn'); const dislikeBtn = actionsDiv?.querySelector('.dislike-btn'); const voteBtn = actionsDiv?.querySelector('.vote-winner-btn'); item.classList.remove('highlight'); actionsDiv.style.display = 'none'; if(likeBtn) { likeBtn.style.display = 'none'; likeBtn.disabled = true; } if(dislikeBtn) { dislikeBtn.style.display = 'none'; dislikeBtn.disabled = true;} if(voteBtn) { voteBtn.style.display = 'none'; voteBtn.disabled = true; } if (scorablePlayers.includes(playerName)) { item.classList.add('highlight'); actionsDiv.style.display = 'flex'; const isChallengeMode = currentChallengeData?.targetType === 'challenge'; if (isChallengeMode) { if(voteBtn) { voteBtn.style.display = 'inline-block'; voteBtn.disabled = false; } } else { if(likeBtn) { likeBtn.style.display = 'inline-block'; likeBtn.disabled = false; } if(dislikeBtn) { dislikeBtn.style.display = 'inline-block'; dislikeBtn.disabled = false; } } } }); const generalLaughBtn = document.getElementById('general-laugh-btn'); if(generalLaughBtn){ const isGroup = currentChallengeData?.targetType === 'group'; generalLaughBtn.style.display = isGroup ? 'block' : 'none'; generalLaughBtn.disabled = !isGroup; } }
 
-            // Se giocatore è scorable
-            if (scorablePlayers.includes(playerName)) {
-              item.classList.add("highlight");
-              actionsDiv.style.display = "flex";
+    // assignPoints, assignGroupPoints, disableActionsAndAdvance (invariate)
+     function assignPoints(playerName, scoreType) { if (!currentChallengeData) return; const scorablePlayers = determineScorablePlayers(currentChallengeData); if (!scorablePlayers.includes(playerName)) { console.warn(`Tentativo di assegnare punti a ${playerName} non scorable.`); return; } let pointsToAdd = 0; if (scoreType === 'like') pointsToAdd = likePoints; else if (scoreType === 'dislike') pointsToAdd = dislikePoints; else if (scoreType === 'challengeWin') pointsToAdd = challengeWinPoints; if (playerScores.hasOwnProperty(playerName)) { playerScores[playerName] += pointsToAdd; updatePlayerScoreVisual(playerName); console.log(`${playerName} riceve ${pointsToAdd} punti (${scoreType}). Totale: ${playerScores[playerName]}`); } disableActionsAndAdvance(); }
+     function assignGroupPoints() { if (!currentChallengeData || currentChallengeData.targetType !== 'group') return; players.forEach(player => { if (playerScores.hasOwnProperty(player)) { playerScores[player] += groupLaughPoints; updatePlayerScoreVisual(player); } }); console.log(`Risate generali! +${groupLaughPoints} punti a tutti.`); disableActionsAndAdvance(); }
+     function disableActionsAndAdvance() { document.querySelectorAll('.score-actions button').forEach(btn => btn.disabled = true); const generalLaughBtn = document.getElementById('general-laugh-btn'); if(generalLaughBtn) generalLaughBtn.disabled = true; document.getElementById('next-btn').disabled = true; document.querySelectorAll('#scoreboard-list .score-item.highlight').forEach(item => { item.classList.remove('highlight'); item.querySelector('.score-actions').style.display = 'none'; }); setTimeout(() => { nextChallenge(); }, 1300); }
 
-              const isChallengeMode =
-                currentChallengeData?.targetType === "challenge";
+    // endGame, resetGame (invariate)
+     function endGame() { /* ... */ document.getElementById('game-section').style.display = 'none'; document.getElementById('scoreboard-sidebar').style.display = 'none'; document.getElementById('scoreboard-section').style.display = 'block'; document.getElementById('setup-section').style.display = 'none'; const sortedPlayers = Object.keys(playerScores).filter(p => players.includes(p)).sort((a, b) => playerScores[b] - playerScores[a]); const scoreListFinal = document.getElementById('score-list-final'); scoreListFinal.innerHTML = ''; if (sortedPlayers.length > 0) { const winnerScore = playerScores[sortedPlayers[0]]; sortedPlayers.forEach((player, index) => { const scoreItem = createScoreboardItem(player); const actionsDiv = scoreItem.querySelector('.score-actions'); if(actionsDiv) actionsDiv.remove(); if (playerScores[player] === winnerScore && winnerScore > 0) scoreItem.classList.add('winner'); const nameSpan = scoreItem.querySelector('.score-name'); nameSpan.textContent = `${index + 1}. ${player}`; const pointsSpan = scoreItem.querySelector('.score-points'); pointsSpan.textContent = playerScores[player] !== undefined ? playerScores[player] : 0; scoreListFinal.appendChild(scoreItem); }); } else { scoreListFinal.innerHTML = '<p style="text-align: center;">Nessun punteggio disponibile.</p>'; } }
+     function resetGame() { /* ... */ players = []; couples = []; playerScores = {}; currentChallengeData = null; document.getElementById('setup-section').style.display = 'block'; document.getElementById('game-section').style.display = 'none'; document.getElementById('scoreboard-section').style.display = 'none'; document.getElementById('scoreboard-sidebar').style.display = 'none'; document.getElementById('scoreboard-list').innerHTML = ''; document.getElementById('players-list').innerHTML = ''; document.getElementById('player-name').value = ''; document.getElementById('couple-section').style.display = 'none'; if(document.getElementById('couple-player1')) document.getElementById('couple-player1').innerHTML = '<option value="">Seleziona...</option>'; if(document.getElementById('couple-player2')) document.getElementById('couple-player2').innerHTML = '<option value="">Seleziona...</option>'; if(document.getElementById('couple-btn')) document.getElementById('couple-btn').disabled = true; if(document.getElementById('start-btn')) document.getElementById('start-btn').disabled = true; }
 
-              if (isChallengeMode) {
-                // Mostra 🏆 per sfide
-                if (voteBtn) {
-                  voteBtn.style.display = "inline-block";
-                  voteBtn.disabled = false;
-                }
-              } else {
-                // Mostra 👍/👎 per single/couple
-                if (likeBtn) {
-                  likeBtn.style.display = "inline-block";
-                  likeBtn.disabled = false;
-                }
-                if (dislikeBtn) {
-                  dislikeBtn.style.display = "inline-block";
-                  dislikeBtn.disabled = false;
-                }
-              }
-            }
-          });
+    // Event listener Invio e Setup iniziale
+     const playerNameInput = document.getElementById('player-name'); if (playerNameInput) { playerNameInput.addEventListener('keypress', function (e) { if (e.key === 'Enter') { addPlayer(); } }); }
+     resetGame();
 
-        // Bottone Risate Generali
-        const generalLaughBtn = document.getElementById("general-laugh-btn");
-        if (generalLaughBtn) {
-          const isGroup = currentChallengeData?.targetType === "group";
-          generalLaughBtn.style.display = isGroup ? "block" : "none";
-          generalLaughBtn.disabled = !isGroup;
-        }
-      }
-
-      // nextChallenge (aggiornata per usare la nuova selectParticipants)
-      function nextChallenge() {
-        if (players.length === 0) {
-          endGame();
-          return;
-        }
-
-        const challengeInfo = determineChallengeType();
-        let participationInfo = selectParticipants(challengeInfo.type); // Ora ritorna from=null per non-single
-
-        if (!participationInfo) {
-          /* ... gestione fallback ... */ console.warn(
-            "Selezione fallita, forzo gruppo."
-          );
-          if (players.length > 0) {
-            participationInfo = {
-              from: null,
-              to: "TUTTI",
-              type: "group",
-              poolOverride: groupChallenges,
-            };
-            challengeInfo.pool = groupChallenges;
-            challengeInfo.type = "group";
-          } else {
-            endGame();
-            return;
-          }
-        }
-
-        let currentPool = participationInfo.poolOverride || challengeInfo.pool;
-        let finalTargetType = participationInfo.type;
-
-        if (!currentPool || currentPool.length === 0) {
-          /* ... fallback pool vuoto ... */
-        }
-
-        let challenge =
-          currentPool[Math.floor(Math.random() * currentPool.length)];
-        let challengeTextContent = challenge.text;
-        let challengeImagePath =
-          challenge.type === "image" && challenge.image
-            ? challenge.image
-            : null;
-
-        // Sostituzione Placeholder (Modificata per gestire from=null)
-        let finalChallengeText = challengeTextContent;
-        if (finalTargetType === "challenge") {
-          finalChallengeText = finalChallengeText
-            .replace(/\[PLAYER_1\]/g, participationInfo.player1)
-            .replace(/\[PLAYER_2\]/g, participationInfo.player2);
-        } else if (finalTargetType === "single") {
-          // Qui 'from' esiste
-          finalChallengeText = finalChallengeText
-            .replace(/\[MITTENTE\]/g, participationInfo.from)
-            .replace(/\[PLAYER\]/g, participationInfo.to);
-        } else if (finalTargetType === "group") {
-          // Rimuovi [MITTENTE] se presente, o sostituisci [PLAYER] con info generica se serve
-          // Scegliamo un giocatore focus SOLO per la sostituzione nel testo, se serve
-          let focusPlayer = players[Math.floor(Math.random() * players.length)];
-          finalChallengeText = finalChallengeText
-            .replace(/\[MITTENTE\]/g, "Gioco")
-            .replace(/\[PLAYER\]/g, focusPlayer); // Sostituisce [PLAYER] con un nome a caso per contesto
-        } else if (finalTargetType === "couple") {
-          // Rimuovi [MITTENTE] se presente
-          finalChallengeText = finalChallengeText
-            .replace(/\[MITTENTE\]/g, "Gioco")
-            .replace(/\[COPPIA_1\]/g, participationInfo.to[0])
-            .replace(/\[COPPIA_2\]/g, participationInfo.to[1])
-            .replace(
-              /\[PLAYER\]/g,
-              `la coppia ${participationInfo.to[0]} & ${participationInfo.to[1]}`
-            );
-        }
-
-        // Salva dati sfida
-        currentChallengeData = {
-          targetType: finalTargetType,
-          player1: participationInfo.player1,
-          player2: participationInfo.player2,
-          fromDisplay: participationInfo.from, // Può essere null
-          toDisplay: participationInfo.to,
-          challenge: finalChallengeText,
-          image: challengeImagePath,
-        };
-
-        updateChallengeUI();
-        updateSidebarHighlightAndActions(); // Chiamata DOPO aver definito currentChallengeData
-        document.getElementById("next-btn").disabled = false;
-      }
-
-      // assignPoints, assignGroupPoints, disableActionsAndAdvance (INVARIATE)
-      function assignPoints(playerName, scoreType) {
-        if (!currentChallengeData) return;
-        const scorablePlayers = determineScorablePlayers(currentChallengeData);
-        if (!scorablePlayers.includes(playerName)) return;
-        let pointsToAdd = 0;
-        if (scoreType === "like") pointsToAdd = likePoints;
-        else if (scoreType === "dislike") pointsToAdd = dislikePoints;
-        else if (scoreType === "challengeWin") pointsToAdd = challengeWinPoints;
-        if (playerScores.hasOwnProperty(playerName)) {
-          playerScores[playerName] += pointsToAdd;
-          updatePlayerScoreVisual(playerName);
-          console.log(
-            `${playerName} riceve ${pointsToAdd} punti (${scoreType}). Totale: ${playerScores[playerName]}`
-          );
-        }
-        disableActionsAndAdvance();
-      }
-      function assignGroupPoints() {
-        if (
-          !currentChallengeData ||
-          currentChallengeData.targetType !== "group"
-        )
-          return;
-        players.forEach((player) => {
-          if (playerScores.hasOwnProperty(player)) {
-            playerScores[player] += groupLaughPoints;
-            updatePlayerScoreVisual(player);
-          }
-        });
-        console.log(`Risate generali! +${groupLaughPoints} punti a tutti.`);
-        disableActionsAndAdvance();
-      }
-      function disableActionsAndAdvance() {
-        document
-          .querySelectorAll(".score-actions button")
-          .forEach((btn) => (btn.disabled = true));
-        const generalLaughBtn = document.getElementById("general-laugh-btn");
-        if (generalLaughBtn) generalLaughBtn.disabled = true;
-        document.getElementById("next-btn").disabled = true;
-        document
-          .querySelectorAll("#scoreboard-list .score-item.highlight")
-          .forEach((item) => {
-            item.classList.remove("highlight");
-            item.querySelector(".score-actions").style.display = "none";
-          });
-        setTimeout(() => {
-          nextChallenge();
-        }, 1300);
-      }
-
-      // endGame, resetGame (INVARIATE)
-      function endGame() {
-        /* ... come prima ... */ document.getElementById(
-          "game-section"
-        ).style.display = "none";
-        document.getElementById("scoreboard-sidebar").style.display = "none";
-        document.getElementById("scoreboard-section").style.display = "block";
-        document.getElementById("setup-section").style.display = "none";
-        const sortedPlayers = Object.keys(playerScores)
-          .filter((p) => players.includes(p))
-          .sort((a, b) => playerScores[b] - playerScores[a]);
-        const scoreListFinal = document.getElementById("score-list-final");
-        scoreListFinal.innerHTML = "";
-        if (sortedPlayers.length > 0) {
-          const winnerScore = playerScores[sortedPlayers[0]];
-          sortedPlayers.forEach((player, index) => {
-            const scoreItem = createScoreboardItem(player);
-            const actionsDiv = scoreItem.querySelector(".score-actions");
-            if (actionsDiv) actionsDiv.remove();
-            if (playerScores[player] === winnerScore && winnerScore > 0)
-              scoreItem.classList.add("winner");
-            const nameSpan = scoreItem.querySelector(".score-name");
-            nameSpan.textContent = `${index + 1}. ${player}`;
-            const pointsSpan = scoreItem.querySelector(".score-points");
-            pointsSpan.textContent =
-              playerScores[player] !== undefined ? playerScores[player] : 0;
-            scoreListFinal.appendChild(scoreItem);
-          });
-        } else {
-          scoreListFinal.innerHTML =
-            '<p style="text-align: center;">Nessun punteggio disponibile.</p>';
-        }
-      }
-      function resetGame() {
-        /* ... come prima ... */ players = [];
-        couples = [];
-        playerScores = {};
-        currentChallengeData = null;
-        document.getElementById("setup-section").style.display = "block";
-        document.getElementById("game-section").style.display = "none";
-        document.getElementById("scoreboard-section").style.display = "none";
-        document.getElementById("scoreboard-sidebar").style.display = "none";
-        document.getElementById("scoreboard-list").innerHTML = "";
-        document.getElementById("players-list").innerHTML = "";
-        document.getElementById("player-name").value = "";
-        document.getElementById("couple-section").style.display = "none";
-        if (document.getElementById("couple-player1"))
-          document.getElementById("couple-player1").innerHTML =
-            '<option value="">Seleziona...</option>';
-        if (document.getElementById("couple-player2"))
-          document.getElementById("couple-player2").innerHTML =
-            '<option value="">Seleziona...</option>';
-        if (document.getElementById("couple-btn"))
-          document.getElementById("couple-btn").disabled = true;
-        if (document.getElementById("start-btn"))
-          document.getElementById("start-btn").disabled = true;
-      }
-
-      // Event listener Invio e Setup iniziale
-      const playerNameInput = document.getElementById("player-name");
-      if (playerNameInput) {
-        playerNameInput.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            addPlayer();
-          }
-        });
-      }
-      resetGame();
-    </script>
+</script>
   </body>
 </html>
